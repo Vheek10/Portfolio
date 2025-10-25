@@ -87,28 +87,28 @@ export const ProfileCard = () => {
 
 	return (
 		<Card
-			className="text-center profile-card"
+			className="text-center profile-card w-full max-w-md mx-auto"
 			hoverable={false}>
-			<CardContent className="p-10">
+			<CardContent className="p-8 sm:p-10">
 				{/* Profile Image */}
-				<div className="image text-center mb-10">
+				<div className="image text-center mb-8">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
 						className="inline-block">
 						<Image
 							src="/assets/img/profile.jpg"
 							alt="Victor Gp"
-							width={200}
-							height={200}
+							width={160}
+							height={160}
 							className="rounded-2xl mx-auto border-4 border-white dark:border-gray-800 shadow-lg"
 						/>
 					</motion.div>
 				</div>
 
 				{/* Name and Title */}
-				<div className="text mb-10">
+				<div className="text mb-8">
 					<motion.h3
-						className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-center gap-2"
+						className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
@@ -119,25 +119,26 @@ export const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="text-gray-600 dark:text-gray-400 leading-relaxed min-h-[4.5rem] flex items-center justify-center">
-						<p className="text-lg">
-							A{" "}
-							<span className="font-semibold text-purple-600 dark:text-purple-400 min-h-[1.5rem] inline-block">
-								{currentRole}
-								<span className="inline-block w-1 h-6 bg-purple-600 dark:bg-purple-400 ml-1 animate-pulse"></span>
-							</span>{" "}
-							🖥️
-							<br />
-							<span className="text-sm md:text-base">
+						className="text-gray-600 dark:text-gray-400 leading-relaxed min-h-[5rem] flex items-center justify-center">
+						<div className="space-y-2">
+							<p className="text-base">
+								A{" "}
+								<span className="font-semibold text-purple-600 dark:text-purple-400 min-h-[1.5rem] inline-block">
+									{currentRole}
+									<span className="inline-block w-1 h-5 bg-purple-600 dark:bg-purple-400 ml-1 animate-pulse"></span>
+								</span>{" "}
+								🖥️
+							</p>
+							<p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs mx-auto">
 								where function meets fire and design meets decentralization.
-							</span>
-						</p>
+							</p>
+						</div>
 					</motion.div>
 				</div>
 
 				{/* Action Buttons */}
 				<motion.div
-					className="common-button-groups flex flex-col sm:flex-row gap-5 mb-10"
+					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-8"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.3 }}>
@@ -146,13 +147,13 @@ export const ProfileCard = () => {
 						href="https://t.me/victorgp"
 						target="_blank"
 						rel="noopener noreferrer"
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						className="btn-call flex items-center justify-center gap-2 px-7 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1">
+						whileHover={{ scale: 1.02 }}
+						whileTap={{ scale: 0.98 }}
+						className="btn-call flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1 text-sm sm:text-base">
 						<svg
-							className="icon"
-							width="20"
-							height="20"
+							className="icon flex-shrink-0"
+							width="18"
+							height="18"
 							viewBox="0 0 24 24"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg">
@@ -169,17 +170,17 @@ export const ProfileCard = () => {
 					{/* Copy Email Button */}
 					<motion.button
 						onClick={copyEmail}
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						className={`btn-copy flex items-center justify-center gap-2 px-7 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-2xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 ${
+						whileHover={{ scale: 1.02 }}
+						whileTap={{ scale: 0.98 }}
+						className={`btn-copy flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 text-sm sm:text-base ${
 							copied
 								? "bg-green-500/10 border-green-500 text-green-600 dark:text-green-400"
 								: ""
 						}`}>
 						{copied ? (
-							<Check className="w-5 h-5" />
+							<Check className="w-4 h-4 flex-shrink-0" />
 						) : (
-							<Copy className="w-5 h-5" />
+							<Copy className="w-4 h-4 flex-shrink-0" />
 						)}
 						{copied ? "Copied!" : "Copy Email"}
 					</motion.button>
@@ -191,7 +192,7 @@ export const ProfileCard = () => {
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.4 }}>
-					<ul className="list-unstyled flex justify-center space-x-5">
+					<ul className="list-unstyled flex justify-center space-x-3">
 						{socialItems.map((item, index) => (
 							<motion.li
 								key={item.id}
@@ -202,9 +203,9 @@ export const ProfileCard = () => {
 									href={item.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									whileHover={{ scale: 1.2, y: -2 }}
-									whileTap={{ scale: 0.9 }}
-									className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
+									whileHover={{ scale: 1.15, y: -2 }}
+									whileTap={{ scale: 0.95 }}
+									className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
 									aria-label={item.name}>
 									{item.icon}
 								</motion.a>

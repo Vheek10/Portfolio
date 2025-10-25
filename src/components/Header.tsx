@@ -73,12 +73,12 @@ const Header = () => {
 	// Don't render until mounted to avoid hydration issues
 	if (!mounted) {
 		return (
-			<header className="fixed top-4 left-1/2 -translate-x-1/2 w-[130vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
+			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[90vw] max-w-4xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-6 py-3">
 					{/* Logo skeleton */}
 					<div className="w-24 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
 					{/* Dark mode toggle skeleton */}
-					<div className="w-15 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
+					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
 				</nav>
 			</header>
 		);
@@ -86,7 +86,7 @@ const Header = () => {
 
 	return (
 		<header
-			className="fixed top-4 left-1/2 -translate-x-1/2 w-[105vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
+			className="fixed top-6 left-1/2 -translate-x-1/2 w-[90vw] max-w-4xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-6 py-3">
 				{/* Logo */}
@@ -110,12 +110,12 @@ const Header = () => {
 				</Link>
 
 				{/* Desktop Menu */}
-				<ul className="hidden md:flex items-center space-x-6 lg:space-x-8">
+				<ul className="hidden md:flex items-center space-x-4 lg:space-x-6">
 					{menus.map((menu) => (
 						<li key={menu.title}>
 							<Link
 								href={menu.href}
-								className={`group relative flex items-center gap-2 text-[15px] lg:text-[16px] font-semibold tracking-wide rounded-lg px-3 py-2 transition-all duration-300 ${
+								className={`group relative flex items-center gap-2 text-[14px] lg:text-[15px] font-semibold tracking-wide rounded-lg px-3 py-2 transition-all duration-300 ${
 									pathname === menu.href
 										? "text-purple-600 dark:text-purple-400 bg-purple-100/40 dark:bg-purple-900/30 shadow-lg shadow-purple-500/20"
 										: "text-gray-900 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400"
@@ -157,7 +157,7 @@ const Header = () => {
 				</ul>
 
 				{/* Right Section */}
-				<div className="flex items-center space-x-3 sm:space-x-4">
+				<div className="flex items-center space-x-3">
 					{/* Dark Mode Toggle - Enhanced */}
 					<button
 						onClick={toggleDarkMode}
@@ -172,13 +172,13 @@ const Header = () => {
 						<span className="relative inline-flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
 							{darkMode ? (
 								<>
-									<Sun className="w-6 h-6 text-yellow-400 drop-shadow-sm" />
+									<Sun className="w-5 h-5 text-yellow-400 drop-shadow-sm" />
 									{/* Sun rays effect */}
 									<div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 animate-pulse" />
 								</>
 							) : (
 								<>
-									<Moon className="w-6 h-6 text-gray-800 dark:text-gray-200 drop-shadow-sm" />
+									<Moon className="w-5 h-5 text-gray-800 dark:text-gray-200 drop-shadow-sm" />
 									{/* Moon glow effect */}
 									<div className="absolute inset-0 rounded-full bg-purple-400/20 blur-sm opacity-0 group-hover:opacity-100 animate-pulse" />
 								</>
@@ -189,7 +189,7 @@ const Header = () => {
 					{/* Let's Talk Button - Enhanced */}
 					<Link
 						href="/contact"
-						className="hidden sm:inline-flex items-center gap-2 relative px-6 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25"
+						className="hidden sm:inline-flex items-center gap-2 relative px-5 py-2.5 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25 text-sm"
 						style={{ transformOrigin: "center" }}>
 						{/* Shine sweep effect */}
 						<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
@@ -228,7 +228,7 @@ const Header = () => {
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
-									className="w-6 h-6 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
+									className="w-5 h-5 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -242,7 +242,7 @@ const Header = () => {
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
-									className="w-6 h-6 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
+									className="w-5 h-5 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -264,7 +264,7 @@ const Header = () => {
 								<Link
 									href={menu.href}
 									onClick={() => setMenuOpen(false)}
-									className={`group relative flex items-center gap-3 text-base font-semibold tracking-wide px-6 py-3 transition-all duration-300 mx-2 ${
+									className={`group relative flex items-center gap-3 text-sm font-semibold tracking-wide px-6 py-3 transition-all duration-300 mx-2 ${
 										pathname === menu.href
 											? "text-purple-600 dark:text-purple-400 bg-purple-100/40 dark:bg-purple-900/30 shadow-lg shadow-purple-500/20"
 											: "text-gray-900 dark:text-gray-100 hover:bg-gray-200/60 dark:hover:bg-gray-800/60 hover:text-purple-500 dark:hover:text-purple-400"
@@ -288,11 +288,11 @@ const Header = () => {
 						))}
 
 						{/* Mobile Let's Talk - Enhanced */}
-						<li className="pt-2 px-2">
+						<li className="pt-2 px-4">
 							<Link
 								href="/contact"
 								onClick={() => setMenuOpen(false)}
-								className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 w-full overflow-hidden shadow-lg">
+								className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 w-full overflow-hidden shadow-lg text-sm">
 								{/* Shine effect */}
 								<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
 

@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { ProfileCard } from "@/components/ProfileCard";
 import { Poppins } from "next/font/google";
-
+import Footer from "@/components/Footer";
 // Optimize font loading with next/font
 const poppins = Poppins({
 	subsets: ["latin"],
@@ -119,6 +119,7 @@ export default function RootLayout({
 							<div className="lg:col-span-3">{children}</div>
 						</div>
 					</div>
+					<Footer />
 				</main>
 			</body>
 		</html>
