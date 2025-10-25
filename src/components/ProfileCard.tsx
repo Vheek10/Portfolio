@@ -89,9 +89,9 @@ export const ProfileCard = () => {
 		<Card
 			className="text-center profile-card"
 			hoverable={false}>
-			<CardContent className="p-6">
+			<CardContent className="p-10">
 				{/* Profile Image */}
-				<div className="image text-center mb-6">
+				<div className="image text-center mb-10">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
 						className="inline-block">
@@ -106,9 +106,9 @@ export const ProfileCard = () => {
 				</div>
 
 				{/* Name and Title */}
-				<div className="text mb-6">
+				<div className="text mb-10">
 					<motion.h3
-						className="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center justify-center gap-2"
+						className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
@@ -129,8 +129,7 @@ export const ProfileCard = () => {
 							🖥️
 							<br />
 							<span className="text-sm md:text-base">
-								specializing in UI/UX design, full-stack development & smart
-								contract engineering.
+								where function meets fire and design meets decentralization.
 							</span>
 						</p>
 					</motion.div>
@@ -138,7 +137,7 @@ export const ProfileCard = () => {
 
 				{/* Action Buttons */}
 				<motion.div
-					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-6"
+					className="common-button-groups flex flex-col sm:flex-row gap-5 mb-10"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.3 }}>
@@ -149,7 +148,7 @@ export const ProfileCard = () => {
 						rel="noopener noreferrer"
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						className="btn-call flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1">
+						className="btn-call flex items-center justify-center gap-2 px-7 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1">
 						<svg
 							className="icon"
 							width="20"
@@ -172,7 +171,7 @@ export const ProfileCard = () => {
 						onClick={copyEmail}
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						className={`btn-copy flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-2xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 ${
+						className={`btn-copy flex items-center justify-center gap-2 px-7 py-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-2xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 ${
 							copied
 								? "bg-green-500/10 border-green-500 text-green-600 dark:text-green-400"
 								: ""
@@ -192,7 +191,7 @@ export const ProfileCard = () => {
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.4 }}>
-					<ul className="list-unstyled flex justify-center space-x-4">
+					<ul className="list-unstyled flex justify-center space-x-5">
 						{socialItems.map((item, index) => (
 							<motion.li
 								key={item.id}
@@ -205,7 +204,7 @@ export const ProfileCard = () => {
 									rel="noopener noreferrer"
 									whileHover={{ scale: 1.2, y: -2 }}
 									whileTap={{ scale: 0.9 }}
-									className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
+									className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
 									aria-label={item.name}>
 									{item.icon}
 								</motion.a>

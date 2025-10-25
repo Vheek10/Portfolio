@@ -73,12 +73,12 @@ const Header = () => {
 	// Don't render until mounted to avoid hydration issues
 	if (!mounted) {
 		return (
-			<header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
+			<header className="fixed top-4 left-1/2 -translate-x-1/2 w-[130vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-6 py-3">
 					{/* Logo skeleton */}
 					<div className="w-24 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
 					{/* Dark mode toggle skeleton */}
-					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
+					<div className="w-15 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
 				</nav>
 			</header>
 		);
@@ -86,7 +86,7 @@ const Header = () => {
 
 	return (
 		<header
-			className="fixed top-4 left-1/2 -translate-x-1/2 w-[95vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
+			className="fixed top-4 left-1/2 -translate-x-1/2 w-[105vw] max-w-6xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-6 py-3">
 				{/* Logo */}
