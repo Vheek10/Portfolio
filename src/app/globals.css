@@ -299,3 +299,55 @@ a:focus-visible {
 	border-color: #8b5cf6;
 	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
+/* Add to your existing globals.css */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.stealth-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.stealth-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* Smooth scrolling container */
+.expertise-row {
+	mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 20%,
+		black 80%,
+		transparent
+	);
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent,
+		black 20%,
+		black 80%,
+		transparent
+	);
+}
+
+/* Ensure images maintain aspect ratio */
+.expertise-item img {
+	max-width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse-soft {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.animate-pulse-soft {
+	animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
