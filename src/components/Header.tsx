@@ -29,8 +29,10 @@ const Header = () => {
 			"(prefers-color-scheme: dark)",
 		).matches;
 
-		const shouldBeDark =
-			storedDarkMode === "true" || (!storedDarkMode && prefersDark);
+		const shouldBeDark = storedDarkMode
+			? storedDarkMode === "true"
+			: prefersDark;
+
 		setDarkMode(shouldBeDark);
 
 		if (shouldBeDark) {
@@ -43,7 +45,7 @@ const Header = () => {
 	const toggleDarkMode = () => {
 		const newMode = !darkMode;
 		setDarkMode(newMode);
-		localStorage.setItem("darkMode", String(newMode));
+		localStorage.setItem("darkMode", newMode.toString());
 
 		if (newMode) {
 			document.documentElement.classList.add("dark");
@@ -74,7 +76,7 @@ const Header = () => {
 			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-8 py-3">
 					{/* Logo skeleton */}
-					<div className="w-48 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+					<div className="w-24 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
 					{/* Dark mode toggle skeleton */}
 					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
 				</nav>
@@ -87,7 +89,7 @@ const Header = () => {
 			className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-8 py-3">
-				{/* Logo - Doubled in length */}
+				{/* Logo */}
 				<Link
 					href="/"
 					className="group flex items-center space-x-2 z-50 relative overflow-hidden"
@@ -98,8 +100,8 @@ const Header = () => {
 					<Image
 						src="/Logo.png"
 						alt="Jeremiah Victor Logo"
-						width={160} // Doubled from 80 to 160
-						height={32} // Kept same height
+						width={160}
+						height={32}
 						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg h-8 w-auto"
 						priority
 					/>
@@ -157,7 +159,7 @@ const Header = () => {
 
 				{/* Right Section */}
 				<div className="flex items-center space-x-4">
-					{/* Dark Mode Toggle - Enhanced */}
+					{/* Dark Mode Toggle - Fixed */}
 					<button
 						onClick={toggleDarkMode}
 						className="group relative p-2 rounded-full transition-all duration-300 hover:bg-gray-200/70 dark:hover:bg-gray-800/60 active:scale-95 z-50 overflow-hidden"

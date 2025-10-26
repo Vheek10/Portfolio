@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { ProfileCard } from "@/components/ProfileCard";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
+import GeometricBackground from "@/components/GeometricBackground";
 
 // Optimize font loading with next/font
 const poppins = Poppins({
@@ -47,7 +48,6 @@ export default function RootLayout({
 			suppressHydrationWarning
 			className={`${poppins.variable} scroll-smooth`}>
 			<head>
-				{/* Preload critical resources */}
 				<link
 					rel="preconnect"
 					href="https://fonts.googleapis.com"
@@ -57,8 +57,6 @@ export default function RootLayout({
 					href="https://fonts.gstatic.com"
 					crossOrigin="anonymous"
 				/>
-
-				{/* Favicon and app icons */}
 				<link
 					rel="icon"
 					href="/favicon.ico"
@@ -84,15 +82,8 @@ export default function RootLayout({
         antialiased
         overflow-x-hidden
       `}>
-				{/* Background gradient elements for visual depth */}
-				<div className="fixed inset-0 -z-10 overflow-hidden">
-					<div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900" />
-
-					{/* Subtle background elements */}
-					<div className="absolute top-1/4 -left-10 w-72 h-72 bg-purple-300/10 rounded-full blur-3xl" />
-					<div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-indigo-300/5 rounded-full blur-3xl" />
-					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-300/5 rounded-full blur-3xl" />
-				</div>
+				{/* Geometric 3D Background */}
+				<GeometricBackground />
 
 				{/* Skip to main content for accessibility */}
 				<a
@@ -108,8 +99,6 @@ export default function RootLayout({
 				<main
 					id="main-content"
 					className="relative z-10 pt-28 min-h-screen">
-					{" "}
-					{/* Increased pt-24 to pt-28 */}
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 						<div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 							{/* Sidebar - Profile Card Only */}
