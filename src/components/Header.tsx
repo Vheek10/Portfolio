@@ -5,54 +5,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-	Home,
-	User,
-	Briefcase,
-	FolderGit2,
-	Mail,
-	Sun,
-	Moon,
-} from "lucide-react";
+import { Home, User, Briefcase, FolderGit2, Mail } from "lucide-react";
 
 const Header = () => {
 	const pathname = usePathname();
-	const [darkMode, setDarkMode] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [mounted, setMounted] = useState(false);
 
 	// Ensure we only render after mounting to avoid hydration mismatch
 	useEffect(() => {
 		setMounted(true);
-		const storedDarkMode = localStorage.getItem("darkMode");
-		const prefersDark = window.matchMedia(
-			"(prefers-color-scheme: dark)",
-		).matches;
-
-		const shouldBeDark = storedDarkMode
-			? storedDarkMode === "true"
-			: prefersDark;
-
-		setDarkMode(shouldBeDark);
-
-		if (shouldBeDark) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
 	}, []);
-
-	const toggleDarkMode = () => {
-		const newMode = !darkMode;
-		setDarkMode(newMode);
-		localStorage.setItem("darkMode", newMode.toString());
-
-		if (newMode) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-	};
 
 	const menus = [
 		{ title: "Home", href: "/", icon: <Home className="w-5 h-5" /> },
@@ -76,8 +39,8 @@ const Header = () => {
 			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-8 py-3">
 					{/* Logo skeleton */}
-					<div className="w-24 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
-					{/* Dark mode toggle skeleton */}
+					<div className="w-40 h-10 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+					{/* Menu items skeleton */}
 					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
 				</nav>
 			</header>
@@ -89,7 +52,7 @@ const Header = () => {
 			className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-8 py-3">
-				{/* Logo */}
+				{/* Logo - Increased Width */}
 				<Link
 					href="/"
 					className="group flex items-center space-x-2 z-50 relative overflow-hidden"
@@ -100,9 +63,9 @@ const Header = () => {
 					<Image
 						src="/Logo.png"
 						alt="Jeremiah Victor Logo"
-						width={160}
-						height={32}
-						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg h-8 w-auto"
+						width={200}
+						height={40}
+						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg h-10 w-auto"
 						priority
 					/>
 
@@ -159,34 +122,6 @@ const Header = () => {
 
 				{/* Right Section */}
 				<div className="flex items-center space-x-4">
-					{/* Dark Mode Toggle - Fixed */}
-					<button
-						onClick={toggleDarkMode}
-						className="group relative p-2 rounded-full transition-all duration-300 hover:bg-gray-200/70 dark:hover:bg-gray-800/60 active:scale-95 z-50 overflow-hidden"
-						aria-label="Toggle dark mode">
-						{/* Background glow */}
-						<div className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-						{/* Animated rings */}
-						<div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-yellow-400/20 dark:group-hover:border-purple-400/20 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-110 group-hover:scale-100" />
-
-						<span className="relative inline-flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
-							{darkMode ? (
-								<>
-									<Sun className="w-6 h-6 text-yellow-400 drop-shadow-sm" />
-									{/* Sun rays effect */}
-									<div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-sm opacity-0 group-hover:opacity-100 animate-pulse" />
-								</>
-							) : (
-								<>
-									<Moon className="w-6 h-6 text-gray-800 dark:text-gray-200 drop-shadow-sm" />
-									{/* Moon glow effect */}
-									<div className="absolute inset-0 rounded-full bg-purple-400/20 blur-sm opacity-0 group-hover:opacity-100 animate-pulse" />
-								</>
-							)}
-						</span>
-					</button>
-
 					{/* Let's Chat Button - Single Line */}
 					<Link
 						href="/contact"

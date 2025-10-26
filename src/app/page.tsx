@@ -13,30 +13,71 @@ import {
 	Rocket,
 	Users,
 	TrendingUp,
+	ExternalLink,
+	Github,
 } from "lucide-react";
 
 export default function Home() {
 	const featuredProjects = [
 		{
-			title: "DeFi Protocol",
+			title: "ElgVote - Voting DApp",
 			description:
-				"A decentralized finance platform with yield farming and staking features.",
-			tech: ["Solidity", "React", "Node.js"],
+				"A decentralized voting application built on Ethereum blockchain with secure and transparent voting mechanism.",
+			tech: ["Solidity", "Next.js", "Tailwind CSS", "Web3.js", "Hardhat"],
 			status: "Live",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/elgvote.png", // Add your project images
 		},
 		{
-			title: "NFT Marketplace",
+			title: "Crypto Trading Bot",
 			description:
-				"Multi-chain NFT marketplace with advanced trading features.",
-			tech: ["Next.js", "Web3.js", "MongoDB"],
-			status: "In Development",
+				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management.",
+			tech: ["Python", "Node.js", "React", "MongoDB", "Binance API"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/trading-bot.png",
 		},
 		{
-			title: "DAO Governance",
+			title: "Portfolio Website",
 			description:
-				"Decentralized autonomous organization with voting and proposal system.",
-			tech: ["Hardhat", "TypeScript", "The Graph"],
+				"Modern, responsive portfolio website with dark mode, smooth animations, and optimized performance.",
+			tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
 			status: "Live",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/portfolio.png",
+		},
+		{
+			title: "E-Commerce Platform",
+			description:
+				"Full-stack e-commerce solution with payment integration, admin dashboard, and real-time inventory management.",
+			tech: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+			status: "Completed",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/ecommerce.png",
+		},
+		{
+			title: "Task Management App",
+			description:
+				"Collaborative task management application with real-time updates, team collaboration, and progress tracking.",
+			tech: ["React", "Firebase", "Material-UI", "Redux"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/taskapp.png",
+		},
+		{
+			title: "Weather Dashboard",
+			description:
+				"Real-time weather application with forecast, interactive maps, and location-based services.",
+			tech: ["Vue.js", "OpenWeather API", "Chart.js", "Leaflet"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/projects/weather.png",
 		},
 	];
 
@@ -64,12 +105,12 @@ export default function Home() {
 	const stats = [
 		{
 			icon: <Award className="w-6 h-6" />,
-			number: "50+",
+			number: "15+",
 			label: "Projects Completed",
 		},
 		{
 			icon: <Star className="w-6 h-6" />,
-			number: "4+",
+			number: "2+",
 			label: "Years Experience",
 		},
 		{
@@ -81,19 +122,24 @@ export default function Home() {
 
 	const featuredSkills = [
 		{
-			title: "Smart Contracts",
-			description: "Secure & efficient blockchain development",
+			title: "Frontend Development",
+			description: "React, Next.js, Vue.js, TypeScript",
 			progress: 90,
 		},
 		{
-			title: "UI/UX Design",
-			description: "User-centered design solutions",
+			title: "Blockchain & Web3",
+			description: "Solidity, Smart Contracts, DApp Development",
 			progress: 85,
 		},
 		{
-			title: "Full-Stack Dev",
-			description: "End-to-end web application development",
-			progress: 95,
+			title: "Backend Development",
+			description: "Node.js, Python, MongoDB, REST APIs",
+			progress: 80,
+		},
+		{
+			title: "UI/UX Design",
+			description: "Figma, Responsive Design, User Experience",
+			progress: 75,
 		},
 	];
 
@@ -113,9 +159,9 @@ export default function Home() {
 							Welcome to My Digital Space
 						</h1>
 						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
-							I create innovative Web3 solutions and stunning digital
-							experiences that push the boundaries of what's possible on the
-							web.
+							I create innovative Web3 solutions, trading applications, and
+							stunning digital experiences that push the boundaries of what's
+							possible on the web.
 						</p>
 						<motion.a
 							href="/portfolio"
@@ -189,12 +235,13 @@ export default function Home() {
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Featured Projects
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400">
-							A glimpse into some of my recent work and innovations
+						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+							Showcasing my diverse range of projects from blockchain
+							applications to trading bots and modern web applications
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 						{featuredProjects.map((project, index) => (
 							<motion.div
 								key={project.title}
@@ -202,7 +249,14 @@ export default function Home() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="group">
-								<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600 h-full">
+								<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600 h-full flex flex-col">
+									{/* Project Image Placeholder */}
+									<div className="w-full h-32 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg mb-4 flex items-center justify-center">
+										<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+											{project.title.split(" ")[0]}
+										</div>
+									</div>
+
 									<div className="flex justify-between items-start mb-3">
 										<h3 className="text-lg font-bold text-gray-900 dark:text-white">
 											{project.title}
@@ -211,17 +265,19 @@ export default function Home() {
 											className={`px-2 py-1 rounded-full text-xs font-medium ${
 												project.status === "Live"
 													? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-													: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+													: project.status === "In Development"
+													? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+													: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
 											}`}>
 											{project.status}
 										</span>
 									</div>
 
-									<p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+									<p className="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow">
 										{project.description}
 									</p>
 
-									<div className="flex flex-wrap gap-2">
+									<div className="flex flex-wrap gap-2 mb-4">
 										{project.tech.map((tech, idx) => (
 											<span
 												key={idx}
@@ -229,6 +285,26 @@ export default function Home() {
 												{tech}
 											</span>
 										))}
+									</div>
+
+									{/* Project Links */}
+									<div className="flex gap-3 mt-auto">
+										{project.liveUrl && (
+											<a
+												href={project.liveUrl}
+												className="flex items-center gap-1 px-3 py-1 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+												<ExternalLink className="w-3 h-3" />
+												Live Demo
+											</a>
+										)}
+										{project.githubUrl && (
+											<a
+												href={project.githubUrl}
+												className="flex items-center gap-1 px-3 py-1 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+												<Github className="w-3 h-3" />
+												Code
+											</a>
+										)}
 									</div>
 								</div>
 							</motion.div>
