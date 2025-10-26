@@ -56,7 +56,7 @@ export const ProfileCard = () => {
 
 	const copyEmail = async () => {
 		try {
-			await navigator.clipboard.writeText("victor@victorgp.dev");
+			await navigator.clipboard.writeText("jeremiahvictorgp@gmail.com");
 			setCopied(true);
 			setTimeout(() => setCopied(false), 2000);
 		} catch (err) {
@@ -73,13 +73,13 @@ export const ProfileCard = () => {
 		},
 		{
 			id: 2,
-			url: "https://x.com/Vheek.io",
+			url: "https://x.com/Vheek_io",
 			name: "Twitter",
 			icon: <Twitter className="w-5 h-5" />,
 		},
 		{
 			id: 3,
-			url: "https://t.me/victorgp",
+			url: "https://t.me/Vheek10",
 			name: "Telegram",
 			icon: <MessageCircle className="w-5 h-5" />,
 		},
@@ -89,23 +89,24 @@ export const ProfileCard = () => {
 		<Card
 			className="text-center profile-card w-full max-w-md mx-auto"
 			hoverable={false}>
-			<CardContent className="p-8 sm:p-10">
-				{/* Profile Image */}
-				<div className="image text-center mb-8">
+			<CardContent className="p-4 sm:p-10">
+				{/* Profile Image - Removed top, left, and right padding */}
+				<div className="image text-center -mx-4 -mt-4 sm:-mx-10 sm:-mt-10 mb-4">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
 						className="inline-block">
 						<Image
-							src="/assets/img/profile.jpg"
+							src="/profile.jpg"
 							alt="Victor Gp"
-							width={160}
-							height={160}
-							className="rounded-2xl mx-auto border-4 border-white dark:border-gray-800 shadow-lg"
+							width={280}
+							height={280}
+							className="rounded-2xl border-2 border-white dark:border-gray-800 shadow-lg w-full"
+							priority
 						/>
 					</motion.div>
 				</div>
 
-				{/* Name and Title */}
+				{/* Name and Title - No changes */}
 				<div className="text mb-8">
 					<motion.h3
 						className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-2"
@@ -136,7 +137,7 @@ export const ProfileCard = () => {
 					</motion.div>
 				</div>
 
-				{/* Action Buttons */}
+				{/* Action Buttons - No changes */}
 				<motion.div
 					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-8"
 					initial={{ opacity: 0, y: 10 }}
@@ -144,7 +145,7 @@ export const ProfileCard = () => {
 					transition={{ delay: 0.3 }}>
 					{/* Start Chat Button */}
 					<motion.a
-						href="https://t.me/victorgp"
+						href="https://t.me/Vheek10"
 						target="_blank"
 						rel="noopener noreferrer"
 						whileHover={{ scale: 1.02 }}
@@ -186,7 +187,7 @@ export const ProfileCard = () => {
 					</motion.button>
 				</motion.div>
 
-				{/* Social Media Icons */}
+				{/* Social Media Icons - No changes */}
 				<motion.div
 					className="social-media-icon"
 					initial={{ opacity: 0, y: 10 }}

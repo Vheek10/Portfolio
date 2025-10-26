@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { ProfileCard } from "@/components/ProfileCard";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
+
 // Optimize font loading with next/font
 const poppins = Poppins({
 	subsets: ["latin"],
@@ -106,13 +107,14 @@ export default function RootLayout({
 				{/* Main content with sidebar layout */}
 				<main
 					id="main-content"
-					className="relative z-10 pt-24 min-h-screen">
+					className="relative z-10 pt-28 min-h-screen">
+					{" "}
+					{/* Increased pt-24 to pt-28 */}
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 						<div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 							{/* Sidebar - Profile Card Only */}
 							<div className="lg:col-span-1">
 								<ProfileCard />
-								{/* CTA Section Removed from Layout - Now only on Home Page */}
 							</div>
 
 							{/* Main Content Area */}

@@ -10,7 +10,6 @@ import {
 	User,
 	Briefcase,
 	FolderGit2,
-	Newspaper,
 	Mail,
 	Sun,
 	Moon,
@@ -66,7 +65,6 @@ const Header = () => {
 			href: "/portfolio",
 			icon: <FolderGit2 className="w-5 h-5" />,
 		},
-		{ title: "Blog", href: "/blog", icon: <Newspaper className="w-5 h-5" /> },
 		{ title: "Contact", href: "/contact", icon: <Mail className="w-5 h-5" /> },
 	];
 
@@ -76,7 +74,7 @@ const Header = () => {
 			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-8 py-3">
 					{/* Logo skeleton */}
-					<div className="w-24 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+					<div className="w-48 h-8 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
 					{/* Dark mode toggle skeleton */}
 					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
 				</nav>
@@ -89,7 +87,7 @@ const Header = () => {
 			className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-8 py-3">
-				{/* Logo */}
+				{/* Logo - Doubled in length */}
 				<Link
 					href="/"
 					className="group flex items-center space-x-2 z-50 relative overflow-hidden"
@@ -98,11 +96,12 @@ const Header = () => {
 					<div className="absolute inset-0 rounded-lg bg-purple-500/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
 
 					<Image
-						src="/assets/img/logo/color.svg"
-						alt="Logo"
-						width={110}
-						height={36}
-						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg"
+						src="/Logo.png"
+						alt="Jeremiah Victor Logo"
+						width={160} // Doubled from 80 to 160
+						height={32} // Kept same height
+						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg h-8 w-auto"
+						priority
 					/>
 
 					{/* Subtle pulse animation */}
@@ -186,7 +185,7 @@ const Header = () => {
 						</span>
 					</button>
 
-					{/* Let's Talk Button - Enhanced */}
+					{/* Let's Chat Button - Single Line */}
 					<Link
 						href="/contact"
 						className="hidden sm:inline-flex items-center gap-2 relative px-6 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25"
@@ -199,10 +198,10 @@ const Header = () => {
 
 						{/* Icon animation */}
 						<span className="relative z-10 flex items-center gap-2">
-							<span className="leading-none transition-all duration-300 group-hover:translate-x-1">
-								Let's Talk
-							</span>
 							<Mail className="w-4 h-4 transform transition-all duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+							<span className="leading-none transition-all duration-300 group-hover:translate-x-1">
+								Let's Chat
+							</span>
 						</span>
 
 						{/* Floating particles */}
@@ -287,7 +286,7 @@ const Header = () => {
 							</li>
 						))}
 
-						{/* Mobile Let's Talk - Enhanced */}
+						{/* Mobile Let's Chat - Single Line */}
 						<li className="pt-2 px-4">
 							<Link
 								href="/contact"
@@ -297,8 +296,8 @@ const Header = () => {
 								<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
 
 								<span className="relative z-10 flex items-center gap-2">
-									<span>Let's Talk</span>
 									<Mail className="w-4 h-4 transform transition-all duration-300 group-hover:scale-110 group-hover:translate-x-1" />
+									<span>Let's Chat</span>
 								</span>
 							</Link>
 						</li>
@@ -309,5 +308,4 @@ const Header = () => {
 	);
 };
 
-// FIXED: Changed from "export default Footer" to "export default Header"
 export default Header;
