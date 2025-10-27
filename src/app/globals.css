@@ -10,10 +10,9 @@ body {
 	height: 100%;
 	font-family: var(--font-sans);
 	scroll-behavior: smooth;
-	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Targeted transitions instead of universal */
+/* Targeted transitions */
 button,
 a,
 .nav-item-hover,
@@ -25,30 +24,199 @@ a,
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Rest of your animations and utilities remain the same */
-/* ... your existing animations ... */
-
-/* Class-based dark mode only */
-.dark .dark\:shadow-glow-purple {
+/* Shadow glow for purple elements */
+.shadow-glow-purple {
 	box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
 }
 
-.dark .dark\:glass-morphism {
+/* Glass morphism effect */
+.glass-morphism {
 	background: rgba(0, 0, 0, 0.2);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-track {
+/* Scrollbar styling */
+::-webkit-scrollbar-track {
 	background: rgba(0, 0, 0, 0.1);
 }
 
-.dark ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 	background: linear-gradient(45deg, #7c3aed, #4f46e5);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
 	background: linear-gradient(45deg, #6d28d9, #4338ca);
+}
+
+/* Custom utilities */
+.glass-effect {
+	background: rgba(15, 23, 42, 0.7);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-border {
+	position: relative;
+	background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.gradient-border::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	padding: 1px;
+	border-radius: inherit;
+	background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask-composite: xor;
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+}
+
+.text-gradient {
+	background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* Animations */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes glow {
+	0%,
+	100% {
+		box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+	}
+	50% {
+		box-shadow: 0 0 40px rgba(139, 92, 246, 0.8);
+	}
+}
+
+@keyframes slideInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes typewriter {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+/* Animation utilities */
+.animate-float {
+	animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+	animation: glow 2s ease-in-out infinite;
+}
+
+.animate-slide-in-up {
+	animation: slideInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.8s ease-out;
+}
+
+.animate-scale-in {
+	animation: scaleIn 0.5s ease-out;
+}
+
+.animate-typewriter {
+	animation: typewriter 3s steps(40) 1s both, blink 0.8s infinite;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 2px solid;
+}
+
+/* Hover effects */
+.hover-lift:hover {
+	transform: translateY(-5px);
+}
+
+.hover-glow:hover {
+	box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+}
+
+/* Focus states for accessibility */
+.focus-ring:focus {
+	outline: 2px solid #8b5cf6;
+	outline-offset: 2px;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-dark {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+.bg-gradient-purple {
+	background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+}
+
+.bg-gradient-blue {
+	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+}
+
+/* Text selection */
+::selection {
+	background: rgba(139, 92, 246, 0.3);
+	color: white;
+}
+
+::-moz-selection {
+	background: rgba(139, 92, 246, 0.3);
+	color: white;
 }

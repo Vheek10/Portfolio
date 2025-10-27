@@ -4,18 +4,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/Card";
-import {
-	Mail,
-	MapPin,
-	Phone,
-	Send,
-	Clock,
-	CheckCircle,
-	Github,
-	Twitter,
-	MessageCircle,
-	Linkedin,
-} from "lucide-react";
+import { Mail, MapPin, Phone, Send, Clock, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -56,33 +45,6 @@ export default function Contact() {
 			value: "< 24 hours",
 			description: "Typically respond within a day",
 			link: "#",
-		},
-	];
-
-	const socialLinks = [
-		{
-			icon: <Github className="w-5 h-5" />,
-			name: "GitHub",
-			url: "https://github.com/Vheek10",
-			description: "Check out my code",
-		},
-		{
-			icon: <Twitter className="w-5 h-5" />,
-			name: "Twitter",
-			url: "https://twitter.com/Vheek_io",
-			description: "Follow for updates",
-		},
-		{
-			icon: <MessageCircle className="w-5 h-5" />,
-			name: "Telegram",
-			url: "https://t.me/vheek10",
-			description: "Chat directly",
-		},
-		{
-			icon: <Linkedin className="w-5 h-5" />,
-			name: "LinkedIn",
-			url: "https://linkedin.com/in/victorgp",
-			description: "Professional network",
 		},
 	];
 
@@ -155,80 +117,53 @@ export default function Contact() {
 			</motion.section>
 
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-				{/* Contact Information */}
+				{/* Contact Information - Now properly aligned with form */}
 				<motion.div
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
-					className="lg:col-span-1 space-y-6">
-					{/* Contact Info Cards */}
-					{contactInfo.map((info, index) => (
-						<motion.div
-							key={info.title}
-							variants={itemVariants}>
-							<Card className="p-6 group hover:shadow-lg transition-all duration-300">
-								<a
-									href={info.link}
-									className="block"
-									onClick={(e) => info.link === "#" && e.preventDefault()}>
-									<div className="flex items-start gap-4">
-										<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300">
-											{info.icon}
+					className="lg:col-span-1">
+					<div className="grid grid-cols-1 gap-6 h-full">
+						{contactInfo.map((info, index) => (
+							<motion.div
+								key={info.title}
+								variants={itemVariants}
+								className="h-full">
+								<Card className="p-6 group hover:shadow-lg transition-all duration-300 h-full">
+									<a
+										href={info.link}
+										className="block h-full"
+										onClick={(e) => info.link === "#" && e.preventDefault()}>
+										<div className="flex items-start gap-4 h-full">
+											<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+												{info.icon}
+											</div>
+											<div className="flex-1 min-w-0">
+												<h3 className="font-semibold text-gray-900 dark:text-white mb-1 truncate">
+													{info.title}
+												</h3>
+												<p className="text-gray-900 dark:text-white font-medium truncate">
+													{info.value}
+												</p>
+												<p className="text-gray-600 dark:text-gray-400 text-sm mt-1 line-clamp-2">
+													{info.description}
+												</p>
+											</div>
 										</div>
-										<div className="flex-1">
-											<h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-												{info.title}
-											</h3>
-											<p className="text-gray-900 dark:text-white font-medium">
-												{info.value}
-											</p>
-											<p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-												{info.description}
-											</p>
-										</div>
-									</div>
-								</a>
-							</Card>
-						</motion.div>
-					))}
-
-					{/* Social Links */}
-					<motion.div variants={itemVariants}>
-						<Card className="p-6">
-							<h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-								Follow & Connect
-							</h3>
-							<div className="grid grid-cols-2 gap-4">
-								{socialLinks.map((social, index) => (
-									<motion.a
-										key={social.name}
-										href={social.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										whileHover={{ scale: 1.05 }}
-										whileTap={{ scale: 0.95 }}
-										className="flex flex-col items-center p-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:border-transparent hover:shadow-lg group">
-										<div className="mb-2 group-hover:scale-110 transition-transform duration-300">
-											{social.icon}
-										</div>
-										<span className="text-sm font-medium">{social.name}</span>
-										<span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-white/80 mt-1">
-											{social.description}
-										</span>
-									</motion.a>
-								))}
-							</div>
-						</Card>
-					</motion.div>
+									</a>
+								</Card>
+							</motion.div>
+						))}
+					</div>
 				</motion.div>
 
-				{/* Contact Form */}
+				{/* Contact Form - Now properly aligned with contact info */}
 				<motion.div
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.6, delay: 0.2 }}
 					className="lg:col-span-2">
-					<Card className="p-8">
+					<Card className="p-8 h-full">
 						{isSubmitted ? (
 							<motion.div
 								initial={{ opacity: 0, scale: 0.8 }}
@@ -251,7 +186,7 @@ export default function Contact() {
 								</button>
 							</motion.div>
 						) : (
-							<>
+							<div className="h-full flex flex-col">
 								<div className="text-center mb-8">
 									<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 										Send a Message
@@ -264,7 +199,7 @@ export default function Contact() {
 
 								<form
 									onSubmit={handleSubmit}
-									className="space-y-6">
+									className="space-y-6 flex-1">
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 										{/* Name Field */}
 										<div>
@@ -325,7 +260,7 @@ export default function Contact() {
 									</div>
 
 									{/* Message Field */}
-									<div>
+									<div className="flex-1">
 										<label
 											htmlFor="message"
 											className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -338,7 +273,7 @@ export default function Contact() {
 											onChange={handleChange}
 											required
 											rows={6}
-											className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+											className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none h-full min-h-[200px]"
 											placeholder="Tell me about your project, timeline, and budget..."
 										/>
 									</div>
@@ -367,7 +302,7 @@ export default function Contact() {
 										* Required fields. I typically respond within 24 hours.
 									</p>
 								</form>
-							</>
+							</div>
 						)}
 					</Card>
 				</motion.div>

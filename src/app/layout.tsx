@@ -23,10 +23,7 @@ export const metadata = {
 		"full-stack developer, 3D web design, web development, React, Next.js, portfolio",
 	authors: [{ name: "Jeremiah Victor" }],
 	viewport: "width=device-width, initial-scale=1",
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "#ffffff" },
-		{ media: "(prefers-color-scheme: dark)", color: "#111827" },
-	],
+	themeColor: "#111827",
 	robots: "index, follow",
 	openGraph: {
 		title: "Jeremiah Victor - Creative Full-Stack Developer",
@@ -45,7 +42,6 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			suppressHydrationWarning
 			className={`${poppins.variable} scroll-smooth`}>
 			<head>
 				<link
@@ -75,14 +71,14 @@ export default function RootLayout({
 			<body
 				className={`
         ${poppins.className}
-        bg-white dark:bg-gray-950 
-        text-gray-900 dark:text-gray-100 
-        transition-colors duration-300
+        bg-gray-950 
+        text-gray-100 
         min-h-screen
         antialiased
         overflow-x-hidden
+        relative
       `}>
-				{/* Geometric 3D Background */}
+				{/* Geometric 3D Background - Ensure it's behind everything */}
 				<GeometricBackground />
 
 				{/* Skip to main content for accessibility */}
