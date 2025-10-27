@@ -42,8 +42,32 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${poppins.variable} scroll-smooth`}>
+			// Add dark class here to prevent flash
+			className={`${poppins.variable} dark scroll-smooth`}
+			// Force dark mode for the entire document
+			style={{ colorScheme: "dark" }}>
 			<head>
+				{/* Add this script to prevent flash */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+              (function() {
+                // Check if dark mode is preferred
+                const isDarkMode = localStorage.theme === 'dark' || 
+                  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                
+                // Set dark mode immediately
+                if (isDarkMode) {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.style.colorScheme = 'dark';
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.style.colorScheme = 'light';
+                }
+              })();
+            `,
+					}}
+				/>
 				<link
 					rel="preconnect"
 					href="https://fonts.googleapis.com"
@@ -53,15 +77,14 @@ export default function RootLayout({
 					href="https://fonts.gstatic.com"
 					crossOrigin="anonymous"
 				/>
-				{/* Cache buster - change the number if it still doesn't work */}
 				<link
 					rel="icon"
-					href="/profile.jpg?v=2"
+					href="/profile.jpg?v=3"
 					sizes="any"
 				/>
 				<link
 					rel="apple-touch-icon"
-					href="/profile.jpg?v=2"
+					href="/profile.jpg?v=3"
 				/>
 			</head>
 			<body
