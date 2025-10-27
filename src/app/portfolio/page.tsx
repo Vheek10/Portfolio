@@ -16,6 +16,7 @@ import {
 	TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 const projects = [
 	// ==== Web2 Projects ====
@@ -25,7 +26,7 @@ const projects = [
 		category: "web2",
 		description:
 			"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, analytics, and exportable results.",
-		image: "/assets/img/projects/elgvotes.jpg",
+		image: "/votingapp.png",
 		tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
 		github: "https://github.com/Vheek10/ELGVotes",
 		live: "#",
@@ -35,11 +36,39 @@ const projects = [
 	},
 	{
 		id: 2,
+		title: "Disney+ Clone",
+		category: "web2",
+		description:
+			"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
+		image: "/disneyclone.png",
+		tech: ["React", "Firebase", "Styled Components", "Context API"],
+		github: "https://github.com/Vheek10/disney-clone",
+		live: "#",
+		featured: true,
+		status: "Live",
+		highlights: ["Streaming UI", "User Auth", "Responsive Design"],
+	},
+	{
+		id: 3,
+		title: "Crypto Trading Bot",
+		category: "web2",
+		description:
+			"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+		image: "/tradingbot.png",
+		tech: ["Python", "Node.js", "Binance API", "WebSocket"],
+		github: "https://github.com/Vheek10/crypto-trading-bot",
+		live: "#",
+		featured: true,
+		status: "Live",
+		highlights: ["Automated Trading", "Real-time Data", "Risk Management"],
+	},
+	{
+		id: 4,
 		title: "CoinMarketCap Clone",
 		category: "web2",
 		description:
 			"A dynamic crypto analytics platform that replicates CoinMarketCap's design and functionality using the CoinGecko API with real-time charts and stats.",
-		image: "/assets/img/projects/coinmarketcap.jpg",
+		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "Recharts", "TailwindCSS"],
 		github: "https://github.com/Vheek10/CoinMarketCap-Clone",
 		live: "#",
@@ -47,12 +76,12 @@ const projects = [
 		highlights: ["Real-time Data", "Charts", "Responsive Design"],
 	},
 	{
-		id: 3,
+		id: 5,
 		title: "Weather Forecast App",
 		category: "web2",
 		description:
 			"A sleek, responsive weather app built with Next.js and TailwindCSS, featuring live weather data, temperature trends, and theme switching.",
-		image: "/assets/img/projects/weather.jpg",
+		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "OpenWeather API", "TailwindCSS"],
 		github: "https://github.com/Vheek10/Weather-App",
 		live: "#",
@@ -62,12 +91,12 @@ const projects = [
 
 	// ==== Web3 Projects ====
 	{
-		id: 4,
+		id: 6,
 		title: "TokenSwap - DeFi Exchange UI",
 		category: "web3",
 		description:
 			"A PancakeSwap-inspired token swap interface with live token prices from CoinGecko, elegant dark UI, and swap settings panel.",
-		image: "/assets/img/projects/tokenswap.jpg",
+		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
 		github: "https://github.com/Vheek10/TokenSwap",
 		live: "#",
@@ -76,12 +105,12 @@ const projects = [
 		highlights: ["DeFi UI", "Live Prices", "Dark Theme"],
 	},
 	{
-		id: 5,
+		id: 7,
 		title: "VaultVote - Decentralized Governance",
 		category: "web3",
 		description:
 			"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
-		image: "/assets/img/projects/vaultvote.jpg",
+		image: "/project-placeholder.jpg",
 		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
 		github: "#",
 		live: "#",
@@ -89,12 +118,12 @@ const projects = [
 		highlights: ["ZK Proofs", "Anonymous Voting", "Governance"],
 	},
 	{
-		id: 6,
+		id: 8,
 		title: "NFT Marketplace UI",
 		category: "web3",
 		description:
 			"Modern NFT marketplace interface with collection browsing, item details, and wallet connectivity features.",
-		image: "/assets/img/projects/nft-marketplace.jpg",
+		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "Web3.js", "TailwindCSS", "Ethers.js"],
 		github: "#",
 		live: "#",
@@ -111,6 +140,8 @@ export default function Portfolio() {
 		{ id: "web2", label: "Web2 Projects" },
 		{ id: "web3", label: "Web3 Projects" },
 		{ id: "featured", label: "Featured" },
+		{ id: "live", label: "Live Projects" },
+		{ id: "development", label: "In Development" },
 	];
 
 	const stats = [
@@ -139,6 +170,9 @@ export default function Portfolio() {
 	const filteredProjects = projects.filter((project) => {
 		if (activeFilter === "all") return true;
 		if (activeFilter === "featured") return project.featured;
+		if (activeFilter === "live") return project.status === "Live";
+		if (activeFilter === "development")
+			return project.status === "In Development";
 		return project.category === activeFilter;
 	});
 
@@ -172,15 +206,18 @@ export default function Portfolio() {
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
 					{/* Background Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
+					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
 						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Portfolio
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Explore my latest projects across Web2 and Web3 — built with
 							precision, creativity, and a passion for modern design.
+							<strong className="text-green-400 block mt-2">
+								✅ 7 Projects Live • 1 In Development
+							</strong>
 						</p>
 					</div>
 				</Card>
@@ -203,9 +240,7 @@ export default function Portfolio() {
 								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 									{stat.number}
 								</div>
-								<div className="text-sm text-gray-600 dark:text-gray-400">
-									{stat.label}
-								</div>
+								<div className="text-sm text-gray-400">{stat.label}</div>
 							</Card>
 						</motion.div>
 					))}
@@ -220,10 +255,8 @@ export default function Portfolio() {
 				<Card className="p-6">
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 						<div className="flex items-center gap-2">
-							<Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-							<span className="font-semibold text-gray-900 dark:text-white">
-								Filter by:
-							</span>
+							<Filter className="w-5 h-5 text-gray-400" />
+							<span className="font-semibold text-white">Filter by:</span>
 						</div>
 						<div className="flex flex-wrap gap-2">
 							{filters.map((filter) => (
@@ -233,7 +266,7 @@ export default function Portfolio() {
 									className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
 										activeFilter === filter.id
 											? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-											: "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+											: "bg-gray-800 text-gray-300 hover:bg-gray-700"
 									}`}>
 									{filter.label}
 								</button>
@@ -243,35 +276,44 @@ export default function Portfolio() {
 				</Card>
 			</motion.section>
 
-			{/* Projects Grid */}
+			{/* Projects Grid - Updated for equal height alignment */}
 			<motion.section
 				variants={containerVariants}
 				initial="hidden"
 				animate="visible"
-				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
 				{filteredProjects.map((project, index) => (
 					<motion.div
 						key={project.id}
 						variants={itemVariants}
 						layout
-						className="group">
-						<Card className="overflow-hidden h-full transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-300 dark:group-hover:border-purple-600">
-							{/* Project Image */}
-							<div className="relative overflow-hidden bg-gradient-to-br from-purple-400 to-blue-500 h-48">
-								<div className="w-full h-full flex items-center justify-center text-white">
-									<div className="text-center p-4">
-										<Code className="w-12 h-12 mx-auto mb-2 opacity-80" />
-										<span className="text-sm font-medium">{project.title}</span>
-									</div>
-								</div>
+						className="group flex">
+						<Card className="overflow-hidden flex flex-col transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-600 w-full">
+							{/* Project Image - Fixed Height */}
+							<div className="relative overflow-hidden h-48 bg-gray-800 flex-shrink-0">
+								<Image
+									src={project.image}
+									alt={project.title}
+									width={400}
+									height={192}
+									className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+									onError={(e) => {
+										// Fallback if image fails to load
+										const target = e.target as HTMLImageElement;
+										target.style.display = "none";
+										// Show fallback background
+										target.parentElement!.style.background =
+											"linear-gradient(135deg, #8B5CF6, #3B82F6)";
+									}}
+								/>
 
 								{/* Status Badge */}
 								<div className="absolute top-4 left-4">
 									<span
 										className={`px-3 py-1 rounded-full text-xs font-medium ${
 											project.status === "Live"
-												? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-												: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+												? "bg-green-900 text-green-200"
+												: "bg-blue-900 text-blue-200"
 										}`}>
 										{project.status}
 									</span>
@@ -280,7 +322,7 @@ export default function Portfolio() {
 								{/* Featured Badge */}
 								{project.featured && (
 									<div className="absolute top-4 right-4">
-										<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+										<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 text-yellow-200">
 											Featured
 										</span>
 									</div>
@@ -315,13 +357,13 @@ export default function Portfolio() {
 								</div>
 							</div>
 
-							{/* Project Content */}
-							<div className="p-6">
-								<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+							{/* Project Content - Flex grow for equal height */}
+							<div className="p-6 flex flex-col flex-grow">
+								<h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors duration-300 line-clamp-2">
 									{project.title}
 								</h3>
 
-								<p className="text-gray-600 dark:text-gray-400 text-sm mb-4 leading-relaxed">
+								<p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3 flex-grow">
 									{project.description}
 								</p>
 
@@ -331,7 +373,7 @@ export default function Portfolio() {
 										{project.highlights.map((highlight, idx) => (
 											<span
 												key={idx}
-												className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
+												className="px-2 py-1 bg-purple-900 text-purple-300 rounded-full text-xs font-medium">
 												{highlight}
 											</span>
 										))}
@@ -343,14 +385,14 @@ export default function Portfolio() {
 									{project.tech.map((tech, idx) => (
 										<span
 											key={idx}
-											className="px-3 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-xs text-gray-700 dark:text-gray-300">
+											className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
 											{tech}
 										</span>
 									))}
 								</div>
 
-								{/* Action Buttons */}
-								<div className="flex gap-3">
+								{/* Action Buttons - Fixed at bottom */}
+								<div className="flex gap-3 mt-auto pt-4">
 									{project.live !== "#" && (
 										<motion.a
 											href={project.live}
@@ -372,7 +414,7 @@ export default function Portfolio() {
 											whileTap={{ scale: 0.95 }}
 											className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-semibold transition-all duration-300 ${
 												project.live !== "#"
-													? "border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-purple-500 hover:bg-purple-500/5"
+													? "border-gray-600 text-gray-300 hover:border-purple-500 hover:bg-purple-500/5"
 													: "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg"
 											}`}>
 											<Github className="w-4 h-4" />
@@ -393,13 +435,13 @@ export default function Portfolio() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
 					<Card className="p-12 text-center">
-						<div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+						<div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-800 flex items-center justify-center">
 							<Filter className="w-10 h-10 text-gray-400" />
 						</div>
-						<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+						<h3 className="text-xl font-bold text-white mb-2">
 							No projects found
 						</h3>
-						<p className="text-gray-600 dark:text-gray-400 mb-6">
+						<p className="text-gray-400 mb-6">
 							No projects match the selected filter. Try choosing a different
 							category.
 						</p>

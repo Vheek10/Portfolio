@@ -16,68 +16,69 @@ import {
 	ExternalLink,
 	Github,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
 	const featuredProjects = [
 		{
-			title: "ElgVote - Voting DApp",
+			title: "ELGVotes - Voting App",
 			description:
-				"A decentralized voting application built on Ethereum blockchain with secure and transparent voting mechanism.",
-			tech: ["Solidity", "Next.js", "Tailwind CSS", "Web3.js", "Hardhat"],
+				"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, and real-time results.",
+			tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
 			status: "Live",
 			liveUrl: "#",
-			githubUrl: "#",
-			image: "/projects/elgvote.png",
+			githubUrl: "https://github.com/Vheek10/ELGVotes",
+			image: "/votingapp.png",
 		},
 		{
 			title: "Crypto Trading Bot",
 			description:
-				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management.",
-			tech: ["Python", "Node.js", "React", "MongoDB", "Binance API"],
+				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+			tech: ["Python", "Node.js", "Binance API", "WebSocket"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "https://github.com/Vheek10/crypto-trading-bot",
+			image: "/tradingbot.png",
+		},
+		{
+			title: "Disney+ Clone",
+			description:
+				"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
+			tech: ["React", "Firebase", "Styled Components", "Context API"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "https://github.com/Vheek10/disney-clone",
+			image: "/disneyclone.png",
+		},
+		{
+			title: "TokenSwap - DeFi Exchange",
+			description:
+				"A PancakeSwap-inspired token swap interface with live token prices from CoinGecko, elegant dark UI, and swap settings panel.",
+			tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
+			status: "Live",
+			liveUrl: "#",
+			githubUrl: "https://github.com/Vheek10/TokenSwap",
+			image: "/project-placeholder.jpg",
+		},
+		{
+			title: "NFT Marketplace UI",
+			description:
+				"Modern NFT marketplace interface with collection browsing, item details, and wallet connectivity features.",
+			tech: ["Next.js", "Web3.js", "TailwindCSS", "Ethers.js"],
 			status: "Live",
 			liveUrl: "#",
 			githubUrl: "#",
-			image: "/projects/trading-bot.png",
+			image: "/project-placeholder.jpg",
 		},
 		{
-			title: "Portfolio Website",
+			title: "VaultVote - Web3 Governance",
 			description:
-				"Modern, responsive portfolio website with smooth animations and optimized performance.",
-			tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-			status: "Live",
+				"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
+			tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
+			status: "In Development",
 			liveUrl: "#",
 			githubUrl: "#",
-			image: "/projects/portfolio.png",
-		},
-		{
-			title: "E-Commerce Platform",
-			description:
-				"Full-stack e-commerce solution with payment integration, admin dashboard, and real-time inventory management.",
-			tech: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-			status: "Completed",
-			liveUrl: "#",
-			githubUrl: "#",
-			image: "/projects/ecommerce.png",
-		},
-		{
-			title: "Task Management App",
-			description:
-				"Collaborative task management application with real-time updates, team collaboration, and progress tracking.",
-			tech: ["React", "Firebase", "Material-UI", "Redux"],
-			status: "Live",
-			liveUrl: "#",
-			githubUrl: "#",
-			image: "/projects/taskapp.png",
-		},
-		{
-			title: "Weather Dashboard",
-			description:
-				"Real-time weather application with forecast, interactive maps, and location-based services.",
-			tech: ["Vue.js", "OpenWeather API", "Chart.js", "Leaflet"],
-			status: "Live",
-			liveUrl: "#",
-			githubUrl: "#",
-			image: "/projects/weather.png",
+			image: "/project-placeholder.jpg",
 		},
 	];
 
@@ -245,66 +246,109 @@ export default function Home() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="group">
-								<div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full flex flex-col">
-									{/* Project Image Placeholder */}
-									<div className="w-full h-32 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-lg mb-4 flex items-center justify-center">
-										<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-											{project.title.split(" ")[0]}
-										</div>
+								{/* Card with no padding around image */}
+								<div className="rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full flex flex-col overflow-hidden">
+									{/* Project Image - No padding, glued to top and sides */}
+									<div className="relative w-full h-32 bg-gray-700 overflow-hidden">
+										<Image
+											src={project.image}
+											alt={project.title}
+											width={400}
+											height={128}
+											className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+											onError={(e) => {
+												// Fallback if image fails to load
+												const target = e.target as HTMLImageElement;
+												target.style.display = "none";
+												// Show fallback background
+												target.parentElement!.style.background =
+													"linear-gradient(135deg, #8B5CF6, #3B82F6)";
+												// Add text fallback
+												const fallbackText = document.createElement("div");
+												fallbackText.className =
+													"w-full h-full flex items-center justify-center text-white font-bold text-lg";
+												fallbackText.textContent = project.title.split(" ")[0];
+												target.parentElement!.appendChild(fallbackText);
+											}}
+										/>
 									</div>
 
-									<div className="flex justify-between items-start mb-3">
-										<h3 className="text-lg font-bold text-white">
-											{project.title}
-										</h3>
-										<span
-											className={`px-2 py-1 rounded-full text-xs font-medium ${
-												project.status === "Live"
-													? "bg-green-900 text-green-200"
-													: project.status === "In Development"
-													? "bg-blue-900 text-blue-200"
-													: "bg-gray-700 text-gray-200"
-											}`}>
-											{project.status}
-										</span>
-									</div>
-
-									<p className="text-gray-400 text-sm mb-4 flex-grow">
-										{project.description}
-									</p>
-
-									<div className="flex flex-wrap gap-2 mb-4">
-										{project.tech.map((tech, idx) => (
+									{/* Content with padding */}
+									<div className="p-6 flex flex-col flex-grow">
+										<div className="flex justify-between items-start mb-3">
+											<h3 className="text-lg font-bold text-white line-clamp-1">
+												{project.title}
+											</h3>
 											<span
-												key={idx}
-												className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
-												{tech}
+												className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2 ${
+													project.status === "Live"
+														? "bg-green-900 text-green-200"
+														: project.status === "In Development"
+														? "bg-blue-900 text-blue-200"
+														: "bg-gray-700 text-gray-200"
+												}`}>
+												{project.status}
 											</span>
-										))}
-									</div>
+										</div>
 
-									{/* Project Links */}
-									<div className="flex gap-3 mt-auto">
-										{project.liveUrl && (
-											<a
-												href={project.liveUrl}
-												className="flex items-center gap-1 px-3 py-1 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-												<ExternalLink className="w-3 h-3" />
-												Live Demo
-											</a>
-										)}
-										{project.githubUrl && (
-											<a
-												href={project.githubUrl}
-												className="flex items-center gap-1 px-3 py-1 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-												<Github className="w-3 h-3" />
-												Code
-											</a>
-										)}
+										<p className="text-gray-400 text-sm mb-4 flex-grow line-clamp-3">
+											{project.description}
+										</p>
+
+										<div className="flex flex-wrap gap-2 mb-4">
+											{project.tech.slice(0, 3).map((tech, idx) => (
+												<span
+													key={idx}
+													className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
+													{tech}
+												</span>
+											))}
+											{project.tech.length > 3 && (
+												<span className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
+													+{project.tech.length - 3}
+												</span>
+											)}
+										</div>
+
+										{/* Project Links */}
+										<div className="flex gap-3 mt-auto pt-4">
+											{project.liveUrl && project.liveUrl !== "#" && (
+												<a
+													href={project.liveUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="flex items-center gap-1 px-3 py-2 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex-1 justify-center">
+													<ExternalLink className="w-3 h-3" />
+													Live Demo
+												</a>
+											)}
+											{project.githubUrl && project.githubUrl !== "#" && (
+												<a
+													href={project.githubUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="flex items-center gap-1 px-3 py-2 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex-1 justify-center">
+													<Github className="w-3 h-3" />
+													Code
+												</a>
+											)}
+										</div>
 									</div>
 								</div>
 							</motion.div>
 						))}
+					</div>
+
+					{/* View All Projects CTA */}
+					<div className="text-center mt-8">
+						<motion.a
+							href="/portfolio"
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white">
+							View All Projects
+							<ArrowRight className="w-4 h-4" />
+						</motion.a>
 					</div>
 				</Card>
 			</motion.section>

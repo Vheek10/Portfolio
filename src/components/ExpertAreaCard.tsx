@@ -6,9 +6,15 @@ import React, { useEffect, useRef } from "react";
 import { Card, CardContent } from "./Card";
 import { motion } from "framer-motion";
 
+interface TechItem {
+	id: number;
+	icon: string;
+	name: string;
+}
+
 const ExpertAreaCard = () => {
 	// Updated expert items with online logo URLs
-	const expertItems = [
+	const expertItems: TechItem[] = [
 		// UI Tools
 		{
 			id: 1,
@@ -162,13 +168,44 @@ const ExpertAreaCard = () => {
 		};
 	}, []);
 
-	// Fix: Update the ScrollingRow props interface to accept null
+	// Tech item component
+	const TechItem = ({ item }: { item: TechItem }) => (
+		<motion.div
+			key={item.id}
+			className="expertise-item flex-shrink-0 w-20 text-center group"
+			whileHover={{ scale: 1.1, y: -2 }}
+			transition={{ duration: 0.2 }}>
+			<div className="image text-center mb-2">
+				<div className="w-14 h-14 mx-auto rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
+					<img
+						src={item.icon}
+						alt={item.name}
+						className="w-7 h-7 transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+						onError={(e) => {
+							// Fallback for broken images
+							const target = e.target as HTMLImageElement;
+							target.src = `https://via.placeholder.com/28/8B5CF6/FFFFFF?text=${item.name.charAt(
+								0,
+							)}`;
+						}}
+					/>
+				</div>
+			</div>
+			<div className="text">
+				<h4 className="title text-xs font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+					{item.name}
+				</h4>
+			</div>
+		</motion.div>
+	);
+
+	// Scrolling row component - Fixed TypeScript issue
 	const ScrollingRow = ({
 		items,
 		scrollRef,
 		className = "",
 	}: {
-		items: typeof expertItems;
+		items: TechItem[];
 		scrollRef: React.RefObject<HTMLDivElement | null>;
 		className?: string;
 	}) => (
@@ -177,33 +214,10 @@ const ExpertAreaCard = () => {
 			ref={scrollRef}>
 			<div className="flex space-x-8 min-w-max py-4">
 				{items.map((item) => (
-					<motion.div
+					<TechItem
 						key={item.id}
-						className="expertise-item flex-shrink-0 w-20 text-center group"
-						whileHover={{ scale: 1.1, y: -2 }}
-						transition={{ duration: 0.2 }}>
-						<div className="image text-center mb-2">
-							<div className="w-14 h-14 mx-auto rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
-								<img
-									src={item.icon}
-									alt={item.name}
-									className="w-7 h-7 transition-all duration-300 group-hover:brightness-0 group-hover:invert"
-									onError={(e) => {
-										// Fallback for broken images
-										const target = e.target as HTMLImageElement;
-										target.src = `https://via.placeholder.com/28/8B5CF6/FFFFFF?text=${item.name.charAt(
-											0,
-										)}`;
-									}}
-								/>
-							</div>
-						</div>
-						<div className="text">
-							<h4 className="title text-xs font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
-								{item.name}
-							</h4>
-						</div>
-					</motion.div>
+						item={item}
+					/>
 				))}
 			</div>
 		</div>
@@ -217,7 +231,7 @@ const ExpertAreaCard = () => {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
-					Tech Stacks & Tools
+					Tech Stack & Tools
 				</motion.h3>
 
 				<div className="space-y-2">
