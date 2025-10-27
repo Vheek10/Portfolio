@@ -56,7 +56,7 @@ const projects = [
 			"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
 		image: "/tradingbot.png",
 		tech: ["Python", "Node.js", "Binance API", "WebSocket"],
-		github: "https://github.com/Vheek10/crypto-trading-bot",
+		github: "https://github.com/Vheek10/trading-bot",
 		live: "#",
 		featured: true,
 		status: "Live",

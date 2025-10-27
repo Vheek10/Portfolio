@@ -37,7 +37,7 @@ export default function Home() {
 			tech: ["Python", "Node.js", "Binance API", "WebSocket"],
 			status: "Live",
 			liveUrl: "#",
-			githubUrl: "https://github.com/Vheek10/crypto-trading-bot",
+			githubUrl: "https://github.com/Vheek10/trading-bot",
 			image: "/tradingbot.png",
 		},
 		{
