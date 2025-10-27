@@ -5,7 +5,6 @@
 import React, { useEffect, useRef } from "react";
 import { Card, CardContent } from "./Card";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 const ExpertAreaCard = () => {
 	// Updated expert items with online logo URLs
@@ -163,13 +162,14 @@ const ExpertAreaCard = () => {
 		};
 	}, []);
 
+	// Fix: Update the ScrollingRow props interface to accept null
 	const ScrollingRow = ({
 		items,
 		scrollRef,
 		className = "",
 	}: {
 		items: typeof expertItems;
-		scrollRef: React.RefObject<HTMLDivElement>;
+		scrollRef: React.RefObject<HTMLDivElement | null>;
 		className?: string;
 	}) => (
 		<div
