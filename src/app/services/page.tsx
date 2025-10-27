@@ -182,17 +182,17 @@ export default function Services() {
 	const stats = [
 		{
 			icon: <Award className="w-6 h-6" />,
-			number: "50+",
+			number: "15+",
 			label: "Projects Completed",
 		},
 		{
 			icon: <Star className="w-6 h-6" />,
-			number: "40+",
+			number: "10+",
 			label: "Happy Clients",
 		},
 		{
 			icon: <Clock className="w-6 h-6" />,
-			number: "4+",
+			number: "2+",
 			label: "Years Experience",
 		},
 		{
@@ -325,15 +325,6 @@ export default function Services() {
 										? "ring-2 ring-purple-500 shadow-xl"
 										: "group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600"
 								}`}>
-								{/* Popular Badge */}
-								{service.popular && (
-									<div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-										<span className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
-											Most Popular
-										</span>
-									</div>
-								)}
-
 								{/* Service Icon */}
 								<div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
 									{service.icon}

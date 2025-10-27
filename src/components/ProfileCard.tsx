@@ -23,8 +23,8 @@ export const ProfileCard = () => {
 	const [typingSpeed, setTypingSpeed] = useState(150);
 
 	const roles = useRef([
-		"Web3 Fullstack Developer",
-		"Frontend Developer",
+		"Web3 Developer",
+		"Fullstack Developer",
 		"UI/UX Designer",
 		"Smart Contract Engineer",
 	]);

@@ -121,7 +121,7 @@ export default function Portfolio() {
 		},
 		{
 			icon: <Code className="w-6 h-6" />,
-			number: "6+",
+			number: "15+",
 			label: "Projects Completed",
 		},
 		{
