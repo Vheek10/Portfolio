@@ -215,9 +215,6 @@ export default function Portfolio() {
 						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Explore my latest projects across Web2 and Web3 — built with
 							precision, creativity, and a passion for modern design.
-							<strong className="text-green-400 block mt-2">
-								✅ 7 Projects Live • 1 In Development
-							</strong>
 						</p>
 					</div>
 				</Card>
