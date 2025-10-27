@@ -31,7 +31,7 @@ export default function Home() {
 			image: "/votingapp.png",
 		},
 		{
-			title: "Crypto Trading Bot",
+			title: "Trading Bot",
 			description:
 				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
 			tech: ["Python", "Node.js", "Binance API", "WebSocket"],

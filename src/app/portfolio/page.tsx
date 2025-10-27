@@ -50,12 +50,12 @@ const projects = [
 	},
 	{
 		id: 3,
-		title: "Crypto Trading Bot",
+		title: "Trading Bot",
 		category: "web2",
 		description:
-			"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+			"Automated  trading bot with real-time market analysis, multiple strategy support, and risk management features.",
 		image: "/tradingbot.png",
-		tech: ["Python", "Node.js", "Binance API", "WebSocket"],
+		tech: ["Python", "Node.js", "Tradingview API", "WebSocket"],
 		github: "https://github.com/Vheek10/trading-bot",
 		live: "#",
 		featured: true,
