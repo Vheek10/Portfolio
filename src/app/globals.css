@@ -220,3 +220,12 @@ a,
 	background: rgba(139, 92, 246, 0.3);
 	color: white;
 }
+/* Force dark theme */
+:root {
+	color-scheme: dark;
+}
+
+body {
+	background-color: #111827; /* gray-950 */
+	color: #f3f4f6; /* gray-100 */
+}

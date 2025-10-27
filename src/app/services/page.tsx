@@ -38,7 +38,6 @@ export default function Services() {
 				"Multi-chain Support",
 				"DeFi Protocol Development",
 			],
-			technologies: ["Solidity", "Hardhat", "Ethers.js", "Web3.js", "IPFS"],
 			popular: true,
 		},
 		{
@@ -54,7 +53,6 @@ export default function Services() {
 				"Progressive Web Apps",
 				"API Integration",
 			],
-			technologies: ["React", "Next.js", "TypeScript", "Tailwind", "GraphQL"],
 		},
 		{
 			icon: <Palette className="w-8 h-8" />,
@@ -69,7 +67,6 @@ export default function Services() {
 				"Design System Creation",
 				"User Testing",
 			],
-			technologies: ["Figma", "Adobe XD", "Prototyping", "User Testing"],
 		},
 		{
 			icon: <Shield className="w-8 h-8" />,
@@ -83,7 +80,6 @@ export default function Services() {
 				"Upgradeable Contracts",
 				"Documentation & Testing",
 			],
-			technologies: ["Solidity", "Hardhat", "Foundry", "OpenZeppelin"],
 		},
 	];
 
@@ -255,13 +251,13 @@ export default function Services() {
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
 					{/* Background Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
+					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
 						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Development Services
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Full-stack development services specializing in Web3, Web2
 							frontend, and freelance projects. Transforming your ideas into
 							secure, scalable, and user-friendly applications.
@@ -287,9 +283,7 @@ export default function Services() {
 								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 									{stat.number}
 								</div>
-								<div className="text-sm text-gray-600 dark:text-gray-400">
-									{stat.label}
-								</div>
+								<div className="text-sm text-gray-400">{stat.label}</div>
 							</Card>
 						</motion.div>
 					))}
@@ -305,13 +299,13 @@ export default function Services() {
 					<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 						Core Services
 					</h2>
-					<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+					<p className="text-gray-400 max-w-2xl mx-auto">
 						Comprehensive development solutions including Web3, Web2 frontend,
 						and freelance services.
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 					{mainServices.map((service, index) => (
 						<motion.div
 							key={service.title}
@@ -320,63 +314,52 @@ export default function Services() {
 							transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
 							className="group relative">
 							<Card
-								className={`h-full p-6 transition-all duration-300 ${
+								className={`h-full p-8 transition-all duration-300 ${
 									service.popular
 										? "ring-2 ring-purple-500 shadow-xl"
-										: "group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600"
+										: "group-hover:shadow-lg group-hover:border-purple-600"
 								}`}>
-								{/* Service Icon */}
-								<div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-									{service.icon}
-								</div>
-
-								{/* Service Title & Description */}
-								<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-									{service.title}
-								</h3>
-								<p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-									{service.description}
-								</p>
-
-								{/* Features List */}
-								<div className="space-y-3 mb-6">
-									{service.features.map((feature, idx) => (
-										<div
-											key={idx}
-											className="flex items-center gap-3">
-											<CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-											<span className="text-sm text-gray-700 dark:text-gray-300">
-												{feature}
-											</span>
+								<div className="flex flex-col h-full">
+									{/* Service Header */}
+									<div className="flex items-start gap-6 mb-6">
+										{/* Service Icon */}
+										<div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+											{service.icon}
 										</div>
-									))}
-								</div>
 
-								{/* Technologies */}
-								<div className="mb-4">
-									<h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-										Technologies:
-									</h4>
-									<div className="flex flex-wrap gap-2">
-										{service.technologies.map((tech, idx) => (
-											<span
+										{/* Service Title & Description */}
+										<div className="flex-1">
+											<h3 className="text-xl font-bold text-white mb-3">
+												{service.title}
+											</h3>
+											<p className="text-gray-400 leading-relaxed">
+												{service.description}
+											</p>
+										</div>
+									</div>
+
+									{/* Features List */}
+									<div className="space-y-3 mb-6 flex-1">
+										{service.features.map((feature, idx) => (
+											<div
 												key={idx}
-												className="px-3 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-xs text-gray-700 dark:text-gray-300">
-												{tech}
-											</span>
+												className="flex items-center gap-3">
+												<CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+												<span className="text-sm text-gray-300">{feature}</span>
+											</div>
 										))}
 									</div>
-								</div>
 
-								{/* CTA Button */}
-								<motion.a
-									href="/contact"
-									whileHover={{ scale: 1.05 }}
-									whileTap={{ scale: 0.95 }}
-									className="inline-flex items-center justify-center w-full gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg mt-4">
-									Discuss Project
-									<ArrowRight className="w-4 h-4" />
-								</motion.a>
+									{/* CTA Button */}
+									<motion.a
+										href="/contact"
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+										className="inline-flex items-center justify-center w-full gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg mt-4">
+										Discuss Project
+										<ArrowRight className="w-4 h-4" />
+									</motion.a>
+								</div>
 							</Card>
 						</motion.div>
 					))}
@@ -393,7 +376,7 @@ export default function Services() {
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Freelance Development
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto">
 							Flexible freelance services for projects of all sizes. Get
 							dedicated development expertise without the overhead of a
 							full-time hire.
@@ -408,11 +391,11 @@ export default function Services() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="text-center group">
-								<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600 h-full">
-									<h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+								<div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
+									<h3 className="text-lg font-bold text-white mb-3">
 										{benefit.title}
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+									<p className="text-gray-400 text-sm leading-relaxed">
 										{benefit.description}
 									</p>
 								</div>
@@ -432,7 +415,7 @@ export default function Services() {
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Specialized Services
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto">
 							Additional development services to meet your specific project
 							requirements and business needs.
 						</p>
@@ -446,23 +429,23 @@ export default function Services() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
 								className="group">
-								<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600 h-full">
+								<div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
 									<div className="flex items-start gap-4">
 										<div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
 											{service.icon}
 										</div>
 										<div>
-											<h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+											<h3 className="text-lg font-bold text-white mb-2">
 												{service.title}
 											</h3>
-											<p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
+											<p className="text-gray-400 text-sm mb-3">
 												{service.description}
 											</p>
 											<div className="space-y-1">
 												{service.features.map((feature, idx) => (
 													<div
 														key={idx}
-														className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+														className="flex items-center gap-2 text-sm text-gray-400">
 														<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
 														{feature}
 													</div>
@@ -487,7 +470,7 @@ export default function Services() {
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Development Process
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto">
 							A structured approach to ensure your project's success from
 							concept to deployment.
 						</p>
@@ -509,10 +492,10 @@ export default function Services() {
 										{step.step}
 									</div>
 								</div>
-								<h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+								<h3 className="text-lg font-bold text-white mb-3">
 									{step.title}
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+								<p className="text-gray-400 text-sm leading-relaxed">
 									{step.description}
 								</p>
 							</motion.div>

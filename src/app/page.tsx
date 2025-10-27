@@ -27,7 +27,7 @@ export default function Home() {
 			status: "Live",
 			liveUrl: "#",
 			githubUrl: "#",
-			image: "/projects/elgvote.png", // Add your project images
+			image: "/projects/elgvote.png",
 		},
 		{
 			title: "Crypto Trading Bot",
@@ -42,7 +42,7 @@ export default function Home() {
 		{
 			title: "Portfolio Website",
 			description:
-				"Modern, responsive portfolio website with dark mode, smooth animations, and optimized performance.",
+				"Modern, responsive portfolio website with smooth animations and optimized performance.",
 			tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
 			status: "Live",
 			liveUrl: "#",
@@ -152,13 +152,13 @@ export default function Home() {
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
 					{/* Background Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
+					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
 						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Welcome to My Digital Space
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
+						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of what's
 							possible on the web.
@@ -195,9 +195,7 @@ export default function Home() {
 						<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 							{stat.number}
 						</div>
-						<div className="text-sm text-gray-600 dark:text-gray-400">
-							{stat.label}
-						</div>
+						<div className="text-sm text-gray-400">{stat.label}</div>
 					</Card>
 				))}
 			</motion.section>
@@ -215,12 +213,10 @@ export default function Home() {
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
 						</div>
-						<h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+						<h3 className="text-lg font-bold text-white mb-2">
 							{highlight.title}
 						</h3>
-						<p className="text-gray-600 dark:text-gray-400 text-sm">
-							{highlight.description}
-						</p>
+						<p className="text-gray-400 text-sm">{highlight.description}</p>
 					</Card>
 				))}
 			</motion.section>
@@ -235,7 +231,7 @@ export default function Home() {
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Featured Projects
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto">
 							Showcasing my diverse range of projects from blockchain
 							applications to trading bots and modern web applications
 						</p>
@@ -249,31 +245,31 @@ export default function Home() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="group">
-								<div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600 h-full flex flex-col">
+								<div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full flex flex-col">
 									{/* Project Image Placeholder */}
-									<div className="w-full h-32 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg mb-4 flex items-center justify-center">
+									<div className="w-full h-32 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-lg mb-4 flex items-center justify-center">
 										<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 											{project.title.split(" ")[0]}
 										</div>
 									</div>
 
 									<div className="flex justify-between items-start mb-3">
-										<h3 className="text-lg font-bold text-gray-900 dark:text-white">
+										<h3 className="text-lg font-bold text-white">
 											{project.title}
 										</h3>
 										<span
 											className={`px-2 py-1 rounded-full text-xs font-medium ${
 												project.status === "Live"
-													? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+													? "bg-green-900 text-green-200"
 													: project.status === "In Development"
-													? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-													: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+													? "bg-blue-900 text-blue-200"
+													: "bg-gray-700 text-gray-200"
 											}`}>
 											{project.status}
 										</span>
 									</div>
 
-									<p className="text-gray-600 dark:text-gray-400 text-sm mb-4 flex-grow">
+									<p className="text-gray-400 text-sm mb-4 flex-grow">
 										{project.description}
 									</p>
 
@@ -281,7 +277,7 @@ export default function Home() {
 										{project.tech.map((tech, idx) => (
 											<span
 												key={idx}
-												className="px-2 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full text-xs text-gray-700 dark:text-gray-300">
+												className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
 												{tech}
 											</span>
 										))}
@@ -319,9 +315,7 @@ export default function Home() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
 				<Card className="p-6">
-					<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-						Core Expertise
-					</h3>
+					<h3 className="text-xl font-bold text-white mb-6">Core Expertise</h3>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (
 							<motion.div
@@ -331,14 +325,14 @@ export default function Home() {
 								transition={{ delay: 1.2 + index * 0.1 }}
 								className="group">
 								<div className="flex justify-between items-center mb-2">
-									<span className="font-semibold text-gray-900 dark:text-white">
+									<span className="font-semibold text-white">
 										{skill.title}
 									</span>
-									<span className="text-sm text-gray-500 dark:text-gray-400">
+									<span className="text-sm text-gray-400">
 										{skill.progress}%
 									</span>
 								</div>
-								<div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+								<div className="w-full bg-gray-700 rounded-full h-2">
 									<motion.div
 										initial={{ width: 0 }}
 										animate={{ width: `${skill.progress}%` }}
@@ -346,7 +340,7 @@ export default function Home() {
 										className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/25"
 									/>
 								</div>
-								<p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+								<p className="text-sm text-gray-400 mt-1">
 									{skill.description}
 								</p>
 							</motion.div>

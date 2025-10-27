@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, User, Briefcase, FolderGit2, Mail } from "lucide-react";
 
@@ -36,12 +35,12 @@ const Header = () => {
 	// Don't render until mounted to avoid hydration issues
 	if (!mounted) {
 		return (
-			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
+			<header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-gray-900/40 border border-gray-800 rounded-2xl shadow-sm">
 				<nav className="flex justify-between items-center px-8 py-3">
 					{/* Logo skeleton */}
-					<div className="w-40 h-10 bg-gray-300 dark:bg-gray-600 rounded animate-pulse" />
+					<div className="w-40 h-10 bg-gray-600 rounded animate-pulse" />
 					{/* Menu items skeleton */}
-					<div className="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full animate-pulse" />
+					<div className="w-10 h-10 bg-gray-600 rounded-full animate-pulse" />
 				</nav>
 			</header>
 		);
@@ -49,10 +48,10 @@ const Header = () => {
 
 	return (
 		<header
-			className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-white/60 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
+			className="fixed top-6 left-1/2 -translate-x-1/2 w-[95vw] max-w-7xl z-50 backdrop-blur-xl bg-gray-900/40 border border-gray-800 rounded-2xl shadow-sm transition-all duration-300"
 			style={{ WebkitTapHighlightColor: "transparent" }}>
 			<nav className="flex justify-between items-center px-8 py-3">
-				{/* Logo - Increased Width */}
+				{/* Logo - Vheek Design */}
 				<Link
 					href="/"
 					className="group flex items-center space-x-2 z-50 relative overflow-hidden"
@@ -60,17 +59,19 @@ const Header = () => {
 					{/* Logo glow effect */}
 					<div className="absolute inset-0 rounded-lg bg-purple-500/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
 
-					<Image
-						src="/Logo.png"
-						alt="Jeremiah Victor Logo"
-						width={200}
-						height={40}
-						className="object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-2 group-hover:drop-shadow-lg h-10 w-auto"
-						priority
-					/>
+					{/* Vheek Logo */}
+					<div className="relative">
+						<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 group-hover:from-purple-300 group-hover:to-blue-300 transition-all duration-300">
+							&lt;Vheek /&gt;
+						</div>
 
-					{/* Subtle pulse animation */}
-					<div className="absolute -inset-2 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:animate-pulse rounded-lg" />
+						{/* Subtle pulse animation */}
+						<div className="absolute -inset-2 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:animate-pulse rounded-lg" />
+					</div>
+
+					{/* Animated brackets */}
+					<div className="absolute -left-1 -top-1 w-2 h-2 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 group-hover:animate-bounce" />
+					<div className="absolute -right-1 -bottom-1 w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 group-hover:animate-bounce" />
 				</Link>
 
 				{/* Desktop Menu */}
@@ -81,8 +82,8 @@ const Header = () => {
 								href={menu.href}
 								className={`group relative flex items-center gap-2 text-[15px] lg:text-[16px] font-semibold tracking-wide rounded-lg px-4 py-2 transition-all duration-300 ${
 									pathname === menu.href
-										? "text-purple-600 dark:text-purple-400 bg-purple-100/40 dark:bg-purple-900/30 shadow-lg shadow-purple-500/20"
-										: "text-gray-900 dark:text-gray-100 hover:text-purple-500 dark:hover:text-purple-400"
+										? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
+										: "text-gray-100 hover:text-purple-400"
 								}`}>
 								{/* Hover background effect */}
 								<div
@@ -114,7 +115,7 @@ const Header = () => {
 								)}
 
 								{/* Hover border animation */}
-								<div className="absolute inset-0 rounded-lg border border-transparent group-hover:border-purple-300/30 dark:group-hover:border-purple-500/30 transition-all duration-500" />
+								<div className="absolute inset-0 rounded-lg border border-transparent group-hover:border-purple-500/30 transition-all duration-500" />
 							</Link>
 						</li>
 					))}
@@ -151,7 +152,7 @@ const Header = () => {
 					{/* Mobile Menu Toggle - Enhanced */}
 					<button
 						onClick={() => setMenuOpen(!menuOpen)}
-						className="md:hidden p-2 rounded-full hover:bg-gray-200/60 dark:hover:bg-gray-800/60 transition-all duration-300 active:scale-95 z-50 group relative overflow-hidden"
+						className="md:hidden p-2 rounded-full hover:bg-gray-800/60 transition-all duration-300 active:scale-95 z-50 group relative overflow-hidden"
 						aria-label="Toggle menu">
 						{/* Background effect */}
 						<div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -164,7 +165,7 @@ const Header = () => {
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
-									className="w-6 h-6 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
+									className="w-6 h-6 text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -178,7 +179,7 @@ const Header = () => {
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
-									className="w-6 h-6 text-gray-900 dark:text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
+									className="w-6 h-6 text-gray-100 transition-all duration-300 group-hover:stroke-purple-500">
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
@@ -193,7 +194,7 @@ const Header = () => {
 
 			{/* Mobile Menu - Enhanced */}
 			{menuOpen && (
-				<div className="md:hidden absolute top-full left-0 right-0 mt-2 backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 shadow-lg border border-gray-200 dark:border-gray-700 rounded-2xl transition-all duration-300 animate-in slide-in-from-top mx-4">
+				<div className="md:hidden absolute top-full left-0 right-0 mt-2 backdrop-blur-xl bg-gray-900/70 shadow-lg border border-gray-700 rounded-2xl transition-all duration-300 animate-in slide-in-from-top mx-4">
 					<ul className="flex flex-col py-4 space-y-2">
 						{menus.map((menu) => (
 							<li key={menu.title}>
@@ -202,8 +203,8 @@ const Header = () => {
 									onClick={() => setMenuOpen(false)}
 									className={`group relative flex items-center gap-3 text-base font-semibold tracking-wide px-6 py-3 transition-all duration-300 mx-4 ${
 										pathname === menu.href
-											? "text-purple-600 dark:text-purple-400 bg-purple-100/40 dark:bg-purple-900/30 shadow-lg shadow-purple-500/20"
-											: "text-gray-900 dark:text-gray-100 hover:bg-gray-200/60 dark:hover:bg-gray-800/60 hover:text-purple-500 dark:hover:text-purple-400"
+											? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
+											: "text-gray-100 hover:bg-gray-800/60 hover:text-purple-400"
 									}`}>
 									{/* Hover background */}
 									<div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500" />

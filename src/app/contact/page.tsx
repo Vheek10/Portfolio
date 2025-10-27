@@ -101,14 +101,14 @@ export default function Contact() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
-					{/* Background Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
+					{/* Background Gradient - Dark theme only */}
+					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
 						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Let's Work Together
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Have a project in mind? Let's discuss how we can bring your ideas
 							to life with cutting-edge Web3 and Web2 solutions.
 						</p>
@@ -117,7 +117,7 @@ export default function Contact() {
 			</motion.section>
 
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-				{/* Contact Information - Now properly aligned with form */}
+				{/* Contact Information */}
 				<motion.div
 					variants={containerVariants}
 					initial="hidden"
@@ -139,13 +139,13 @@ export default function Contact() {
 												{info.icon}
 											</div>
 											<div className="flex-1 min-w-0">
-												<h3 className="font-semibold text-gray-900 dark:text-white mb-1 truncate">
+												<h3 className="font-semibold text-white mb-1 truncate">
 													{info.title}
 												</h3>
-												<p className="text-gray-900 dark:text-white font-medium truncate">
+												<p className="text-white font-medium truncate">
 													{info.value}
 												</p>
-												<p className="text-gray-600 dark:text-gray-400 text-sm mt-1 line-clamp-2">
+												<p className="text-gray-400 text-sm mt-1 line-clamp-2">
 													{info.description}
 												</p>
 											</div>
@@ -157,7 +157,7 @@ export default function Contact() {
 					</div>
 				</motion.div>
 
-				{/* Contact Form - Now properly aligned with contact info */}
+				{/* Contact Form */}
 				<motion.div
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0 }}
@@ -169,13 +169,13 @@ export default function Contact() {
 								initial={{ opacity: 0, scale: 0.8 }}
 								animate={{ opacity: 1, scale: 1 }}
 								className="text-center py-12">
-								<div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-									<CheckCircle className="w-10 h-10 text-green-600 dark:text-green-400" />
+								<div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-900 flex items-center justify-center">
+									<CheckCircle className="w-10 h-10 text-green-400" />
 								</div>
-								<h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+								<h3 className="text-2xl font-bold text-white mb-2">
 									Message Sent!
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 mb-6">
+								<p className="text-gray-400 mb-6">
 									Thank you for reaching out. I'll get back to you within 24
 									hours.
 								</p>
@@ -191,7 +191,7 @@ export default function Contact() {
 									<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 										Send a Message
 									</h2>
-									<p className="text-gray-600 dark:text-gray-400">
+									<p className="text-gray-400">
 										Fill out the form below and I'll get back to you as soon as
 										possible.
 									</p>
@@ -205,7 +205,7 @@ export default function Contact() {
 										<div>
 											<label
 												htmlFor="name"
-												className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+												className="block text-sm font-medium text-gray-300 mb-2">
 												Full Name *
 											</label>
 											<input
@@ -215,7 +215,7 @@ export default function Contact() {
 												value={formData.name}
 												onChange={handleChange}
 												required
-												className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+												className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
 												placeholder="Your full name"
 											/>
 										</div>
@@ -224,7 +224,7 @@ export default function Contact() {
 										<div>
 											<label
 												htmlFor="email"
-												className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+												className="block text-sm font-medium text-gray-300 mb-2">
 												Email Address *
 											</label>
 											<input
@@ -234,7 +234,7 @@ export default function Contact() {
 												value={formData.email}
 												onChange={handleChange}
 												required
-												className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+												className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
 												placeholder="your.email@example.com"
 											/>
 										</div>
@@ -244,7 +244,7 @@ export default function Contact() {
 									<div>
 										<label
 											htmlFor="subject"
-											className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+											className="block text-sm font-medium text-gray-300 mb-2">
 											Subject *
 										</label>
 										<input
@@ -254,7 +254,7 @@ export default function Contact() {
 											value={formData.subject}
 											onChange={handleChange}
 											required
-											className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+											className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
 											placeholder="What's this about?"
 										/>
 									</div>
@@ -263,7 +263,7 @@ export default function Contact() {
 									<div className="flex-1">
 										<label
 											htmlFor="message"
-											className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+											className="block text-sm font-medium text-gray-300 mb-2">
 											Message *
 										</label>
 										<textarea
@@ -273,7 +273,7 @@ export default function Contact() {
 											onChange={handleChange}
 											required
 											rows={6}
-											className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none h-full min-h-[200px]"
+											className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none h-full min-h-[200px]"
 											placeholder="Tell me about your project, timeline, and budget..."
 										/>
 									</div>
@@ -298,7 +298,7 @@ export default function Contact() {
 										)}
 									</motion.button>
 
-									<p className="text-center text-sm text-gray-500 dark:text-gray-400">
+									<p className="text-center text-sm text-gray-400">
 										* Required fields. I typically respond within 24 hours.
 									</p>
 								</form>
@@ -322,21 +322,21 @@ export default function Contact() {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						<div className="space-y-4">
-							<div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-								<h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
+								<h3 className="font-semibold text-white mb-2">
 									What's your typical response time?
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm">
 									I typically respond to all inquiries within 24 hours. For
 									urgent matters, Telegram is the fastest way to reach me.
 								</p>
 							</div>
 
-							<div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-								<h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
+								<h3 className="font-semibold text-white mb-2">
 									Do you work with international clients?
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm">
 									Yes! I work with clients from all over the world. My remote
 									setup allows me to collaborate effectively across different
 									time zones.
@@ -345,22 +345,22 @@ export default function Contact() {
 						</div>
 
 						<div className="space-y-4">
-							<div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-								<h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
+								<h3 className="font-semibold text-white mb-2">
 									What information should I include in my project inquiry?
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm">
 									Please include: project overview, goals, timeline, budget
 									range, and any specific technologies or features you have in
 									mind.
 								</p>
 							</div>
 
-							<div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-								<h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
+								<h3 className="font-semibold text-white mb-2">
 									Do you offer ongoing support after project completion?
 								</h3>
-								<p className="text-gray-600 dark:text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm">
 									Yes, I offer various support and maintenance packages to
 									ensure your project continues to run smoothly after
 									deployment.

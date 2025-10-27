@@ -87,29 +87,29 @@ export const ProfileCard = () => {
 
 	return (
 		<Card
-			className="text-center profile-card w-full max-w-md mx-auto"
+			className="text-center profile-card w-full mx-auto"
 			hoverable={false}>
-			<CardContent className="p-4 sm:p-10">
-				{/* Profile Image - Removed top, left, and right padding */}
-				<div className="image text-center -mx-4 -mt-4 sm:-mx-10 sm:-mt-10 mb-4">
+			<CardContent className="p-4 sm:p-6 lg:p-8">
+				{/* Profile Image - Removed side gaps on mobile */}
+				<div className="image text-center -mx-4 -mt-4 sm:-mx-6 sm:-mt-6 lg:-mx-8 lg:-mt-8 mb-4">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						className="inline-block">
+						className="inline-block w-full">
 						<Image
 							src="/profile.jpg"
 							alt="Victor Gp"
 							width={280}
 							height={280}
-							className="rounded-2xl border-2 border-white dark:border-gray-800 shadow-lg w-full"
+							className="rounded-2xl border-2 border-gray-800 shadow-lg w-full h-auto"
 							priority
 						/>
 					</motion.div>
 				</div>
 
-				{/* Name and Title - No changes */}
-				<div className="text mb-8">
+				{/* Name and Title */}
+				<div className="text mb-6 lg:mb-8">
 					<motion.h3
-						className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center justify-center gap-2"
+						className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
@@ -120,26 +120,26 @@ export const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="text-gray-600 dark:text-gray-400 leading-relaxed min-h-[5rem] flex items-center justify-center">
+						className="text-gray-400 leading-relaxed min-h-[4rem] sm:min-h-[5rem] flex items-center justify-center">
 						<div className="space-y-2">
-							<p className="text-base">
+							<p className="text-sm sm:text-base">
 								A{" "}
-								<span className="font-semibold text-purple-600 dark:text-purple-400 min-h-[1.5rem] inline-block">
+								<span className="font-semibold text-purple-400 min-h-[1.5rem] inline-block">
 									{currentRole}
-									<span className="inline-block w-1 h-5 bg-purple-600 dark:bg-purple-400 ml-1 animate-pulse"></span>
+									<span className="inline-block w-1 h-5 bg-purple-400 ml-1 animate-pulse"></span>
 								</span>{" "}
 								🖥️
 							</p>
-							<p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs mx-auto">
+							<p className="text-xs sm:text-sm text-gray-400 max-w-xs mx-auto">
 								where function meets fire and design meets decentralization.
 							</p>
 						</div>
 					</motion.div>
 				</div>
 
-				{/* Action Buttons - No changes */}
+				{/* Action Buttons */}
 				<motion.div
-					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-8"
+					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-6 lg:mb-8"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.3 }}>
@@ -150,7 +150,7 @@ export const ProfileCard = () => {
 						rel="noopener noreferrer"
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
-						className="btn-call flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1 text-sm sm:text-base">
+						className="btn-call flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1 text-sm">
 						<svg
 							className="icon flex-shrink-0"
 							width="18"
@@ -173,10 +173,8 @@ export const ProfileCard = () => {
 						onClick={copyEmail}
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
-						className={`btn-copy flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 text-sm sm:text-base ${
-							copied
-								? "bg-green-500/10 border-green-500 text-green-600 dark:text-green-400"
-								: ""
+						className={`btn-copy flex items-center justify-center gap-2 px-4 py-3 border border-gray-600 text-gray-300 font-medium rounded-xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 text-sm ${
+							copied ? "bg-green-500/10 border-green-500 text-green-400" : ""
 						}`}>
 						{copied ? (
 							<Check className="w-4 h-4 flex-shrink-0" />
@@ -187,7 +185,7 @@ export const ProfileCard = () => {
 					</motion.button>
 				</motion.div>
 
-				{/* Social Media Icons - No changes */}
+				{/* Social Media Icons */}
 				<motion.div
 					className="social-media-icon"
 					initial={{ opacity: 0, y: 10 }}
@@ -206,7 +204,7 @@ export const ProfileCard = () => {
 									rel="noopener noreferrer"
 									whileHover={{ scale: 1.15, y: -2 }}
 									whileTap={{ scale: 0.95 }}
-									className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
+									className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
 									aria-label={item.name}>
 									{item.icon}
 								</motion.a>
