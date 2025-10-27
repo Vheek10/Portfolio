@@ -53,19 +53,15 @@ export default function RootLayout({
 					href="https://fonts.gstatic.com"
 					crossOrigin="anonymous"
 				/>
+				{/* Cache buster - change the number if it still doesn't work */}
 				<link
 					rel="icon"
-					href="/favicon.ico"
+					href="/profile.jpg?v=2"
 					sizes="any"
 				/>
 				<link
-					rel="icon"
-					href="/assets/img/logo/color.svg"
-					type="image/svg+xml"
-				/>
-				<link
 					rel="apple-touch-icon"
-					href="/apple-touch-icon.png"
+					href="/profile.jpg?v=2"
 				/>
 			</head>
 			<body
