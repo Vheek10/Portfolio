@@ -26,7 +26,7 @@ export default function Home() {
 				"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, and real-time results.",
 			tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
 			status: "Live",
-			liveUrl: "#",
+			liveUrl: "https://voting-appelg.vercel.app/",
 			githubUrl: "https://github.com/Vheek10/ELGVotes",
 			image: "/votingapp.png",
 		},
@@ -36,7 +36,7 @@ export default function Home() {
 				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
 			tech: ["Python", "Node.js", "Binance API", "WebSocket"],
 			status: "Live",
-			liveUrl: "#",
+			liveUrl: "https://trading-bot-navy-rho.vercel.app/",
 			githubUrl: "https://github.com/Vheek10/trading-bot",
 			image: "/tradingbot.png",
 		},
@@ -46,7 +46,7 @@ export default function Home() {
 				"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
 			tech: ["React", "Firebase", "Styled Components", "Context API"],
 			status: "Live",
-			liveUrl: "#",
+			liveUrl: "https://disney-clone-master-phi.vercel.app/",
 			githubUrl: "https://github.com/Vheek10/disney-clone",
 			image: "/disneyclone.png",
 		},
@@ -124,7 +124,7 @@ export default function Home() {
 	const featuredSkills = [
 		{
 			title: "Frontend Development",
-			description: "React, Next.js, Vue.js, TypeScript",
+			description: "React, Next.js, TypeScript",
 			progress: 90,
 		},
 		{
@@ -134,7 +134,7 @@ export default function Home() {
 		},
 		{
 			title: "Backend Development",
-			description: "Node.js, Python, MongoDB, REST APIs",
+			description: "Node.js, MongoDB, REST APIs",
 			progress: 80,
 		},
 		{
