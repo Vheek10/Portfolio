@@ -7,8 +7,7 @@ import * as THREE from "three";
 
 const GeometricBackground = () => {
 	const mountRef = useRef<HTMLDivElement>(null);
-	const frameRef = useRef<number>();
-
+	const frameRef = useRef<number | null>(null);
 	useEffect(() => {
 		if (!mountRef.current) return;
 
