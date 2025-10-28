@@ -6,6 +6,10 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/Card";
 import { Mail, MapPin, Phone, Send, Clock, CheckCircle } from "lucide-react";
 import { useState } from "react";
+import emailjs from "emailjs-com";
+
+// Initialize EmailJS (you'll need to get these from your EmailJS account)
+emailjs.init("auR9dWwQWFJdldZ9H"); // Replace with your EmailJS public key
 
 export default function Contact() {
 	const [formData, setFormData] = useState({
@@ -16,6 +20,7 @@ export default function Contact() {
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [error, setError] = useState("");
 
 	const contactInfo = [
 		{
@@ -55,21 +60,43 @@ export default function Contact() {
 			...formData,
 			[e.target.name]: e.target.value,
 		});
+		setError(""); // Clear error when user starts typing
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsSubmitting(true);
+		setError("");
 
-		// Simulate form submission
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		try {
+			// Send email using EmailJS
+			const templateParams = {
+				from_name: formData.name,
+				from_email: formData.email,
+				subject: formData.subject,
+				message: formData.message,
+				to_email: "jeremiahvictorgp@gmail.com",
+			};
 
-		setIsSubmitting(false);
-		setIsSubmitted(true);
-		setFormData({ name: "", email: "", subject: "", message: "" });
+			await emailjs.send(
+				"service_usczodq", // Replace with your EmailJS service ID
+				"template_akepjxb", // Replace with your EmailJS template ID
+				templateParams,
+			);
 
-		// Reset success message after 5 seconds
-		setTimeout(() => setIsSubmitted(false), 5000);
+			setIsSubmitting(false);
+			setIsSubmitted(true);
+			setFormData({ name: "", email: "", subject: "", message: "" });
+
+			// Reset success message after 5 seconds
+			setTimeout(() => setIsSubmitted(false), 5000);
+		} catch (error) {
+			console.error("Error sending email:", error);
+			setError(
+				"Failed to send message. Please try again or contact me directly at jeremiahvictorgp@gmail.com",
+			);
+			setIsSubmitting(false);
+		}
 	};
 
 	const containerVariants = {
@@ -196,6 +223,15 @@ export default function Contact() {
 										possible.
 									</p>
 								</div>
+
+								{error && (
+									<motion.div
+										initial={{ opacity: 0, y: -10 }}
+										animate={{ opacity: 1, y: 0 }}
+										className="mb-6 p-4 rounded-xl bg-red-900 border border-red-700 text-red-200 text-sm">
+										{error}
+									</motion.div>
+								)}
 
 								<form
 									onSubmit={handleSubmit}
