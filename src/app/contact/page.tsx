@@ -8,8 +8,8 @@ import { Mail, MapPin, Phone, Send, Clock, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import emailjs from "emailjs-com";
 
-// Initialize EmailJS (you'll need to get these from your EmailJS account)
-emailjs.init("auR9dWwQWFJdldZ9H"); // Replace with your EmailJS public key
+// Initialize EmailJS with your credentials
+emailjs.init("auR9dWwQWFJdldZ9H");
 
 export default function Contact() {
 	const [formData, setFormData] = useState({
@@ -60,7 +60,7 @@ export default function Contact() {
 			...formData,
 			[e.target.name]: e.target.value,
 		});
-		setError(""); // Clear error when user starts typing
+		setError("");
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -69,20 +69,23 @@ export default function Contact() {
 		setError("");
 
 		try {
-			// Send email using EmailJS
+			// Send email using EmailJS with your credentials
 			const templateParams = {
 				from_name: formData.name,
 				from_email: formData.email,
 				subject: formData.subject,
 				message: formData.message,
 				to_email: "jeremiahvictorgp@gmail.com",
+				reply_to: formData.email,
 			};
 
-			await emailjs.send(
-				"service_usczodq", // Replace with your EmailJS service ID
-				"template_akepjxb", // Replace with your EmailJS template ID
+			const result = await emailjs.send(
+				"service_usczodq",
+				"template_akepjxb",
 				templateParams,
 			);
+
+			console.log("Email sent successfully:", result);
 
 			setIsSubmitting(false);
 			setIsSubmitted(true);
