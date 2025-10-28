@@ -22,8 +22,8 @@ export const Card = ({
 			whileTap={hoverable ? { scale: 0.98 } : {}}
 			onClick={onClick}
 			className={`
-        rounded-3xl bg-white/60 dark:bg-gray-900/40 
-        backdrop-blur-xl border border-gray-200 dark:border-gray-700
+        rounded-3xl bg-gray-900/40 
+        backdrop-blur-xl border border-gray-700
         shadow-sm hover:shadow-xl transition-all duration-300
         overflow-hidden
         ${className}

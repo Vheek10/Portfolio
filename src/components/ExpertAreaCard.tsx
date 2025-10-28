@@ -176,7 +176,7 @@ const ExpertAreaCard = () => {
 			whileHover={{ scale: 1.1, y: -2 }}
 			transition={{ duration: 0.2 }}>
 			<div className="image text-center mb-2">
-				<div className="w-14 h-14 mx-auto rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
+				<div className="w-14 h-14 mx-auto rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
 					<img
 						src={item.icon}
 						alt={item.name}
@@ -192,7 +192,7 @@ const ExpertAreaCard = () => {
 				</div>
 			</div>
 			<div className="text">
-				<h4 className="title text-xs font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+				<h4 className="title text-xs font-medium text-gray-300 transition-colors duration-300 group-hover:text-purple-400">
 					{item.name}
 				</h4>
 			</div>
@@ -227,7 +227,7 @@ const ExpertAreaCard = () => {
 		<Card className="expertise-card">
 			<CardContent className="p-6">
 				<motion.h3
-					className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+					className="text-2xl font-bold text-white mb-6 text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
@@ -239,7 +239,7 @@ const ExpertAreaCard = () => {
 					<ScrollingRow
 						items={topRowItems}
 						scrollRef={topScrollRef}
-						className="border-b border-gray-100 dark:border-gray-800 pb-2"
+						className="border-b border-gray-800 pb-2"
 					/>
 
 					{/* Bottom Scrolling Row */}
@@ -251,7 +251,7 @@ const ExpertAreaCard = () => {
 
 				{/* Legend */}
 				<motion.div
-					className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-gray-500 dark:text-gray-400"
+					className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-gray-400"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.8 }}>

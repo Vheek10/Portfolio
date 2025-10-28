@@ -151,7 +151,7 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-8 text-center relative overflow-hidden">
+				<Card className="p-8 text-center relative overflow-hidden bg-gray-900 border-gray-800">
 					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
@@ -185,7 +185,7 @@ export default function Home() {
 				{stats.map((stat, index) => (
 					<Card
 						key={stat.label}
-						className="text-center p-6">
+						className="text-center p-6 bg-gray-900 border-gray-800">
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
@@ -210,7 +210,7 @@ export default function Home() {
 				{highlights.map((highlight, index) => (
 					<Card
 						key={highlight.title}
-						className="p-6 text-center group">
+						className="p-6 text-center group bg-gray-900 border-gray-800">
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
 						</div>
@@ -227,7 +227,7 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.6, duration: 0.6 }}>
-				<Card className="p-8">
+				<Card className="p-8 bg-gray-900 border-gray-800">
 					<div className="text-center mb-8">
 						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Featured Projects
@@ -358,7 +358,7 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
-				<Card className="p-6">
+				<Card className="p-6 bg-gray-900 border-gray-800">
 					<h3 className="text-xl font-bold text-white mb-6">Core Expertise</h3>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (

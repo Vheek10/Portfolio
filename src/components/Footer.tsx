@@ -30,7 +30,7 @@ const Footer = () => {
 	}, []);
 
 	return (
-		<footer className="py-4 px-4 bg-white/40 dark:bg-gray-900/30">
+		<footer className="py-4 px-4 bg-gray-900/30">
 			<div className="max-w-3xl mx-auto text-center">
 				{/* Animated Quote */}
 				<div className="mb-3 min-h-[40px] flex items-center justify-center">
@@ -42,7 +42,7 @@ const Footer = () => {
 							exit={{ opacity: 0, x: -10 }}
 							transition={{ duration: 0.4 }}
 							className="px-3">
-							<p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic">
+							<p className="text-xs sm:text-sm text-gray-400 italic">
 								"{quotes[currentQuoteIndex]}"
 							</p>
 						</motion.div>
@@ -50,9 +50,9 @@ const Footer = () => {
 				</div>
 
 				{/* Copyright */}
-				<div className="flex items-center justify-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+				<div className="flex items-center justify-center gap-2 text-xs text-gray-500">
 					<div className="w-0.5 h-0.5 bg-gray-400 rounded-full"></div>
-					<span className="font-medium text-gray-500 dark:text-gray-400">
+					<span className="font-medium text-gray-400">
 						© {getCurrentYear()} @Vheek
 					</span>
 					<div className="w-0.5 h-0.5 bg-gray-400 rounded-full"></div>

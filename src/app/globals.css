@@ -53,6 +53,8 @@
 /* Your custom styles */
 body {
 	font-family: var(--font-poppins);
+	background-color: oklch(0.15 0.01 260); /* Dark background */
+	color: oklch(0.95 0.01 260); /* Light text */
 }
 
 /* Force hover states for debugging */
