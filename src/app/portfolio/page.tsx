@@ -29,7 +29,7 @@ const projects = [
 		image: "/votingapp.png",
 		tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
 		github: "https://github.com/Vheek10/ELGVotes",
-		live: "#",
+		live: "https://elg-votes.vercel.app", // Live website
 		featured: true,
 		status: "Live",
 		highlights: ["Full-stack", "Real-time Results", "Admin Dashboard"],
@@ -43,7 +43,7 @@ const projects = [
 		image: "/disneyclone.png",
 		tech: ["React", "Firebase", "Styled Components", "Context API"],
 		github: "https://github.com/Vheek10/disney-clone",
-		live: "#",
+		live: "https://disney-clone-vheek10.vercel.app", // Live website
 		featured: true,
 		status: "Live",
 		highlights: ["Streaming UI", "User Auth", "Responsive Design"],
@@ -53,11 +53,11 @@ const projects = [
 		title: "Trading Bot",
 		category: "web2",
 		description:
-			"Automated  trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+			"Automated trading bot with real-time market analysis, multiple strategy support, and risk management features.",
 		image: "/tradingbot.png",
 		tech: ["Python", "Node.js", "Tradingview API", "WebSocket"],
 		github: "https://github.com/Vheek10/trading-bot",
-		live: "#",
+		live: "https://trading-bot-navy-rho.vercel.app", // Added live demo link
 		featured: true,
 		status: "Live",
 		highlights: ["Automated Trading", "Real-time Data", "Risk Management"],
@@ -71,8 +71,8 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "Recharts", "TailwindCSS"],
 		github: "https://github.com/Vheek10/CoinMarketCap-Clone",
-		live: "#",
-		status: "Live",
+		live: "#", // Removed live website link
+		status: "In Development", // Changed from "Live" to "In Development"
 		highlights: ["Real-time Data", "Charts", "Responsive Design"],
 	},
 	{
@@ -84,8 +84,8 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "OpenWeather API", "TailwindCSS"],
 		github: "https://github.com/Vheek10/Weather-App",
-		live: "#",
-		status: "Live",
+		live: "#", // Removed live website link
+		status: "In Development", // Changed from "Live" to "In Development"
 		highlights: ["Live Data", "Theme Switching", "Mobile First"],
 	},
 
@@ -99,13 +99,26 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
 		github: "https://github.com/Vheek10/TokenSwap",
-		live: "#",
+		live: "#", // Removed live website link
 		featured: true,
-		status: "Live",
+		status: "In Development", // Changed from "Live" to "In Development"
 		highlights: ["DeFi UI", "Live Prices", "Dark Theme"],
 	},
 	{
 		id: 7,
+		title: "DeFi Portfolio Tracker",
+		category: "web3",
+		description:
+			"A comprehensive DeFi portfolio tracker that aggregates holdings across multiple chains, displays real-time P&L, and provides portfolio analytics.",
+		image: "/project-placeholder.jpg",
+		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
+		github: "#",
+		live: "#", // No live demo available yet
+		status: "In Development",
+		highlights: ["Multi-chain", "Real-time P&L", "Portfolio Analytics"],
+	},
+	{
+		id: 8,
 		title: "VaultVote - Decentralized Governance",
 		category: "web3",
 		description:
@@ -113,12 +126,12 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
 		github: "#",
-		live: "#",
+		live: "#", // No live demo available yet
 		status: "In Development",
 		highlights: ["ZK Proofs", "Anonymous Voting", "Governance"],
 	},
 	{
-		id: 8,
+		id: 9,
 		title: "NFT Marketplace UI",
 		category: "web3",
 		description:
@@ -126,8 +139,8 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "Web3.js", "TailwindCSS", "Ethers.js"],
 		github: "#",
-		live: "#",
-		status: "Live",
+		live: "#", // No live demo available yet
+		status: "In Development", // Changed from "Live" to "In Development"
 		highlights: ["NFT Display", "Wallet Connect", "Collection View"],
 	},
 ];
