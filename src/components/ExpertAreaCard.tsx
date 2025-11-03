@@ -13,96 +13,96 @@ interface TechItem {
 }
 
 const ExpertAreaCard = () => {
-	// Updated expert items with online logo URLs
+	// Updated expert items with local icons from public/icons folder and online SVGs for specific items
 	const expertItems: TechItem[] = [
 		// UI Tools
 		{
 			id: 1,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+			icon: "/icons/figma.svg",
 			name: "Figma",
 		},
 		{
 			id: 2,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg",
+			icon: "/icons/adobe-xd.svg",
 			name: "AdobeXD",
 		},
 
 		// Programming Languages
 		{
 			id: 3,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+			icon: "/icons/javascript.svg",
 			name: "JavaScript",
 		},
 		{
 			id: 4,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+			icon: "/icons/typescript.svg",
 			name: "TypeScript",
 		},
 
 		// Frameworks
 		{
 			id: 5,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+			icon: "/icons/react.svg",
 			name: "React",
 		},
 		{
 			id: 6,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+			icon: "/icons/nextjs.svg",
 			name: "Next.js",
 		},
 
 		// Web3 Libraries
 		{
 			id: 7,
-			icon: "https://etherscan.io/images/brandassets/etherscan-logo-circle.svg",
+			icon: "/icons/ethers.svg",
 			name: "Ethers.js",
 		},
 		{
 			id: 8,
-			icon: "https://web3js.readthedocs.io/en/v1.10.0/_static/web3js.jpg",
+			icon: "/icons/web3js.svg",
 			name: "Web3.js",
 		},
 
 		// Blockchain
 		{
 			id: 9,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg",
+			icon: "/icons/solidity.svg",
 			name: "Solidity",
 		},
 		{
 			id: 10,
-			icon: "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+			icon: "/icons/ethereum.svg",
 			name: "Ethereum",
 		},
 
 		// Development Tools
 		{
 			id: 11,
-			icon: "https://hardhat.org/_next/static/media/hardhat-logo.5c80f9de.svg",
+			icon: "/icons/hardhat.svg",
 			name: "Hardhat",
 		},
 		{
 			id: 12,
-			icon: "https://raw.githubusercontent.com/foundry-rs/foundry/master/static/logo.svg",
+			icon: "/icons/foundry.svg",
 			name: "Foundry",
 		},
 
 		// Version Control & Runtime
 		{
 			id: 13,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+			icon: "/icons/git.svg",
 			name: "Git",
 		},
 		{
 			id: 14,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+			icon: "/icons/nodejs.svg",
 			name: "Node.js",
 		},
 
 		// Additional Technologies
 		{
 			id: 15,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+			icon: "/icons/tailwindcss.png", // Using PNG for Tailwind
 			name: "Tailwind",
 		},
 		{
@@ -168,38 +168,52 @@ const ExpertAreaCard = () => {
 		};
 	}, []);
 
-	// Tech item component
-	const TechItem = ({ item }: { item: TechItem }) => (
-		<motion.div
-			key={item.id}
-			className="expertise-item flex-shrink-0 w-20 text-center group"
-			whileHover={{ scale: 1.1, y: -2 }}
-			transition={{ duration: 0.2 }}>
-			<div className="image text-center mb-2">
-				<div className="w-14 h-14 mx-auto rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
-					<img
-						src={item.icon}
-						alt={item.name}
-						className="w-7 h-7 transition-all duration-300 group-hover:brightness-0 group-hover:invert"
-						onError={(e) => {
-							// Fallback for broken images
-							const target = e.target as HTMLImageElement;
-							target.src = `https://via.placeholder.com/28/8B5CF6/FFFFFF?text=${item.name.charAt(
-								0,
-							)}`;
-						}}
-					/>
-				</div>
-			</div>
-			<div className="text">
-				<h4 className="title text-xs font-medium text-gray-300 transition-colors duration-300 group-hover:text-purple-400">
-					{item.name}
-				</h4>
-			</div>
-		</motion.div>
-	);
+	// Tech item component with better error handling
+	const TechItem = ({ item }: { item: TechItem }) => {
+		const [imgError, setImgError] = React.useState(false);
 
-	// Scrolling row component - Fixed TypeScript issue
+		const handleError = () => {
+			console.log(`Failed to load icon for ${item.name}: ${item.icon}`);
+			setImgError(true);
+		};
+
+		// Check if the icon is from an external source (for CORS handling)
+		const isExternalIcon = item.icon.startsWith("http");
+
+		return (
+			<motion.div
+				key={item.id}
+				className="expertise-item flex-shrink-0 w-20 text-center group"
+				whileHover={{ scale: 1.1, y: -2 }}
+				transition={{ duration: 0.2 }}>
+				<div className="image text-center mb-2">
+					<div className="w-14 h-14 mx-auto rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
+						{!imgError ? (
+							<img
+								src={item.icon}
+								alt={item.name}
+								className="w-7 h-7 transition-all duration-300 group-hover:brightness-0 group-hover:invert"
+								onError={handleError}
+								loading="lazy"
+								crossOrigin={isExternalIcon ? "anonymous" : undefined}
+							/>
+						) : (
+							<div className="w-7 h-7 flex items-center justify-center text-xs font-bold text-white bg-purple-600 rounded">
+								{item.name.charAt(0)}
+							</div>
+						)}
+					</div>
+				</div>
+				<div className="text">
+					<h4 className="title text-xs font-medium text-gray-300 transition-colors duration-300 group-hover:text-purple-400">
+						{item.name}
+					</h4>
+				</div>
+			</motion.div>
+		);
+	};
+
+	// Scrolling row component
 	const ScrollingRow = ({
 		items,
 		scrollRef,

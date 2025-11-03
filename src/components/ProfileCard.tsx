@@ -24,7 +24,7 @@ export const ProfileCard = () => {
 
 	const roles = useRef([
 		"Web3 Developer",
-		"Fullstack Developer",
+		"Full Stack Developer",
 		"UI/UX Designer",
 		"Smart Contract Engineer",
 	]);
@@ -98,11 +98,15 @@ export const ProfileCard = () => {
 			className="text-center profile-card w-full mx-auto"
 			hoverable={false}>
 			<CardContent className="p-4 sm:p-6 lg:p-8">
-				{/* Profile Image - Removed side gaps on mobile */}
+				{/* Profile Image - Scaled on mobile to eliminate side gaps */}
 				<div className="image text-center -mx-4 -mt-4 sm:-mx-6 sm:-mt-6 lg:-mx-8 lg:-mt-8 mb-4">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						className="inline-block w-full">
+						className="inline-block w-full scale-105 sm:scale-100"
+						style={{
+							// Force the scale to eliminate side gaps on mobile
+							transform: "scale(1.05)",
+						}}>
 						<Image
 							src="/profile.jpg"
 							alt="Victor Gp"
