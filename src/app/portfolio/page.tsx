@@ -19,37 +19,53 @@ import { useState } from "react";
 import Image from "next/image";
 
 const projects = [
-	// ==== Web2 Projects ====
+	// ==== Value Content Africa ====
 	{
 		id: 1,
+		title: "Value Content Africa",
+		category: "web2",
+		description:
+			"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
+		image: "/valuecontent.png",
+		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+		github: "https://github.com/Vheek10/Value-Content-Africa",
+		live: "https://value-content-africa.vercel.app",
+		featured: true,
+		status: "Live",
+		highlights: ["Pan-African", "Social Impact", "Modern Design"],
+	},
+
+	// ==== Web2 Projects ====
+	{
+		id: 2,
 		title: "ELGVotes - Award Voting App",
 		category: "web2",
 		description:
 			"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, analytics, and exportable results.",
 		image: "/votingapp.png",
 		tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
-		github: "https://github.com/Vheek10/ELGVotes",
-		live: "https://elg-votes.vercel.app", // Live website
+		github: "https://github.com/Vheek10/Voting-App",
+		live: "https://voting-app-rnq4.vercel.app",
 		featured: true,
 		status: "Live",
 		highlights: ["Full-stack", "Real-time Results", "Admin Dashboard"],
 	},
 	{
-		id: 2,
+		id: 3,
 		title: "Disney+ Clone",
 		category: "web2",
 		description:
 			"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
 		image: "/disneyclone.png",
 		tech: ["React", "Firebase", "Styled Components", "Context API"],
-		github: "https://github.com/Vheek10/disney-clone",
-		live: "https://disney-clone-vheek10.vercel.app", // Live website
+		github: "https://github.com/Vheek10/disney-clone-master",
+		live: "https://disney-clone-master-phi.vercel.app/",
 		featured: true,
 		status: "Live",
 		highlights: ["Streaming UI", "User Auth", "Responsive Design"],
 	},
 	{
-		id: 3,
+		id: 4,
 		title: "Trading Bot",
 		category: "web2",
 		description:
@@ -57,13 +73,13 @@ const projects = [
 		image: "/tradingbot.png",
 		tech: ["Python", "Node.js", "Tradingview API", "WebSocket"],
 		github: "https://github.com/Vheek10/trading-bot",
-		live: "https://trading-bot-navy-rho.vercel.app", // Added live demo link
+		live: "https://trading-bot-navy-rho.vercel.app",
 		featured: true,
 		status: "Live",
 		highlights: ["Automated Trading", "Real-time Data", "Risk Management"],
 	},
 	{
-		id: 4,
+		id: 5,
 		title: "CoinMarketCap Clone",
 		category: "web2",
 		description:
@@ -71,12 +87,12 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "Recharts", "TailwindCSS"],
 		github: "https://github.com/Vheek10/CoinMarketCap-Clone",
-		live: "#", // Removed live website link
-		status: "In Development", // Changed from "Live" to "In Development"
+		live: "#",
+		status: "In Development",
 		highlights: ["Real-time Data", "Charts", "Responsive Design"],
 	},
 	{
-		id: 5,
+		id: 6,
 		title: "Weather Forecast App",
 		category: "web2",
 		description:
@@ -84,14 +100,14 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "OpenWeather API", "TailwindCSS"],
 		github: "https://github.com/Vheek10/Weather-App",
-		live: "#", // Removed live website link
-		status: "In Development", // Changed from "Live" to "In Development"
+		live: "#",
+		status: "In Development",
 		highlights: ["Live Data", "Theme Switching", "Mobile First"],
 	},
 
 	// ==== Web3 Projects ====
 	{
-		id: 6,
+		id: 7,
 		title: "TokenSwap - DeFi Exchange UI",
 		category: "web3",
 		description:
@@ -99,13 +115,13 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
 		github: "https://github.com/Vheek10/TokenSwap",
-		live: "#", // Removed live website link
+		live: "#",
 		featured: true,
-		status: "In Development", // Changed from "Live" to "In Development"
+		status: "In Development",
 		highlights: ["DeFi UI", "Live Prices", "Dark Theme"],
 	},
 	{
-		id: 7,
+		id: 8,
 		title: "DeFi Portfolio Tracker",
 		category: "web3",
 		description:
@@ -113,12 +129,12 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
 		github: "#",
-		live: "#", // No live demo available yet
+		live: "#",
 		status: "In Development",
 		highlights: ["Multi-chain", "Real-time P&L", "Portfolio Analytics"],
 	},
 	{
-		id: 8,
+		id: 9,
 		title: "VaultVote - Decentralized Governance",
 		category: "web3",
 		description:
@@ -126,22 +142,9 @@ const projects = [
 		image: "/project-placeholder.jpg",
 		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
 		github: "#",
-		live: "#", // No live demo available yet
+		live: "#",
 		status: "In Development",
 		highlights: ["ZK Proofs", "Anonymous Voting", "Governance"],
-	},
-	{
-		id: 9,
-		title: "NFT Marketplace UI",
-		category: "web3",
-		description:
-			"Modern NFT marketplace interface with collection browsing, item details, and wallet connectivity features.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "Web3.js", "TailwindCSS", "Ethers.js"],
-		github: "#",
-		live: "#", // No live demo available yet
-		status: "In Development", // Changed from "Live" to "In Development"
-		highlights: ["NFT Display", "Wallet Connect", "Collection View"],
 	},
 ];
 
