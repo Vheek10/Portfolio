@@ -14,7 +14,7 @@ const Footer = () => {
 		"Small daily improvements lead to stunning results.",
 		"Skill through focus, mastery through persistence.",
 		"The expert was once a beginner.",
-		"Excellence is habit, not act.",
+		"Excellence is a habit, not an act.",
 	];
 
 	const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);

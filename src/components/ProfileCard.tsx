@@ -125,7 +125,7 @@ export const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
-						Victor Gp <span className="wave">👋</span>
+						Victor Gp 
 					</motion.h3>
 
 					<motion.div
