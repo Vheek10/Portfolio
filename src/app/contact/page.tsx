@@ -2,10 +2,10 @@
 
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/Card";
-import { Send, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { Send, CheckCircle, ChevronDown, DollarSign } from "lucide-react";
+import { useState, useRef } from "react";
 import emailjs from "emailjs-com";
 
 // Initialize EmailJS with your credentials
@@ -22,6 +22,8 @@ export default function Contact() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [error, setError] = useState("");
+	const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+	const budgetRef = useRef<HTMLDivElement>(null);
 
 	const budgetOptions = [
 		{ value: "", label: "Select budget range" },
@@ -43,6 +45,15 @@ export default function Contact() {
 			...formData,
 			[e.target.name]: e.target.value,
 		});
+		setError("");
+	};
+
+	const handleBudgetSelect = (value: string) => {
+		setFormData({
+			...formData,
+			budget: value,
+		});
+		setIsBudgetOpen(false);
 		setError("");
 	};
 
@@ -91,6 +102,27 @@ export default function Contact() {
 			setIsSubmitting(false);
 		}
 	};
+
+	// Close dropdown when clicking outside
+	useState(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				budgetRef.current &&
+				!budgetRef.current.contains(event.target as Node)
+			) {
+				setIsBudgetOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	});
+
+	const selectedOption =
+		budgetOptions.find((opt) => opt.value === formData.budget) ||
+		budgetOptions[0];
 
 	return (
 		<div className="space-y-8">
@@ -227,28 +259,104 @@ export default function Contact() {
 										/>
 									</div>
 
-									{/* Budget Field */}
-									<div>
-										<label
-											htmlFor="budget"
-											className="block text-sm font-medium text-gray-300 mb-2">
+									{/* Enhanced Budget Field */}
+									<div
+										className="relative"
+										ref={budgetRef}>
+										<label className="block text-sm font-medium text-gray-300 mb-2">
 											Estimated Budget
 										</label>
-										<select
-											id="budget"
-											name="budget"
-											value={formData.budget}
-											onChange={handleChange}
-											className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300">
-											{budgetOptions.map((option) => (
-												<option
-													key={option.value}
-													value={option.value}
-													className="bg-gray-800">
-													{option.label}
-												</option>
-											))}
-										</select>
+										<motion.button
+											type="button"
+											onClick={() => setIsBudgetOpen(!isBudgetOpen)}
+											className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-800 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 hover:border-gray-500 hover:bg-gray-750 flex items-center justify-between group relative overflow-hidden"
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}>
+											{/* Background gradient on hover */}
+											<div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+											<div className="flex items-center gap-3 relative z-10">
+												{formData.budget ? (
+													<>
+														<span className="text-lg">
+															{selectedOption.icon}
+														</span>
+														<span className="font-medium">
+															{selectedOption.label}
+														</span>
+													</>
+												) : (
+													<>
+														<DollarSign className="w-4 h-4 text-gray-400" />
+														<span className="text-gray-400">
+															Select budget range
+														</span>
+													</>
+												)}
+											</div>
+
+											<motion.div
+												animate={{ rotate: isBudgetOpen ? 180 : 0 }}
+												transition={{ duration: 0.3 }}
+												className="relative z-10">
+												<ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
+											</motion.div>
+										</motion.button>
+
+										<AnimatePresence>
+											{isBudgetOpen && (
+												<motion.div
+													initial={{ opacity: 0, y: -10, scale: 0.95 }}
+													animate={{ opacity: 1, y: 0, scale: 1 }}
+													exit={{ opacity: 0, y: -10, scale: 0.95 }}
+													transition={{ duration: 0.2 }}
+													className="absolute top-full left-0 right-0 mt-2 bg-gray-800 border border-gray-600 rounded-xl shadow-2xl shadow-purple-500/10 z-50 overflow-hidden">
+													<div className="max-h-60 overflow-y-auto custom-scrollbar">
+														{budgetOptions.map((option, index) => (
+															<motion.button
+																key={option.value}
+																type="button"
+																onClick={() => handleBudgetSelect(option.value)}
+																className={`w-full px-4 py-3 text-left transition-all duration-200 flex items-center gap-3 group relative overflow-hidden ${
+																	formData.budget === option.value
+																		? "bg-purple-900/30 text-purple-300"
+																		: "text-gray-300 hover:bg-gray-700/50 hover:text-white"
+																} ${
+																	index !== budgetOptions.length - 1
+																		? "border-b border-gray-700/50"
+																		: ""
+																}`}
+																whileHover={{ x: 4 }}
+																transition={{ duration: 0.2 }}>
+																{/* Hover effect */}
+																<div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+																{/* Selection indicator */}
+																{formData.budget === option.value && (
+																	<div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-blue-500" />
+																)}
+
+																<span className="text-lg relative z-10">
+																	{option.icon}
+																</span>
+																<span className="font-medium relative z-10">
+																	{option.label}
+																</span>
+
+																{formData.budget === option.value && (
+																	<motion.div
+																		initial={{ scale: 0 }}
+																		animate={{ scale: 1 }}
+																		className="ml-auto relative z-10">
+																		<div className="w-2 h-2 bg-purple-500 rounded-full" />
+																	</motion.div>
+																)}
+															</motion.button>
+														))}
+													</div>
+												</motion.div>
+											)}
+										</AnimatePresence>
 									</div>
 								</div>
 
@@ -362,6 +470,24 @@ export default function Contact() {
 					</div>
 				</Card>
 			</motion.section>
+
+			{/* Custom scrollbar styles */}
+			<style jsx>{`
+				.custom-scrollbar::-webkit-scrollbar {
+					width: 6px;
+				}
+				.custom-scrollbar::-webkit-scrollbar-track {
+					background: rgba(75, 85, 99, 0.2);
+					border-radius: 3px;
+				}
+				.custom-scrollbar::-webkit-scrollbar-thumb {
+					background: rgba(139, 92, 246, 0.5);
+					border-radius: 3px;
+				}
+				.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+					background: rgba(139, 92, 246, 0.7);
+				}
+			`}</style>
 		</div>
 	);
 }
