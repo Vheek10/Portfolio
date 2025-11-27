@@ -19,9 +19,25 @@ import { useState } from "react";
 import Image from "next/image";
 
 const projects = [
-	// ==== Value Content Africa ====
+	// ==== Forex Project ====
 	{
 		id: 1,
+		title: "Forex Growth Hub",
+		category: "web2",
+		description:
+			"A comprehensive forex trading platform with real-time market data, trading tools, and educational resources for traders of all levels.",
+		image: "/forex.png",
+		tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
+		github: "https://github.com/Vheek10/forex-growth-hub",
+		live: "https://forex-growth-hub.vercel.app",
+		featured: true,
+		status: "Live",
+		highlights: ["Real-time Data", "Trading Tools", "Educational"],
+	},
+
+	// ==== Value Content Africa ====
+	{
+		id: 2,
 		title: "Value Content Africa",
 		category: "web2",
 		description:
@@ -37,7 +53,7 @@ const projects = [
 
 	// ==== Web2 Projects ====
 	{
-		id: 2,
+		id: 3,
 		title: "ELGVotes - Award Voting App",
 		category: "web2",
 		description:
@@ -51,7 +67,7 @@ const projects = [
 		highlights: ["Full-stack", "Real-time Results", "Admin Dashboard"],
 	},
 	{
-		id: 3,
+		id: 4,
 		title: "Disney+ Clone",
 		category: "web2",
 		description:
@@ -65,7 +81,7 @@ const projects = [
 		highlights: ["Streaming UI", "User Auth", "Responsive Design"],
 	},
 	{
-		id: 4,
+		id: 5,
 		title: "Trading Bot",
 		category: "web2",
 		description:
@@ -78,21 +94,9 @@ const projects = [
 		status: "Live",
 		highlights: ["Automated Trading", "Real-time Data", "Risk Management"],
 	},
+
 	{
-		id: 5,
-		title: "CoinMarketCap Clone",
-		category: "web2",
-		description:
-			"A dynamic crypto analytics platform that replicates CoinMarketCap's design and functionality using the CoinGecko API with real-time charts and stats.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "CoinGecko API", "Recharts", "TailwindCSS"],
-		github: "https://github.com/Vheek10/CoinMarketCap-Clone",
-		live: "#",
-		status: "In Development",
-		highlights: ["Real-time Data", "Charts", "Responsive Design"],
-	},
-	{
-		id: 6,
+		id: 7,
 		title: "Joeyung Portfolio",
 		category: "web2",
 		description:
@@ -104,50 +108,7 @@ const projects = [
 		featured: true,
 		status: "Live",
 		highlights: ["Portfolio", "Modern Design", "Responsive"],
-	},
-
-	// ==== Web3 Projects ====
-	{
-		id: 7,
-		title: "TokenSwap - DeFi Exchange UI",
-		category: "web3",
-		description:
-			"A PancakeSwap-inspired token swap interface with live token prices from CoinGecko, elegant dark UI, and swap settings panel.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
-		github: "https://github.com/Vheek10/TokenSwap",
-		live: "#",
-		featured: true,
-		status: "In Development",
-		highlights: ["DeFi UI", "Live Prices", "Dark Theme"],
-	},
-	{
-		id: 8,
-		title: "DeFi Portfolio Tracker",
-		category: "web3",
-		description:
-			"A comprehensive DeFi portfolio tracker that aggregates holdings across multiple chains, displays real-time P&L, and provides portfolio analytics.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
-		github: "#",
-		live: "#",
-		status: "In Development",
-		highlights: ["Multi-chain", "Real-time P&L", "Portfolio Analytics"],
-	},
-	{
-		id: 9,
-		title: "VaultVote - Decentralized Governance",
-		category: "web3",
-		description:
-			"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
-		image: "/project-placeholder.jpg",
-		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
-		github: "#",
-		live: "#",
-		status: "In Development",
-		highlights: ["ZK Proofs", "Anonymous Voting", "Governance"],
-	},
-];
+	},];
 
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");

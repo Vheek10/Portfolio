@@ -21,6 +21,16 @@ import Image from "next/image";
 export default function Home() {
 	const featuredProjects = [
 		{
+			title: "Forex Growth Hub",
+			description:
+				"A comprehensive forex trading platform with real-time market data, trading tools, and educational resources for traders of all levels.",
+			tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
+			status: "Live",
+			liveUrl: "https://forex-growth-hub.vercel.app",
+			githubUrl: "https://github.com/Vheek10/forex-growth-hub",
+			image: "/forex.png",
+		},
+		{
 			title: "Value Content Africa",
 			description:
 				"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
@@ -69,16 +79,6 @@ export default function Home() {
 			liveUrl: "https://joeyung.vercel.app",
 			githubUrl: "https://github.com/Vheek10/joeyung",
 			image: "/joeyung.png",
-		},
-		{
-			title: "VaultVote - Web3 Governance",
-			description:
-				"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
-			tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
-			status: "In Development",
-			liveUrl: "#",
-			githubUrl: "#",
-			image: "/project-placeholder.jpg",
 		},
 	];
 	const highlights = [
@@ -237,7 +237,8 @@ export default function Home() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{/* Changed to 2 columns only */}
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 						{featuredProjects.map((project, index) => (
 							<motion.div
 								key={project.title}
@@ -245,16 +246,15 @@ export default function Home() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="group">
-								{/* Card with no padding around image */}
+								{/* Card with larger image and minimal content */}
 								<div className="rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full flex flex-col overflow-hidden">
-									{/* Project Image - No padding, glued to top and sides */}
-									<div className="relative w-full h-32 bg-gray-700 overflow-hidden">
+									{/* Project Image - Made even larger for wider cards */}
+									<div className="relative w-full h-80 bg-gray-700 overflow-hidden">
 										<Image
 											src={project.image}
 											alt={project.title}
-											width={400}
-											height={128}
-											className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+											fill
+											className="object-cover transition-transform duration-300 group-hover:scale-105"
 											onError={(e) => {
 												// Fallback if image fails to load
 												const target = e.target as HTMLImageElement;
@@ -272,64 +272,46 @@ export default function Home() {
 										/>
 									</div>
 
-									{/* Content with padding */}
+									{/* Content - Only title and links */}
 									<div className="p-6 flex flex-col flex-grow">
-										<div className="flex justify-between items-start mb-3">
-											<h3 className="text-lg font-bold text-white line-clamp-1">
-												{project.title}
-											</h3>
-											<span
-												className={`px-2 py-1 rounded-full text-xs font-medium flex-shrink-0 ml-2 ${
-													project.status === "Live"
-														? "bg-green-900 text-green-200"
-														: project.status === "In Development"
-														? "bg-blue-900 text-blue-200"
-														: "bg-gray-700 text-gray-200"
-												}`}>
-												{project.status}
-											</span>
-										</div>
+										{/* Project Title with cool font and animation */}
+										<motion.h3
+											className="text-2xl font-bold text-white text-center mb-6 font-mono bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+											whileHover={{
+												scale: 1.05,
+												background: "linear-gradient(135deg, #8B5CF6, #3B82F6)",
+												WebkitBackgroundClip: "text",
+												WebkitTextFillColor: "transparent",
+											}}
+											transition={{ duration: 0.3 }}>
+											{project.title}
+										</motion.h3>
 
-										<p className="text-gray-400 text-sm mb-4 flex-grow line-clamp-3">
-											{project.description}
-										</p>
-
-										<div className="flex flex-wrap gap-2 mb-4">
-											{project.tech.slice(0, 3).map((tech, idx) => (
-												<span
-													key={idx}
-													className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
-													{tech}
-												</span>
-											))}
-											{project.tech.length > 3 && (
-												<span className="px-2 py-1 bg-gray-700 border border-gray-600 rounded-full text-xs text-gray-300">
-													+{project.tech.length - 3}
-												</span>
-											)}
-										</div>
-
-										{/* Project Links */}
-										<div className="flex gap-3 mt-auto pt-4">
+										{/* Project Links - Icon only */}
+										<div className="flex justify-center gap-4 mt-auto">
 											{project.liveUrl && project.liveUrl !== "#" && (
-												<a
+												<motion.a
 													href={project.liveUrl}
 													target="_blank"
 													rel="noopener noreferrer"
-													className="flex items-center gap-1 px-3 py-2 text-xs bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex-1 justify-center">
-													<ExternalLink className="w-3 h-3" />
-													Live Demo
-												</a>
+													whileHover={{ scale: 1.2, rotate: 5 }}
+													whileTap={{ scale: 0.9 }}
+													className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+													title="Live Demo">
+													<ExternalLink className="w-5 h-5" />
+												</motion.a>
 											)}
 											{project.githubUrl && project.githubUrl !== "#" && (
-												<a
+												<motion.a
 													href={project.githubUrl}
 													target="_blank"
 													rel="noopener noreferrer"
-													className="flex items-center gap-1 px-3 py-2 text-xs bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex-1 justify-center">
-													<Github className="w-3 h-3" />
-													Code
-												</a>
+													whileHover={{ scale: 1.2, rotate: -5 }}
+													whileTap={{ scale: 0.9 }}
+													className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-600 text-white hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-gray-500/25"
+													title="View Code">
+													<Github className="w-5 h-5" />
+												</motion.a>
 											)}
 										</div>
 									</div>
