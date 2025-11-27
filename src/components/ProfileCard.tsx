@@ -95,7 +95,7 @@ export const ProfileCard = () => {
 
 	return (
 		<Card
-			className="text-center profile-card w-full mx-auto"
+			className="text-center profile-card w-full mx-auto -ml-4 lg:-ml-8"
 			hoverable={false}>
 			<CardContent className="p-4 sm:p-6 lg:p-8">
 				{/* Profile Image - Scaled on mobile to eliminate side gaps */}
@@ -125,7 +125,7 @@ export const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
-						Victor Gp 
+						Victor Gp
 					</motion.h3>
 
 					<motion.div

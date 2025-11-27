@@ -107,22 +107,24 @@ export default function RootLayout({
 					Skip to main content
 				</a>
 
-				{/* Header component */}
+				{/* Header component - NOT sticky */}
 				<Header />
 
 				{/* Main content with sidebar layout */}
 				<main
 					id="main-content"
-					className="relative z-10 pt-28 min-h-screen">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-						<div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-							{/* Sidebar - Profile Card Only */}
-							<div className="lg:col-span-1">
-								<ProfileCard />
+					className="relative z-10 pt-20 min-h-screen">
+					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+						<div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+							{/* Sidebar - Profile Card Only - STICKY on scroll */}
+							<div className="lg:w-80 lg:flex-shrink-0">
+								<div className="sticky top-6">
+									<ProfileCard />
+								</div>
 							</div>
 
-							{/* Main Content Area */}
-							<div className="lg:col-span-3">{children}</div>
+							{/* Main Content Area - Normal scroll behavior */}
+							<div className="flex-1 min-w-0">{children}</div>
 						</div>
 					</div>
 					<Footer />

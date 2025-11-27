@@ -5,11 +5,17 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/Card";
 import { Send, CheckCircle, ChevronDown, DollarSign } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "emailjs-com";
 
 // Initialize EmailJS with your credentials
 emailjs.init("auR9dWwQWFJdldZ9H");
+
+interface BudgetOption {
+	value: string;
+	label: string;
+	icon?: React.ReactNode;
+}
 
 export default function Contact() {
 	const [formData, setFormData] = useState({
@@ -25,7 +31,7 @@ export default function Contact() {
 	const [isBudgetOpen, setIsBudgetOpen] = useState(false);
 	const budgetRef = useRef<HTMLDivElement>(null);
 
-	const budgetOptions = [
+	const budgetOptions: BudgetOption[] = [
 		{ value: "", label: "Select budget range" },
 		{ value: "$100 - $500", label: "$100 - $500" },
 		{ value: "$500 - $1,000", label: "$500 - $1,000" },
@@ -104,7 +110,7 @@ export default function Contact() {
 	};
 
 	// Close dropdown when clicking outside
-	useState(() => {
+	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
 				budgetRef.current &&
@@ -118,7 +124,7 @@ export default function Contact() {
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	});
+	}, []);
 
 	const selectedOption =
 		budgetOptions.find((opt) => opt.value === formData.budget) ||
@@ -278,9 +284,7 @@ export default function Contact() {
 											<div className="flex items-center gap-3 relative z-10">
 												{formData.budget ? (
 													<>
-														<span className="text-lg">
-															{selectedOption.icon}
-														</span>
+														<DollarSign className="w-4 h-4 text-purple-400" />
 														<span className="font-medium">
 															{selectedOption.label}
 														</span>
@@ -336,9 +340,7 @@ export default function Contact() {
 																	<div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-blue-500" />
 																)}
 
-																<span className="text-lg relative z-10">
-																	{option.icon}
-																</span>
+																<DollarSign className="w-4 h-4 relative z-10" />
 																<span className="font-medium relative z-10">
 																	{option.label}
 																</span>

@@ -19,96 +19,129 @@ import { useState } from "react";
 import Image from "next/image";
 
 const projects = [
-	// ==== Forex Project ====
+	// ==== Web2 Projects ====
 	{
 		id: 1,
 		title: "Forex Growth Hub",
 		category: "web2",
 		description:
-			"A comprehensive forex trading platform with real-time market data, trading tools, and educational resources for traders of all levels.",
+			"Comprehensive forex trading platform with real-time market data and trading tools.",
 		image: "/forex.png",
 		tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
 		github: "https://github.com/Vheek10/forex-growth-hub",
 		live: "https://forex-growth-hub.vercel.app",
 		featured: true,
 		status: "Live",
-		highlights: ["Real-time Data", "Trading Tools", "Educational"],
 	},
 
-	// ==== Value Content Africa ====
 	{
 		id: 2,
 		title: "Value Content Africa",
 		category: "web2",
 		description:
-			"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
+			"Pan-African initiative focused on value-driven content and social impact.",
 		image: "/valuecontent.png",
 		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
 		github: "https://github.com/Vheek10/Value-Content-Africa",
 		live: "https://value-content-africa.vercel.app",
 		featured: true,
 		status: "Live",
-		highlights: ["Pan-African", "Social Impact", "Modern Design"],
 	},
 
-	// ==== Web2 Projects ====
 	{
 		id: 3,
-		title: "ELGVotes - Award Voting App",
+		title: "ELGVotes - Voting App",
 		category: "web2",
 		description:
-			"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, analytics, and exportable results.",
+			"Full-stack voting application with admin dashboard and real-time results.",
 		image: "/votingapp.png",
 		tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
 		github: "https://github.com/Vheek10/Voting-App",
 		live: "https://voting-app-rnq4.vercel.app",
 		featured: true,
 		status: "Live",
-		highlights: ["Full-stack", "Real-time Results", "Admin Dashboard"],
 	},
+
 	{
 		id: 4,
 		title: "Disney+ Clone",
 		category: "web2",
 		description:
-			"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
+			"Streaming platform clone with movie browsing and user authentication.",
 		image: "/disneyclone.png",
 		tech: ["React", "Firebase", "Styled Components", "Context API"],
 		github: "https://github.com/Vheek10/disney-clone-master",
 		live: "https://disney-clone-master-phi.vercel.app/",
 		featured: true,
 		status: "Live",
-		highlights: ["Streaming UI", "User Auth", "Responsive Design"],
 	},
+
 	{
 		id: 5,
 		title: "Trading Bot",
 		category: "web2",
 		description:
-			"Automated trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+			"Automated trading bot with real-time market analysis and risk management.",
 		image: "/tradingbot.png",
 		tech: ["Python", "Node.js", "Tradingview API", "WebSocket"],
 		github: "https://github.com/Vheek10/trading-bot",
 		live: "https://trading-bot-navy-rho.vercel.app",
 		featured: true,
 		status: "Live",
-		highlights: ["Automated Trading", "Real-time Data", "Risk Management"],
 	},
 
 	{
-		id: 7,
+		id: 6,
 		title: "Joeyung Portfolio",
 		category: "web2",
 		description:
-			"A sleek, modern portfolio website showcasing creative work and projects. Features responsive design, smooth animations, and clean UI/UX.",
+			"Modern portfolio website with responsive design and smooth animations.",
 		image: "/joeyung.png",
 		tech: ["ReactJs", "TailwindCSS", "Framer Motion", "TypeScript"],
 		github: "https://github.com/Vheek10/joeyung",
 		live: "https://joeyung.vercel.app",
 		featured: true,
 		status: "Live",
-		highlights: ["Portfolio", "Modern Design", "Responsive"],
-	},];
+	},
+
+	// ==== Web3 Projects ====
+	{
+		id: 7,
+		title: "TokenSwap - DeFi Exchange",
+		category: "web3",
+		description: "PancakeSwap-inspired token swap interface with live prices.",
+		image: "/project-placeholder.jpg",
+		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
+		github: "https://github.com/Vheek10/TokenSwap",
+		live: "#",
+		featured: true,
+		status: "In Development",
+	},
+
+	{
+		id: 8,
+		title: "DeFi Portfolio Tracker",
+		category: "web3",
+		description: "Multi-chain portfolio tracker with real-time P&L analytics.",
+		image: "/project-placeholder.jpg",
+		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
+		github: "#",
+		live: "#",
+		status: "In Development",
+	},
+
+	{
+		id: 9,
+		title: "VaultVote - Governance",
+		category: "web3",
+		description: "Decentralized governance platform with anonymous voting.",
+		image: "/project-placeholder.jpg",
+		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
+		github: "#",
+		live: "#",
+		status: "In Development",
+	},
+];
 
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
@@ -154,6 +187,13 @@ export default function Portfolio() {
 		return project.category === activeFilter;
 	});
 
+	const web2Projects = projects.filter(
+		(project) => project.category === "web2",
+	);
+	const web3Projects = projects.filter(
+		(project) => project.category === "web3",
+	);
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -175,24 +215,161 @@ export default function Portfolio() {
 		},
 	};
 
+	const ProjectCard = ({ project }: { project: any }) => (
+		<motion.div
+			variants={itemVariants}
+			layout
+			className="group flex">
+			<Card className="overflow-hidden flex flex-col transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-600 w-full">
+				{/* Project Image - Larger */}
+				<div className="relative overflow-hidden h-64 bg-gray-800 flex-shrink-0">
+					<Image
+						src={project.image}
+						alt={project.title}
+						fill
+						className="object-cover transition-transform duration-300 group-hover:scale-105"
+						onError={(e) => {
+							const target = e.target as HTMLImageElement;
+							target.style.display = "none";
+							target.parentElement!.style.background =
+								"linear-gradient(135deg, #8B5CF6, #3B82F6)";
+						}}
+					/>
+
+					{/* Status Badge */}
+					<div className="absolute top-4 left-4">
+						<span
+							className={`px-3 py-1 rounded-full text-xs font-medium ${
+								project.status === "Live"
+									? "bg-green-900 text-green-200"
+									: "bg-blue-900 text-blue-200"
+							}`}>
+							{project.status}
+						</span>
+					</div>
+
+					{/* Featured Badge */}
+					{project.featured && (
+						<div className="absolute top-4 right-4">
+							<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 text-yellow-200">
+								Featured
+							</span>
+						</div>
+					)}
+
+					{/* Overlay with Links */}
+					<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+						<div className="flex gap-4">
+							{project.live !== "#" && (
+								<motion.a
+									href={project.live}
+									target="_blank"
+									rel="noopener noreferrer"
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
+									className="w-12 h-12 rounded-full bg-white text-purple-600 flex items-center justify-center transition-all duration-300 hover:bg-purple-600 hover:text-white">
+									<ExternalLink className="w-5 h-5" />
+								</motion.a>
+							)}
+							{project.github !== "#" && (
+								<motion.a
+									href={project.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
+									className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white">
+									<Github className="w-5 h-5" />
+								</motion.a>
+							)}
+						</div>
+					</div>
+				</div>
+
+				{/* Project Content - Minimal */}
+				<div className="p-6 flex flex-col flex-grow">
+					{/* Project Title */}
+					<motion.h3
+						className="text-xl font-bold text-white text-center mb-4 font-mono bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+						whileHover={{
+							scale: 1.05,
+							background: "linear-gradient(135deg, #8B5CF6, #3B82F6)",
+							WebkitBackgroundClip: "text",
+							WebkitTextFillColor: "transparent",
+						}}
+						transition={{ duration: 0.3 }}>
+						{project.title}
+					</motion.h3>
+
+					{/* Short Description */}
+					<p className="text-gray-400 text-sm mb-4 text-center line-clamp-2 flex-grow">
+						{project.description}
+					</p>
+
+					{/* Technologies - Minimal */}
+					<div className="flex flex-wrap gap-1 mb-4 justify-center">
+						{project.tech.slice(0, 3).map((tech: string, idx: number) => (
+							<span
+								key={idx}
+								className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+								{tech}
+							</span>
+						))}
+						{project.tech.length > 3 && (
+							<span className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+								+{project.tech.length - 3}
+							</span>
+						)}
+					</div>
+
+					{/* Action Buttons - Icon Only */}
+					<div className="flex justify-center gap-3 mt-auto pt-4">
+						{project.live !== "#" && (
+							<motion.a
+								href={project.live}
+								target="_blank"
+								rel="noopener noreferrer"
+								whileHover={{ scale: 1.2, rotate: 5 }}
+								whileTap={{ scale: 0.9 }}
+								className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+								title="Live Demo">
+								<ExternalLink className="w-5 h-5" />
+							</motion.a>
+						)}
+						{project.github !== "#" && (
+							<motion.a
+								href={project.github}
+								target="_blank"
+								rel="noopener noreferrer"
+								whileHover={{ scale: 1.2, rotate: -5 }}
+								whileTap={{ scale: 0.9 }}
+								className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-600 text-white hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-gray-500/25"
+								title="View Code">
+								<Github className="w-5 h-5" />
+							</motion.a>
+						)}
+					</div>
+				</div>
+			</Card>
+		</motion.div>
+	);
+
 	return (
-		<div className="space-y-8">
+		<div className="space-y-12">
 			{/* Hero Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
-					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
-
 					<div className="relative z-10">
 						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Portfolio
 						</h1>
 						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Explore my latest projects across Web2 and Web3 — built with
-							precision, creativity, and a passion for modern design.
+							modern technologies and clean design.
 						</p>
 					</div>
 				</Card>
@@ -251,160 +428,85 @@ export default function Portfolio() {
 				</Card>
 			</motion.section>
 
-			{/* Projects Grid - Updated for equal height alignment */}
-			<motion.section
-				variants={containerVariants}
-				initial="hidden"
-				animate="visible"
-				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-				{filteredProjects.map((project, index) => (
-					<motion.div
-						key={project.id}
-						variants={itemVariants}
-						layout
-						className="group flex">
-						<Card className="overflow-hidden flex flex-col transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-600 w-full">
-							{/* Project Image - Fixed Height */}
-							<div className="relative overflow-hidden h-48 bg-gray-800 flex-shrink-0">
-								<Image
-									src={project.image}
-									alt={project.title}
-									width={400}
-									height={192}
-									className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-									onError={(e) => {
-										// Fallback if image fails to load
-										const target = e.target as HTMLImageElement;
-										target.style.display = "none";
-										// Show fallback background
-										target.parentElement!.style.background =
-											"linear-gradient(135deg, #8B5CF6, #3B82F6)";
-									}}
+			{/* All Projects View */}
+			{activeFilter === "all" && (
+				<>
+					{/* Web2 Projects Section */}
+					<motion.section
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}>
+						<div className="text-center mb-8">
+							<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+								Web2 Projects
+							</h2>
+							<p className="text-gray-400 max-w-2xl mx-auto">
+								Modern web applications built with cutting-edge technologies and
+								user-centric design.
+							</p>
+						</div>
+						<motion.div
+							variants={containerVariants}
+							initial="hidden"
+							animate="visible"
+							className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							{web2Projects.map((project) => (
+								<ProjectCard
+									key={project.id}
+									project={project}
 								/>
+							))}
+						</motion.div>
+					</motion.section>
 
-								{/* Status Badge */}
-								<div className="absolute top-4 left-4">
-									<span
-										className={`px-3 py-1 rounded-full text-xs font-medium ${
-											project.status === "Live"
-												? "bg-green-900 text-green-200"
-												: "bg-blue-900 text-blue-200"
-										}`}>
-										{project.status}
-									</span>
-								</div>
+					{/* Web3 Projects Section */}
+					<motion.section
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.2 }}>
+						<div className="text-center mb-8">
+							<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+								Web3 Projects
+							</h2>
+							<p className="text-gray-400 max-w-2xl mx-auto">
+								Blockchain and decentralized applications exploring the future
+								of web technology.
+							</p>
+						</div>
+						<motion.div
+							variants={containerVariants}
+							initial="hidden"
+							animate="visible"
+							className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							{web3Projects.map((project) => (
+								<ProjectCard
+									key={project.id}
+									project={project}
+								/>
+							))}
+						</motion.div>
+					</motion.section>
+				</>
+			)}
 
-								{/* Featured Badge */}
-								{project.featured && (
-									<div className="absolute top-4 right-4">
-										<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 text-yellow-200">
-											Featured
-										</span>
-									</div>
-								)}
-
-								{/* Overlay with Links */}
-								<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-									<div className="flex gap-4">
-										{project.live !== "#" && (
-											<motion.a
-												href={project.live}
-												target="_blank"
-												rel="noopener noreferrer"
-												whileHover={{ scale: 1.1 }}
-												whileTap={{ scale: 0.9 }}
-												className="w-12 h-12 rounded-full bg-white text-purple-600 flex items-center justify-center transition-all duration-300 hover:bg-purple-600 hover:text-white">
-												<ExternalLink className="w-5 h-5" />
-											</motion.a>
-										)}
-										{project.github !== "#" && (
-											<motion.a
-												href={project.github}
-												target="_blank"
-												rel="noopener noreferrer"
-												whileHover={{ scale: 1.1 }}
-												whileTap={{ scale: 0.9 }}
-												className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white">
-												<Github className="w-5 h-5" />
-											</motion.a>
-										)}
-									</div>
-								</div>
-							</div>
-
-							{/* Project Content - Flex grow for equal height */}
-							<div className="p-6 flex flex-col flex-grow">
-								<h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors duration-300 line-clamp-2">
-									{project.title}
-								</h3>
-
-								<p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3 flex-grow">
-									{project.description}
-								</p>
-
-								{/* Highlights */}
-								{project.highlights && (
-									<div className="flex flex-wrap gap-2 mb-4">
-										{project.highlights.map((highlight, idx) => (
-											<span
-												key={idx}
-												className="px-2 py-1 bg-purple-900 text-purple-300 rounded-full text-xs font-medium">
-												{highlight}
-											</span>
-										))}
-									</div>
-								)}
-
-								{/* Technologies */}
-								<div className="flex flex-wrap gap-2 mb-4">
-									{project.tech.map((tech, idx) => (
-										<span
-											key={idx}
-											className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
-											{tech}
-										</span>
-									))}
-								</div>
-
-								{/* Action Buttons - Fixed at bottom */}
-								<div className="flex gap-3 mt-auto pt-4">
-									{project.live !== "#" && (
-										<motion.a
-											href={project.live}
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-											className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg">
-											<ExternalLink className="w-4 h-4" />
-											Live Demo
-										</motion.a>
-									)}
-									{project.github !== "#" && (
-										<motion.a
-											href={project.github}
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-											className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-xl border-2 text-sm font-semibold transition-all duration-300 ${
-												project.live !== "#"
-													? "border-gray-600 text-gray-300 hover:border-purple-500 hover:bg-purple-500/5"
-													: "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg"
-											}`}>
-											<Github className="w-4 h-4" />
-											View Code
-										</motion.a>
-									)}
-								</div>
-							</div>
-						</Card>
-					</motion.div>
-				))}
-			</motion.section>
+			{/* Filtered Projects View */}
+			{activeFilter !== "all" && (
+				<motion.section
+					variants={containerVariants}
+					initial="hidden"
+					animate="visible"
+					className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					{filteredProjects.map((project) => (
+						<ProjectCard
+							key={project.id}
+							project={project}
+						/>
+					))}
+				</motion.section>
+			)}
 
 			{/* Empty State */}
-			{filteredProjects.length === 0 && (
+			{filteredProjects.length === 0 && activeFilter !== "all" && (
 				<motion.section
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -435,20 +537,16 @@ export default function Portfolio() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.8, duration: 0.6 }}>
 				<Card className="p-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 text-white relative overflow-hidden">
-					{/* Background Pattern */}
 					<div className="absolute inset-0 opacity-10">
 						<div className="absolute -top-20 -right-20 w-40 h-40 bg-white rounded-full" />
 						<div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full" />
 					</div>
-
 					<div className="relative z-10">
 						<h3 className="text-2xl font-bold mb-4">Have a Project in Mind?</h3>
 						<p className="text-purple-100 mb-6 max-w-2xl mx-auto">
-							Interested in working together? Let's discuss your next Web3 or
-							Web2 project and bring your ideas to life with cutting-edge
-							technology.
+							Let's discuss your next Web3 or Web2 project and bring your ideas
+							to life.
 						</p>
-
 						<div className="flex flex-wrap justify-center gap-4">
 							<motion.a
 								href="/contact"
@@ -457,15 +555,6 @@ export default function Portfolio() {
 								className="px-8 py-4 rounded-2xl bg-white text-purple-600 font-semibold transition-all duration-300 hover:shadow-2xl flex items-center gap-2">
 								Start a Project
 								<ArrowRight className="w-5 h-5" />
-							</motion.a>
-
-							<motion.a
-								href="/services"
-								whileHover={{ scale: 1.05 }}
-								whileTap={{ scale: 0.95 }}
-								className="px-8 py-4 rounded-2xl border-2 border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-purple-600 flex items-center gap-2">
-								View Services
-								<ExternalLink className="w-5 h-5" />
 							</motion.a>
 						</div>
 					</div>
