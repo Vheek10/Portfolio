@@ -19,69 +19,68 @@ import {
 import Image from "next/image";
 
 export default function Home() {
-	
 	const featuredProjects = [
-	{
-		title: "Value Content Africa",
-		description:
-			"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
-		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
-		status: "Live",
-		liveUrl: "https://value-content-africa.vercel.app",
-		githubUrl: "https://github.com/Vheek10/Value-Content-Africa",
-		image: "/valuecontent.png",
-	},
-	{
-		title: "ELGVotes - Voting App",
-		description:
-			"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, and real-time results.",
-		tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
-		status: "Live",
-		liveUrl: "https://voting-appelg.vercel.app/",
-		githubUrl: "https://github.com/Vheek10/ELGVotes",
-		image: "/votingapp.png",
-	},
-	{
-		title: "Trading Bot",
-		description:
-			"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
-		tech: ["Python", "Node.js", "Binance API", "WebSocket"],
-		status: "Live",
-		liveUrl: "https://trading-bot-navy-rho.vercel.app/",
-		githubUrl: "https://github.com/Vheek10/trading-bot",
-		image: "/tradingbot.png",
-	},
-	{
-		title: "Disney+ Clone",
-		description:
-			"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
-		tech: ["React", "Firebase", "Styled Components", "Context API"],
-		status: "Live",
-		liveUrl: "https://disney-clone-master-phi.vercel.app/",
-		githubUrl: "https://github.com/Vheek10/disney-clone",
-		image: "/disneyclone.png",
-	},
-	{
-		title: "TokenSwap - DeFi Exchange",
-		description:
-			"A PancakeSwap-inspired token swap interface with live token prices from CoinGecko, elegant dark UI, and swap settings panel.",
-		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
-		status: "Live",
-		liveUrl: "#",
-		githubUrl: "https://github.com/Vheek10/TokenSwap",
-		image: "/project-placeholder.jpg",
-	},
-	{
-		title: "VaultVote - Web3 Governance",
-		description:
-			"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
-		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
-		status: "In Development",
-		liveUrl: "#",
-		githubUrl: "#",
-		image: "/project-placeholder.jpg",
-	},
-];
+		{
+			title: "Value Content Africa",
+			description:
+				"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
+			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+			status: "Live",
+			liveUrl: "https://value-content-africa.vercel.app",
+			githubUrl: "https://github.com/Vheek10/Value-Content-Africa",
+			image: "/valuecontent.png",
+		},
+		{
+			title: "ELGVotes - Voting App",
+			description:
+				"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, and real-time results.",
+			tech: ["Next.js", "TailwindCSS", "MongoDB", "TypeScript"],
+			status: "Live",
+			liveUrl: "https://voting-appelg.vercel.app/",
+			githubUrl: "https://github.com/Vheek10/ELGVotes",
+			image: "/votingapp.png",
+		},
+		{
+			title: "Trading Bot",
+			description:
+				"Automated cryptocurrency trading bot with real-time market analysis, multiple strategy support, and risk management features.",
+			tech: ["Python", "Node.js", "Binance API", "WebSocket"],
+			status: "Live",
+			liveUrl: "https://trading-bot-navy-rho.vercel.app/",
+			githubUrl: "https://github.com/Vheek10/trading-bot",
+			image: "/tradingbot.png",
+		},
+		{
+			title: "Disney+ Clone",
+			description:
+				"A responsive Disney+ streaming platform clone with movie/show browsing, user authentication, and video player functionality.",
+			tech: ["React", "Firebase", "Styled Components", "Context API"],
+			status: "Live",
+			liveUrl: "https://disney-clone-master-phi.vercel.app/",
+			githubUrl: "https://github.com/Vheek10/disney-clone",
+			image: "/disneyclone.png",
+		},
+		{
+			title: "Joeyung Portfolio",
+			description:
+				"A sleek, modern portfolio website showcasing creative work and projects. Features responsive design, smooth animations, and clean UI/UX.",
+			tech: ["Next.js", "TailwindCSS", "Framer Motion", "TypeScript"],
+			status: "Live",
+			liveUrl: "https://joeyung.vercel.app",
+			githubUrl: "https://github.com/Vheek10/joeyung",
+			image: "/joeyung.png",
+		},
+		{
+			title: "VaultVote - Web3 Governance",
+			description:
+				"A Web3 startup concept using zero-knowledge proofs for anonymous and verifiable community governance.",
+			tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
+			status: "In Development",
+			liveUrl: "#",
+			githubUrl: "#",
+			image: "/project-placeholder.jpg",
+		},
+	];
 	const highlights = [
 		{
 			icon: <Rocket className="w-6 h-6" />,

@@ -93,16 +93,17 @@ const projects = [
 	},
 	{
 		id: 6,
-		title: "Weather Forecast App",
+		title: "Joeyung Portfolio",
 		category: "web2",
 		description:
-			"A sleek, responsive weather app built with Next.js and TailwindCSS, featuring live weather data, temperature trends, and theme switching.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "OpenWeather API", "TailwindCSS"],
-		github: "https://github.com/Vheek10/Weather-App",
-		live: "#",
-		status: "In Development",
-		highlights: ["Live Data", "Theme Switching", "Mobile First"],
+			"A sleek, modern portfolio website showcasing creative work and projects. Features responsive design, smooth animations, and clean UI/UX.",
+		image: "/joeyung.png",
+		tech: ["ReactJs", "TailwindCSS", "Framer Motion", "TypeScript"],
+		github: "https://github.com/Vheek10/joeyung",
+		live: "https://joeyung.vercel.app",
+		featured: true,
+		status: "Live",
+		highlights: ["Portfolio", "Modern Design", "Responsive"],
 	},
 
 	// ==== Web3 Projects ====
