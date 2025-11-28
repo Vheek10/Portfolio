@@ -14,7 +14,6 @@ emailjs.init("auR9dWwQWFJdldZ9H");
 interface BudgetOption {
 	value: string;
 	label: string;
-	icon?: React.ReactNode;
 }
 
 export default function Contact() {
