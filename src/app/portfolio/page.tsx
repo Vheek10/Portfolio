@@ -293,9 +293,6 @@ export default function Portfolio() {
 						className="text-xl font-bold text-white text-center mb-4 font-mono bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 						whileHover={{
 							scale: 1.05,
-							background: "linear-gradient(135deg, #8B5CF6, #3B82F6)",
-							WebkitBackgroundClip: "text",
-							WebkitTextFillColor: "transparent",
 						}}
 						transition={{ duration: 0.3 }}>
 						{project.title}
