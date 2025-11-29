@@ -22,10 +22,13 @@ export const Card = ({
 			whileTap={hoverable ? { scale: 0.98 } : {}}
 			onClick={onClick}
 			className={`
-        rounded-3xl bg-gray-900/40 
-        backdrop-blur-xl border border-gray-700
-        shadow-sm hover:shadow-xl transition-all duration-300
+        rounded-2xl sm:rounded-3xl 
+        bg-gray-900/40 backdrop-blur-xl 
+        border border-gray-700
+        shadow-sm hover:shadow-xl 
+        transition-all duration-300
         overflow-hidden
+        w-full
         ${className}
       `}>
 			{children}
@@ -40,7 +43,11 @@ export const CardHeader = ({
 	children: ReactNode;
 	className?: string;
 }) => {
-	return <div className={`p-6 pb-4 ${className}`}>{children}</div>;
+	return (
+		<div className={`p-4 sm:p-5 md:p-6 pb-2 sm:pb-3 md:pb-4 ${className}`}>
+			{children}
+		</div>
+	);
 };
 
 export const CardContent = ({
@@ -50,7 +57,9 @@ export const CardContent = ({
 	children: ReactNode;
 	className?: string;
 }) => {
-	return <div className={`p-6 pt-0 ${className}`}>{children}</div>;
+	return (
+		<div className={`p-4 sm:p-5 md:p-6 pt-0 ${className}`}>{children}</div>
+	);
 };
 
 export const CardFooter = ({
@@ -60,5 +69,7 @@ export const CardFooter = ({
 	children: ReactNode;
 	className?: string;
 }) => {
-	return <div className={`p-6 pt-0 ${className}`}>{children}</div>;
+	return (
+		<div className={`p-4 sm:p-5 md:p-6 pt-0 ${className}`}>{children}</div>
+	);
 };

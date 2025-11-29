@@ -110,21 +110,21 @@ export default function RootLayout({
 				{/* Header component - NOT sticky */}
 				<Header />
 
-				{/* Main content with sidebar layout */}
+				{/* Main content with responsive layout */}
 				<main
 					id="main-content"
-					className="relative z-10 pt-20 min-h-screen">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-						<div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-							{/* Sidebar - Profile Card Only - STICKY on scroll */}
+					className="relative z-10 pt-16 md:pt-20 min-h-screen">
+					<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 md:py-6">
+						<div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8">
+							{/* Sidebar - Profile Card Only - STICKY on desktop only */}
 							<div className="lg:w-80 lg:flex-shrink-0">
-								<div className="sticky top-6">
+								<div className="lg:sticky lg:top-6">
 									<ProfileCard />
 								</div>
 							</div>
 
-							{/* Main Content Area - Normal scroll behavior */}
-							<div className="flex-1 min-w-0">{children}</div>
+							{/* Main Content Area - Add negative margin to align with header right edge */}
+							<div className="flex-1 min-w-0 w-full lg:-mr-8">{children}</div>
 						</div>
 					</div>
 					<Footer />

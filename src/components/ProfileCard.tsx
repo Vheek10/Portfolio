@@ -69,13 +69,13 @@ export const ProfileCard = () => {
 			id: 1,
 			url: "https://github.com/Vheek10",
 			name: "Github",
-			icon: <Github className="w-5 h-5" />,
+			icon: <Github className="w-4 h-4 sm:w-5 sm:h-5" />,
 		},
 		{
 			id: 2,
 			url: "https://x.com/Vheek_io",
 			name: "Twitter",
-			icon: <Twitter className="w-5 h-5" />,
+			icon: <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />,
 		},
 		{
 			id: 3,
@@ -83,7 +83,7 @@ export const ProfileCard = () => {
 			name: "WhatsApp",
 			icon: (
 				<svg
-					className="w-5 h-5"
+					className="w-4 h-4 sm:w-5 sm:h-5"
 					viewBox="0 0 24 24"
 					fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg">
@@ -95,16 +95,15 @@ export const ProfileCard = () => {
 
 	return (
 		<Card
-			className="text-center profile-card w-full mx-auto -ml-4 lg:-ml-8"
+			className="text-center profile-card w-full mx-auto lg:-ml-8"
 			hoverable={false}>
-			<CardContent className="p-4 sm:p-6 lg:p-8">
-				{/* Profile Image - Scaled on mobile to eliminate side gaps */}
-				<div className="image text-center -mx-4 -mt-4 sm:-mx-6 sm:-mt-6 lg:-mx-8 lg:-mt-8 mb-4">
+			<CardContent className="p-3 sm:p-4 md:p-6 lg:p-8">
+				{/* Profile Image - Improved mobile scaling */}
+				<div className="image text-center -mx-3 sm:-mx-4 md:-mx-6 lg:-mx-8 -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8 mb-3 sm:mb-4 md:mb-6">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						className="inline-block w-full scale-105 sm:scale-100"
+						className="inline-block w-full scale-105 sm:scale-100 md:scale-100"
 						style={{
-							// Force the scale to eliminate side gaps on mobile
 							transform: "scale(1.05)",
 						}}>
 						<Image
@@ -119,9 +118,9 @@ export const ProfileCard = () => {
 				</div>
 
 				{/* Name and Title */}
-				<div className="text mb-6 lg:mb-8">
+				<div className="text mb-4 sm:mb-6 md:mb-8">
 					<motion.h3
-						className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 flex items-center justify-center gap-2"
+						className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
@@ -132,18 +131,20 @@ export const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="text-gray-400 leading-relaxed min-h-[4rem] sm:min-h-[5rem] flex items-center justify-center">
-						<div className="space-y-2">
-							<p className="text-sm sm:text-base">
+						className="text-gray-400 leading-relaxed min-h-[3.5rem] sm:min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
+						<div className="space-y-1 sm:space-y-2">
+							<p className="text-xs sm:text-sm md:text-base">
 								A{" "}
-								<span className="font-semibold text-purple-400 min-h-[1.5rem] inline-block">
+								<span className="font-semibold text-purple-400 min-h-[1.25rem] sm:min-h-[1.5rem] inline-block">
 									{currentRole}
-									<span className="inline-block w-1 h-5 bg-purple-400 ml-1 animate-pulse"></span>
+									<span className="inline-block w-0.5 sm:w-1 h-4 sm:h-5 bg-purple-400 ml-0.5 sm:ml-1 animate-pulse"></span>
 								</span>{" "}
 								🖥️
 							</p>
-							<p className="text-xs sm:text-sm text-gray-400 max-w-xs mx-auto">
-								where function meets fire and design meets decentralization.
+							<p className="text-xs sm:text-sm text-gray-400 max-w-xs mx-auto px-2 sm:px-0">
+								Crafting digital experiences where innovation meets execution.
+								Transforming complex ideas into seamless, user-centric
+								applications that bridge the gap between design and technology.
 							</p>
 						</div>
 					</motion.div>
@@ -151,7 +152,7 @@ export const ProfileCard = () => {
 
 				{/* Action Buttons */}
 				<motion.div
-					className="common-button-groups flex flex-col sm:flex-row gap-3 mb-6 lg:mb-8"
+					className="common-button-groups flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.3 }}>
@@ -162,9 +163,9 @@ export const ProfileCard = () => {
 						rel="noopener noreferrer"
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
-						className="btn-call flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1 text-sm">
+						className="btn-call flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 flex-1 text-xs sm:text-sm">
 						<svg
-							className="icon flex-shrink-0 w-5 h-5"
+							className="icon flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5"
 							viewBox="0 0 24 24"
 							fill="currentColor"
 							xmlns="http://www.w3.org/2000/svg">
@@ -178,13 +179,13 @@ export const ProfileCard = () => {
 						onClick={copyEmail}
 						whileHover={{ scale: 1.02 }}
 						whileTap={{ scale: 0.98 }}
-						className={`btn-copy flex items-center justify-center gap-2 px-4 py-3 border border-gray-600 text-gray-300 font-medium rounded-xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 text-sm ${
+						className={`btn-copy flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-3 border border-gray-600 text-gray-300 font-medium rounded-xl transition-all duration-300 hover:border-purple-500 hover:bg-purple-500/5 flex-1 text-xs sm:text-sm ${
 							copied ? "bg-green-500/10 border-green-500 text-green-400" : ""
 						}`}>
 						{copied ? (
-							<Check className="w-4 h-4 flex-shrink-0" />
+							<Check className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
 						) : (
-							<Copy className="w-4 h-4 flex-shrink-0" />
+							<Copy className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
 						)}
 						{copied ? "Copied!" : "Copy Email"}
 					</motion.button>
@@ -196,7 +197,7 @@ export const ProfileCard = () => {
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.4 }}>
-					<ul className="list-unstyled flex justify-center space-x-3">
+					<ul className="list-unstyled flex justify-center space-x-2 sm:space-x-3">
 						{socialItems.map((item, index) => (
 							<motion.li
 								key={item.id}
@@ -209,7 +210,7 @@ export const ProfileCard = () => {
 									rel="noopener noreferrer"
 									whileHover={{ scale: 1.15, y: -2 }}
 									whileTap={{ scale: 0.95 }}
-									className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg"
+									className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-lg text-xs"
 									aria-label={item.name}>
 									{item.icon}
 								</motion.a>
