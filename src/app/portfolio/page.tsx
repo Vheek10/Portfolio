@@ -104,9 +104,23 @@ const projects = [
 		status: "Live",
 	},
 
-	// ==== Web3 Projects ====
 	{
 		id: 7,
+		title: "ResumeAI - AI Resume Builder",
+		category: "web2",
+		description:
+			"AI-powered resume builder with templates, content suggestions, and ATS optimization.",
+		image: "/resumeai.png", // Make sure to add this image to your public folder
+		tech: ["Next.js", "OpenAI API", "TailwindCSS", "TypeScript", "Firebase"],
+		github: "https://github.com/Vheek10/ai-resume-craft",
+		live: "https://ai-resume-nine-ecru.vercel.app/",
+		featured: true,
+		status: "Live",
+	},
+
+	// ==== Web3 Projects ====
+	{
+		id: 8,
 		title: "TokenSwap - DeFi Exchange",
 		category: "web3",
 		description: "PancakeSwap-inspired token swap interface with live prices.",
@@ -119,7 +133,7 @@ const projects = [
 	},
 
 	{
-		id: 8,
+		id: 9,
 		title: "DeFi Portfolio Tracker",
 		category: "web3",
 		description: "Multi-chain portfolio tracker with real-time P&L analytics.",
@@ -131,7 +145,7 @@ const projects = [
 	},
 
 	{
-		id: 9,
+		id: 10,
 		title: "VaultVote - Governance",
 		category: "web3",
 		description: "Decentralized governance platform with anonymous voting.",
@@ -163,7 +177,7 @@ export default function Portfolio() {
 		},
 		{
 			icon: <Code className="w-6 h-6" />,
-			number: "15+",
+			number: "16+",
 			label: "Projects Completed",
 		},
 		{

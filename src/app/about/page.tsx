@@ -20,17 +20,17 @@ export default function About() {
 	const stats = [
 		{
 			icon: <Target className="w-6 h-6" />,
-			number: "15+",
+			number: "20+",
 			label: "Projects Delivered",
 		},
 		{
 			icon: <Heart className="w-6 h-6" />,
-			number: "10+",
+			number: "15+",
 			label: "Happy Clients",
 		},
 		{
 			icon: <Zap className="w-6 h-6" />,
-			number: "2+",
+			number: "3+",
 			label: "Years Experience",
 		},
 		{

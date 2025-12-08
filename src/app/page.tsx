@@ -105,12 +105,12 @@ export default function Home() {
 	const stats = [
 		{
 			icon: <Award className="w-6 h-6" />,
-			number: "15+",
+			number: "20+",
 			label: "Projects Completed",
 		},
 		{
 			icon: <Star className="w-6 h-6" />,
-			number: "2+",
+			number: "3+",
 			label: "Years Experience",
 		},
 		{
