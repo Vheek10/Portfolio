@@ -151,7 +151,7 @@ const projects = [
 		description: "Decentralized prediction platform on Solana blockchain.",
 		image: "/polysight.png",
 		tech: ["Next.js", "Rust", "Solana", "TypeScript"],
-		github: "www.github.com/Vheek10/PolySight",
+		github: "www.github.com/Vheek10/Polysight",
 		live: "polysight.vercel.app",
 		status: "Live",
 	},
