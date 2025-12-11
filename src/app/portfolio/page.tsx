@@ -121,15 +121,15 @@ const projects = [
 	// ==== Web3 Projects ====
 	{
 		id: 8,
-		title: "TokenSwap - DeFi Exchange",
+		title: "StrataDeed - OnChain Real Estate",
 		category: "web3",
-		description: "PancakeSwap-inspired token swap interface with live prices.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "CoinGecko API", "TailwindCSS", "TypeScript"],
-		github: "https://github.com/Vheek10/TokenSwap",
-		live: "#",
-		featured: true,
-		status: "In Development",
+		description: "Decentralized real estate agency with property tokenization.",
+		image: "/stratadeed.png",
+		tech: ["Next.js", "Solidity", "Ethereum", "IPFS"],
+		github: "https://github.com/Vheek10/StrataDeed",
+		live: "https://strata-deed.vercel.app/",
+		featured: false,
+		status: "Live",
 	},
 
 	{
@@ -146,14 +146,14 @@ const projects = [
 
 	{
 		id: 10,
-		title: "VaultVote - Governance",
+		title: "PolySight - Solana Prediction Market",
 		category: "web3",
-		description: "Decentralized governance platform with anonymous voting.",
-		image: "/project-placeholder.jpg",
-		tech: ["Solidity", "Next.js", "TailwindCSS", "Web3.js"],
-		github: "#",
-		live: "#",
-		status: "In Development",
+		description: "Decentralized prediction platform on Solana blockchain.",
+		image: "/polysight.png",
+		tech: ["Next.js", "Rust", "Solana", "TypeScript"],
+		github: "www.github.com/Vheek10/PolySight",
+		live: "polysight.vercel.app",
+		status: "Live",
 	},
 ];
 
