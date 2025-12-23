@@ -21,14 +21,14 @@ import Image from "next/image";
 export default function Home() {
 	const featuredProjects = [
 		{
-			title: "Forex Growth Hub",
+			title: "StrataDeed - OnChain Real Estate",
 			description:
-				"A comprehensive forex trading platform with real-time market data, trading tools, and educational resources for traders of all levels.",
-			tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
+				"Decentralized real estate agency with property tokenization.",
+			tech: ["Next.js", "Solidity", "Ethereum", "IPFS"],
 			status: "Live",
-			liveUrl: "https://forex-growth-hub.vercel.app",
-			githubUrl: "https://github.com/Vheek10/forex-growth-hub",
-			image: "/forex.png",
+			liveUrl: "https://strata-deed.vercel.app/",
+			githubUrl: "https://github.com/Vheek10/StrataDeed",
+			image: "/stratadeed.png",
 		},
 		{
 			title: "Value Content Africa",
