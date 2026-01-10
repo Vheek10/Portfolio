@@ -254,7 +254,7 @@ export default function Services() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-lg md:text-lg lg:text-lg font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Development Services
 						</h1>
 						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -296,7 +296,7 @@ export default function Services() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2, duration: 0.6 }}>
 				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+					<h2 className="text-lg md:text-lg font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 						Core Services
 					</h2>
 					<p className="text-gray-400 max-w-2xl mx-auto">
@@ -329,7 +329,7 @@ export default function Services() {
 
 										{/* Service Title & Description */}
 										<div className="flex-1">
-											<h3 className="text-lg font-bold text-white mb-3">
+											<h3 className="text-base sm:text-lg font-bold text-white mb-3">
 												{service.title}
 											</h3>
 											<p className="text-gray-400 leading-relaxed">
@@ -392,7 +392,7 @@ export default function Services() {
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="text-center group">
 								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
-									<h3 className="text-lg font-bold text-white mb-3">
+									<h3 className="text-base font-bold text-white mb-3">
 										{benefit.title}
 									</h3>
 									<p className="text-gray-400 text-sm leading-relaxed">
@@ -412,7 +412,7 @@ export default function Services() {
 				transition={{ delay: 1.0, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-12">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-xl md:text-2xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Specialized Services
 						</h2>
 						<p className="text-gray-400 max-w-2xl mx-auto">
@@ -435,7 +435,7 @@ export default function Services() {
 											{service.icon}
 										</div>
 										<div>
-											<h3 className="text-lg font-bold text-white mb-2">
+											<h3 className="text-base font-bold text-white mb-2">
 												{service.title}
 											</h3>
 											<p className="text-gray-400 text-sm mb-3">
@@ -467,7 +467,7 @@ export default function Services() {
 				transition={{ delay: 1.4, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-12">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-xl md:text-2xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Development Process
 						</h2>
 						<p className="text-gray-400 max-w-2xl mx-auto">
@@ -483,7 +483,7 @@ export default function Services() {
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 1.6 + index * 0.1, duration: 0.6 }}
-								className="text-center group">
+								className="text-center group p-4">
 								<div className="relative mb-6">
 									<div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
 										{step.icon}
@@ -525,7 +525,7 @@ export default function Services() {
 					</div>
 
 					<div className="relative z-10">
-						<h3 className="text-xl font-bold mb-4">
+						<h3 className="text-lg md:text-xl font-bold mb-4">
 							Ready to Start Your Project?
 						</h3>
 						<p className="text-purple-100 mb-6 max-w-2xl mx-auto">

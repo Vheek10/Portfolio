@@ -304,7 +304,7 @@ export default function Portfolio() {
 				<div className="p-6 flex flex-col flex-grow">
 					{/* Project Title */}
 					<motion.h3
-						className="text-xl font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+						className="text-lg font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 						whileHover={{
 							scale: 1.05,
 						}}
@@ -526,7 +526,7 @@ export default function Portfolio() {
 						<div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-800 flex items-center justify-center">
 							<Filter className="w-10 h-10 text-gray-400" />
 						</div>
-						<h3 className="text-xl font-bold text-white mb-2">
+						<h3 className="text-lg font-bold text-white mb-2">
 							No projects found
 						</h3>
 						<p className="text-gray-400 mb-6">

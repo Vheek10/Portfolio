@@ -166,7 +166,7 @@ export default function Contact() {
 							<div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-900 flex items-center justify-center">
 								<CheckCircle className="w-10 h-10 text-green-400" />
 							</div>
-							<h3 className="text-xl font-bold text-white mb-2">
+							<h3 className="text-lg font-bold text-white mb-2">
 								Message Sent!
 							</h3>
 							<p className="text-gray-400 mb-6">
@@ -416,7 +416,7 @@ export default function Contact() {
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-8">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-xl md:text-2xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Frequently Asked Questions
 						</h2>
 					</div>
@@ -424,20 +424,20 @@ export default function Contact() {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="font-semibold text-white mb-2">
+								<h3 className="text-base font-bold font-clash text-white mb-2">
 									What's your typical response time?
 								</h3>
-								<p className="text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm leading-relaxed">
 									I typically respond to all inquiries within 24 hours. For
 									urgent matters, WhatsApp is the fastest way to reach me.
 								</p>
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="font-semibold text-white mb-2">
+								<h3 className="text-base font-bold font-clash text-white mb-2">
 									Do you work with international clients?
 								</h3>
-								<p className="text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Yes! I work with clients from all over the world. My remote
 									setup allows me to collaborate effectively across different
 									time zones.
@@ -447,10 +447,10 @@ export default function Contact() {
 
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="font-semibold text-white mb-2">
+								<h3 className="text-base font-bold font-clash text-white mb-2">
 									What information should I include in my project inquiry?
 								</h3>
-								<p className="text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Please include: project overview, goals, timeline, budget
 									range, and any specific technologies or features you have in
 									mind.
@@ -458,10 +458,10 @@ export default function Contact() {
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="font-semibold text-white mb-2">
+								<h3 className="text-base font-bold font-clash text-white mb-2">
 									Do you offer ongoing support after project completion?
 								</h3>
-								<p className="text-gray-400 text-sm">
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Yes, I offer various support and maintenance packages to
 									ensure your project continues to run smoothly after
 									deployment.

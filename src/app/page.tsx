@@ -213,7 +213,7 @@ export default function Home() {
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
 						</div>
-						<h3 className="text-lg font-bold text-white mb-2">
+						<h3 className="text-base font-bold text-white mb-2">
 							{highlight.title}
 						</h3>
 						<p className="text-gray-400 text-sm">{highlight.description}</p>
@@ -229,7 +229,7 @@ export default function Home() {
 				<Card className="p-6 sm:p-8">
 					<div className="text-center mb-8">
 						<motion.h3
-							className="text-xl md:text-2xl font-bold font-clash tracking-tight text-white mb-6 text-center">
+							className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							Featured Projects
 						</motion.h3>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
@@ -277,7 +277,7 @@ export default function Home() {
 									<div className="p-6 flex flex-col flex-grow">
 										{/* Project Title with cool font and animation */}
 										<motion.h3
-											className="text-xl md:text-2xl font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+											className="text-lg md:text-xl font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 											whileHover={{
 												scale: 1.05,
 											}}
