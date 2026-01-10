@@ -120,7 +120,7 @@ export const ProfileCard = () => {
 				{/* Name and Title */}
 				<div className="text mb-4 sm:mb-6 md:mb-8">
 					<motion.h3
-						className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2"
+						className="text-lg sm:text-xl md:text-2xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>

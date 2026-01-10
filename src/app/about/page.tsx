@@ -135,7 +135,7 @@ export default function About() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							About Me
 						</h1>
 						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -180,7 +180,7 @@ export default function About() {
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-12">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							What I Offer
 						</h2>
 						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">

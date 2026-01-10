@@ -254,7 +254,7 @@ export default function Services() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Development Services
 						</h1>
 						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -296,7 +296,7 @@ export default function Services() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2, duration: 0.6 }}>
 				<div className="text-center mb-12">
-					<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+					<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 						Core Services
 					</h2>
 					<p className="text-gray-400 max-w-2xl mx-auto">

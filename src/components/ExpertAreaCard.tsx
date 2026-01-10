@@ -241,7 +241,7 @@ const ExpertAreaCard = () => {
 		<Card className="expertise-card">
 			<CardContent className="p-6">
 				<motion.h3
-					className="text-2xl font-bold text-white mb-6 text-center"
+					className="text-2xl font-bold font-clash tracking-tight text-white mb-6 text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>

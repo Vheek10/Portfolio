@@ -3,16 +3,28 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import { ProfileCard } from "@/components/ProfileCard";
-import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 
-// Optimize font loading with next/font
-const poppins = Poppins({
+// Optimize inter for body text
+const inter = Inter({
 	subsets: ["latin"],
-	weight: ["300", "400", "500", "600", "700", "800"],
+	variable: "--font-inter",
 	display: "swap",
-	variable: "--font-poppins",
+});
+
+// Clash Display for headings and accents
+const clashDisplay = localFont({
+	src: [
+		{
+			path: "../../public/fonts/ClashDisplay-Variable.woff2",
+			weight: "200 700",
+		},
+	],
+	variable: "--font-clash",
+	display: "swap",
 });
 
 export const metadata = {
@@ -43,7 +55,7 @@ export default function RootLayout({
 		<html
 			lang="en"
 			// Add dark class here to prevent flash
-			className={`${poppins.variable} dark scroll-smooth`}
+			className={`${inter.variable} ${clashDisplay.variable} dark scroll-smooth`}
 			// Force dark mode for the entire document
 			style={{ colorScheme: "dark" }}>
 			<head>
@@ -89,7 +101,7 @@ export default function RootLayout({
 			</head>
 			<body
 				className={`
-        ${poppins.className}
+        ${inter.className}
         bg-gray-950 
         text-gray-100 
         min-h-screen

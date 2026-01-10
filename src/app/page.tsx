@@ -155,10 +155,10 @@ export default function Home() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Welcome to My Digital Space
 						</h1>
-						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
+						<p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of what's
 							possible on the web.
@@ -228,10 +228,10 @@ export default function Home() {
 				transition={{ delay: 0.6, duration: 0.6 }}>
 				<Card className="p-8 bg-gray-900 border-gray-800">
 					<div className="text-center mb-8">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Featured Projects
 						</h2>
-						<p className="text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
 							Showcasing my diverse range of projects from blockchain
 							applications to trading bots and modern web applications
 						</p>
@@ -276,7 +276,7 @@ export default function Home() {
 									<div className="p-6 flex flex-col flex-grow">
 										{/* Project Title with cool font and animation */}
 										<motion.h3
-											className="text-2xl font-bold text-white text-center mb-6 font-mono bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+											className="text-2xl font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 											whileHover={{
 												scale: 1.05,
 											}}
@@ -337,7 +337,7 @@ export default function Home() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
 				<Card className="p-6 bg-gray-900 border-gray-800">
-					<h3 className="text-xl font-bold text-white mb-6">Core Expertise</h3>
+					<h3 className="text-xl md:text-2xl font-bold font-clash tracking-tight text-white mb-6">Core Expertise</h3>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (
 							<motion.div

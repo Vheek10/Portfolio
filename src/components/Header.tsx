@@ -73,7 +73,7 @@ const Header = () => {
 
 					{/* Vheek Logo */}
 					<div className="relative">
-						<div className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 group-hover:from-purple-300 group-hover:to-blue-300 transition-all duration-300">
+						<div className="text-xl sm:text-2xl font-bold font-clash bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 group-hover:from-purple-300 group-hover:to-blue-300 transition-all duration-300">
 							&lt;Vheek /&gt;
 						</div>
 

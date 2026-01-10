@@ -304,7 +304,7 @@ export default function Portfolio() {
 				<div className="p-6 flex flex-col flex-grow">
 					{/* Project Title */}
 					<motion.h3
-						className="text-xl font-bold text-white text-center mb-4 font-mono bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+						className="text-xl font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 						whileHover={{
 							scale: 1.05,
 						}}
@@ -375,7 +375,7 @@ export default function Portfolio() {
 				<Card className="p-8 text-center relative overflow-hidden">
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Portfolio
 						</h1>
 						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -448,7 +448,7 @@ export default function Portfolio() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6 }}>
 						<div className="text-center mb-8">
-							<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+							<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 								Web2 Projects
 							</h2>
 							<p className="text-gray-400 max-w-2xl mx-auto">
@@ -476,7 +476,7 @@ export default function Portfolio() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.2 }}>
 						<div className="text-center mb-8">
-							<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+							<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 								Web3 Projects
 							</h2>
 							<p className="text-gray-400 max-w-2xl mx-auto">
