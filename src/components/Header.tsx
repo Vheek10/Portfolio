@@ -92,7 +92,7 @@ const Header = () => {
 						<li key={menu.title}>
 							<Link
 								href={menu.href}
-								className={`group relative flex items-center gap-2 text-sm lg:text-[15px] xl:text-[16px] font-semibold tracking-wide rounded-lg px-3 lg:px-4 py-2 transition-all duration-300 ${
+								className={`group relative flex items-center gap-2 text-sm lg:text-[15px] xl:text-[16px] font-semibold font-clash tracking-wide rounded-lg px-3 lg:px-4 py-2 transition-all duration-300 ${
 									pathname === menu.href
 										? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
 										: "text-gray-100 hover:text-purple-400"
@@ -138,7 +138,7 @@ const Header = () => {
 					{/* Let's Chat Button - Single Line */}
 					<Link
 						href="/contact"
-						className="hidden sm:inline-flex items-center gap-2 relative px-4 lg:px-6 py-2 lg:py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25 text-sm lg:text-base"
+						className="hidden sm:inline-flex items-center gap-2 relative px-4 lg:px-6 py-2 lg:py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium font-clash active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25 text-sm lg:text-base"
 						style={{ transformOrigin: "center" }}>
 						{/* Shine sweep effect */}
 						<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
@@ -213,7 +213,7 @@ const Header = () => {
 								<Link
 									href={menu.href}
 									onClick={() => setMenuOpen(false)}
-									className={`group relative flex items-center gap-3 text-sm font-semibold tracking-wide px-4 py-3 transition-all duration-300 mx-2 ${
+									className={`group relative flex items-center gap-3 text-sm font-semibold font-clash tracking-wide px-4 py-3 transition-all duration-300 mx-2 ${
 										pathname === menu.href
 											? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
 											: "text-gray-100 hover:bg-gray-800/60 hover:text-purple-400"
@@ -241,7 +241,7 @@ const Header = () => {
 							<Link
 								href="/contact"
 								onClick={() => setMenuOpen(false)}
-								className="group relative inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium active:scale-95 w-full overflow-hidden shadow-lg text-sm">
+								className="group relative inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium font-clash active:scale-95 w-full overflow-hidden shadow-lg text-sm">
 								{/* Shine effect */}
 								<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
 

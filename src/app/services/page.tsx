@@ -276,7 +276,7 @@ export default function Services() {
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}>
-							<Card className="text-center p-6">
+							<Card className="text-center p-5 sm:p-6">
 								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 									{stat.icon}
 								</div>
@@ -329,7 +329,7 @@ export default function Services() {
 
 										{/* Service Title & Description */}
 										<div className="flex-1">
-											<h3 className="text-xl font-bold text-white mb-3">
+											<h3 className="text-lg font-bold text-white mb-3">
 												{service.title}
 											</h3>
 											<p className="text-gray-400 leading-relaxed">
@@ -391,7 +391,7 @@ export default function Services() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
 								className="text-center group">
-								<div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
+								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
 									<h3 className="text-lg font-bold text-white mb-3">
 										{benefit.title}
 									</h3>
@@ -525,7 +525,7 @@ export default function Services() {
 					</div>
 
 					<div className="relative z-10">
-						<h3 className="text-2xl font-bold mb-4">
+						<h3 className="text-xl font-bold mb-4">
 							Ready to Start Your Project?
 						</h3>
 						<p className="text-purple-100 mb-6 max-w-2xl mx-auto">

@@ -2,16 +2,19 @@
 
 import "./globals.css";
 import Header from "@/components/Header";
-import { ProfileCard } from "@/components/ProfileCard";
+import dynamic from "next/dynamic";
+const ProfileCard = dynamic(() => import("@/components/ProfileCard"), {
+	ssr: true,
+});
 import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 
-// Optimize inter for body text
-const inter = Inter({
+// Optimize manrope for body text
+const manrope = Manrope({
 	subsets: ["latin"],
-	variable: "--font-inter",
+	variable: "--font-manrope",
 	display: "swap",
 });
 
@@ -55,7 +58,7 @@ export default function RootLayout({
 		<html
 			lang="en"
 			// Add dark class here to prevent flash
-			className={`${inter.variable} ${clashDisplay.variable} dark scroll-smooth`}
+			className={`${manrope.variable} ${clashDisplay.variable} dark scroll-smooth`}
 			// Force dark mode for the entire document
 			style={{ colorScheme: "dark" }}>
 			<head>
@@ -101,7 +104,7 @@ export default function RootLayout({
 			</head>
 			<body
 				className={`
-        ${inter.className}
+        ${manrope.className}
         bg-gray-950 
         text-gray-100 
         min-h-screen

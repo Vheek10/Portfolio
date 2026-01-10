@@ -157,7 +157,7 @@ export default function About() {
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}>
-							<Card className="text-center p-6">
+							<Card className="text-center p-5 sm:p-6">
 								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 									{stat.icon}
 								</div>
@@ -197,12 +197,12 @@ export default function About() {
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
 								className="group">
-								<div className="flex flex-col h-full p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600">
+								<div className="flex flex-col h-full p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
 									<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4">
 										{service.icon}
 									</div>
 
-									<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+									<h3 className="text-lg font-bold text-white mb-3">
 										{service.title}
 									</h3>
 
@@ -251,8 +251,8 @@ export default function About() {
 								animate={{ opacity: 1, x: 0 }}
 								transition={{ delay: 1.0 + index * 0.1, duration: 0.6 }}
 								className="group text-center">
-								<div className="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-300 dark:group-hover:border-purple-600">
-									<h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
+									<h3 className="text-lg font-bold text-white mb-3">
 										{value.title}
 									</h3>
 									<p className="text-gray-600 dark:text-gray-400 leading-relaxed">

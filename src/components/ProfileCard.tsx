@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
-export const ProfileCard = () => {
+const ProfileCard = () => {
 	const [copied, setCopied] = useState(false);
 	const [currentRole, setCurrentRole] = useState("");
 	const [isDeleting, setIsDeleting] = useState(false);
@@ -222,3 +222,5 @@ export const ProfileCard = () => {
 		</Card>
 	);
 };
+
+export default ProfileCard;

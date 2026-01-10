@@ -52,7 +52,7 @@ const Footer = () => {
 				{/* Copyright */}
 				<div className="flex items-center justify-center gap-2 text-xs text-gray-500">
 					<div className="w-0.5 h-0.5 bg-gray-400 rounded-full"></div>
-					<span className="font-medium text-gray-400">
+					<span className="font-medium font-clash tracking-wider text-gray-400">
 						© {getCurrentYear()} @Vheek
 					</span>
 					<div className="w-0.5 h-0.5 bg-gray-400 rounded-full"></div>

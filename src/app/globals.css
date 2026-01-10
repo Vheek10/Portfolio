@@ -34,7 +34,7 @@
 	}
 
 	/* Custom fonts */
-	--font-inter: "Inter", sans-serif;
+	--font-manrope: "Manrope", sans-serif;
 	--font-clash: "Clash Display", sans-serif;
 
 	/* Hierarchy and Spacing */
@@ -58,7 +58,7 @@
 
 /* Base Typography */
 body {
-	font-family: var(--font-inter);
+	font-family: var(--font-manrope);
 	background-color: oklch(0.1 0.01 260); /* Slightly darker for better contrast */
 	color: oklch(0.98 0.01 260); /* Brighter text */
 	line-height: 1.6;
@@ -76,10 +76,10 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); }
 h2 { font-size: clamp(2rem, 6vw, 3rem); }
-h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
 
 /* Accents and Small Text */
-.text-accent {
+.text-accent, .font-accent {
 	font-family: var(--font-clash);
 	letter-spacing: var(--letter-spacing-accent);
 	text-transform: uppercase;

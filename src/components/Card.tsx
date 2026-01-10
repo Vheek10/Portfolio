@@ -1,4 +1,5 @@
 /** @format */
+"use client";
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
