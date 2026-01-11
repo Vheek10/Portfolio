@@ -141,10 +141,10 @@ export default function Contact() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Let's Work Together
 						</h1>
-						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-sm md:text-base text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Have a project in mind? Let's discuss how we can bring your ideas
 							to life with cutting-edge Web3 and Web2 solutions.
 						</p>
@@ -182,10 +182,10 @@ export default function Contact() {
 					) : (
 						<div className="h-full flex flex-col">
 							<div className="text-center mb-8">
-								<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
+								<h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 									Send a Message
 								</h2>
-								<p className="text-gray-400 max-w-2xl mx-auto">
+								<p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
 									Fill out the form below with your project details and I'll get
 									back to you as soon as possible to discuss how we can bring
 									your vision to life.
@@ -416,7 +416,7 @@ export default function Contact() {
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-8">
-						<h2 className="text-xl md:text-2xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Frequently Asked Questions
 						</h2>
 					</div>
@@ -424,20 +424,20 @@ export default function Contact() {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-base font-bold font-clash text-white mb-2">
+								<h3 className="text-sm font-bold font-clash text-white mb-2">
 									What's your typical response time?
 								</h3>
-								<p className="text-gray-400 text-sm leading-relaxed">
+								<p className="text-gray-400 text-xs leading-relaxed">
 									I typically respond to all inquiries within 24 hours. For
 									urgent matters, WhatsApp is the fastest way to reach me.
 								</p>
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-base font-bold font-clash text-white mb-2">
+								<h3 className="text-sm font-bold font-clash text-white mb-2">
 									Do you work with international clients?
 								</h3>
-								<p className="text-gray-400 text-sm leading-relaxed">
+								<p className="text-gray-400 text-xs leading-relaxed">
 									Yes! I work with clients from all over the world. My remote
 									setup allows me to collaborate effectively across different
 									time zones.
@@ -447,10 +447,10 @@ export default function Contact() {
 
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-base font-bold font-clash text-white mb-2">
+								<h3 className="text-sm font-bold font-clash text-white mb-2">
 									What information should I include in my project inquiry?
 								</h3>
-								<p className="text-gray-400 text-sm leading-relaxed">
+								<p className="text-gray-400 text-xs leading-relaxed">
 									Please include: project overview, goals, timeline, budget
 									range, and any specific technologies or features you have in
 									mind.
@@ -458,10 +458,10 @@ export default function Contact() {
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-base font-bold font-clash text-white mb-2">
+								<h3 className="text-sm font-bold font-clash text-white mb-2">
 									Do you offer ongoing support after project completion?
 								</h3>
-								<p className="text-gray-400 text-sm leading-relaxed">
+								<p className="text-gray-400 text-xs leading-relaxed">
 									Yes, I offer various support and maintenance packages to
 									ensure your project continues to run smoothly after
 									deployment.

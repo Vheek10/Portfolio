@@ -304,7 +304,7 @@ export default function Portfolio() {
 				<div className="p-6 flex flex-col flex-grow">
 					{/* Project Title */}
 					<motion.h3
-						className="text-lg font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+						className="text-base font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 						whileHover={{
 							scale: 1.05,
 						}}
@@ -313,7 +313,7 @@ export default function Portfolio() {
 					</motion.h3>
 
 					{/* Short Description */}
-					<p className="text-gray-400 text-sm mb-4 text-center line-clamp-2 flex-grow">
+					<p className="text-gray-400 text-xs mb-4 text-center line-clamp-2 flex-grow">
 						{project.description}
 					</p>
 
@@ -375,10 +375,10 @@ export default function Portfolio() {
 				<Card className="p-8 text-center relative overflow-hidden">
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Portfolio
 						</h1>
-						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Explore my latest projects across Web2 and Web3 — built with
 							modern technologies and clean design.
 						</p>

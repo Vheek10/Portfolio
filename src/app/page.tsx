@@ -155,10 +155,10 @@ export default function Home() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Welcome to My Digital Space
 						</h1>
-						<p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
+						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of what's
 							possible on the web.
@@ -216,7 +216,7 @@ export default function Home() {
 						<h3 className="text-base font-bold text-white mb-2">
 							{highlight.title}
 						</h3>
-						<p className="text-gray-400 text-sm">{highlight.description}</p>
+						<p className="text-gray-400 text-xs sm:text-sm">{highlight.description}</p>
 					</Card>
 				))}
 			</motion.section>
@@ -277,7 +277,7 @@ export default function Home() {
 									<div className="p-6 flex flex-col flex-grow">
 										{/* Project Title with cool font and animation */}
 										<motion.h3
-											className="text-lg md:text-xl font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+											className="text-base md:text-lg font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 											whileHover={{
 												scale: 1.05,
 											}}

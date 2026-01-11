@@ -132,13 +132,13 @@ export default function About() {
 				transition={{ duration: 0.6 }}>
 				<Card className="p-8 text-center relative overflow-hidden">
 					{/* Background Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10" />
+					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h1 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							About Me
 						</h1>
-						<p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+						<p className="text-sm md:text-base text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Passionate Web3 developer and digital creator with a focus on
 							building innovative solutions that bridge the gap between
 							cutting-edge technology and exceptional user experiences.
@@ -161,10 +161,10 @@ export default function About() {
 								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 									{stat.icon}
 								</div>
-								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+								<div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 									{stat.number}
 								</div>
-								<div className="text-sm text-gray-600 dark:text-gray-400">
+								<div className="text-xs text-gray-400">
 									{stat.label}
 								</div>
 							</Card>
@@ -180,10 +180,10 @@ export default function About() {
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-12">
-						<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							What I Offer
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm">
 							Comprehensive digital solutions tailored to your business needs,
 							from concept to deployment and beyond.
 						</p>
@@ -202,11 +202,11 @@ export default function About() {
 										{service.icon}
 									</div>
 
-									<h3 className="text-lg font-bold text-white mb-3">
+									<h3 className="text-base font-bold text-white mb-3">
 										{service.title}
 									</h3>
 
-									<p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow">
+									<p className="text-gray-400 mb-4 flex-grow text-xs">
 										{service.description}
 									</p>
 
@@ -214,7 +214,7 @@ export default function About() {
 										{service.features.map((feature, idx) => (
 											<div
 												key={idx}
-												className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+												className="flex items-center gap-2 text-xs text-gray-400">
 												<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
 												{feature}
 											</div>
@@ -234,10 +234,10 @@ export default function About() {
 				transition={{ delay: 0.8, duration: 0.6 }}>
 				<Card className="p-8">
 					<div className="text-center mb-12">
-						<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Values
 						</h2>
-						<p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						<p className="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm">
 							The principles that guide my work and ensure successful
 							collaborations with every client.
 						</p>
@@ -252,10 +252,10 @@ export default function About() {
 								transition={{ delay: 1.0 + index * 0.1, duration: 0.6 }}
 								className="group text-center">
 								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
-									<h3 className="text-lg font-bold text-white mb-3">
+									<h3 className="text-base font-bold text-white mb-3">
 										{value.title}
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+									<p className="text-gray-400 leading-relaxed text-xs">
 										{value.description}
 									</p>
 								</div>

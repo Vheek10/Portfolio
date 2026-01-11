@@ -59,7 +59,6 @@ export default function RootLayout({
 			lang="en"
 			// Add dark class here to prevent flash
 			className={`${manrope.variable} ${clashDisplay.variable} dark scroll-smooth`}
-			// Force dark mode for the entire document
 			style={{ colorScheme: "dark" }}>
 			<head>
 				{/* Add this script to prevent flash */}
@@ -67,17 +66,14 @@ export default function RootLayout({
 					dangerouslySetInnerHTML={{
 						__html: `
               (function() {
-                // Check if dark mode is preferred
-                const isDarkMode = localStorage.theme === 'dark' || 
-                  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                // Always force dark mode to prevent flash
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.colorScheme = 'dark';
                 
-                // Set dark mode immediately
-                if (isDarkMode) {
+                // Still allow localStorage updates if user explicitly switches (for future-proofing)
+                if (localStorage.theme === 'light') {
+                  // But for now, we override it to dark for this specific request
                   document.documentElement.classList.add('dark');
-                  document.documentElement.style.colorScheme = 'dark';
-                } else {
-                  document.documentElement.classList.remove('dark');
-                  document.documentElement.style.colorScheme = 'light';
                 }
               })();
             `,
