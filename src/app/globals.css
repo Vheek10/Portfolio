@@ -62,8 +62,10 @@ body {
 	font-family: var(--font-manrope);
 	background-color: oklch(0.1 0.01 260); /* Slightly darker for better contrast */
 	color: oklch(0.98 0.01 260); /* Brighter text */
-	line-height: 1.6;
+	font-size: 1.05rem; /* Increased from 1rem default for better root readability */
+	line-height: 1.75; /* Slightly increased for better readability */
 	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
 /* Clear Hierarchy */
@@ -71,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: var(--font-clash);
 	font-weight: var(--font-weight-heading);
 	letter-spacing: var(--letter-spacing-heading);
-	line-height: 1.1;
+	line-height: 1.2; /* Slightly increased for readability on multi-line */
 	color: oklch(1 0 0); /* Pure white headings */
 }
 
@@ -88,12 +90,20 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
 }
 
 small, .text-sm {
-	letter-spacing: 0.01em;
-	color: oklch(0.8 0.01 260);
+	letter-spacing: 0.015em;
+	color: oklch(0.85 0.01 260); /* Slightly brighter for readability */
+	line-height: 1.6;
+}
+
+.text-xs {
+	letter-spacing: 0.02em;
+	line-height: 1.5;
 }
 
 /* Improved Contrast for Paragraphs */
 p {
-	color: oklch(0.85 0.01 260);
-	max-width: 65ch; /* Optimal line length */
+	color: oklch(0.88 0.01 260); /* Brighter for better contrast */
+	max-width: 75ch; /* Slightly wider for the larger text */
+	font-size: 1.1rem; /* Bumping primary paragraph text slightly above body base */
+	line-height: 1.75;
 }

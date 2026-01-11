@@ -205,7 +205,7 @@ const ExpertAreaCard = () => {
 					</div>
 				</div>
 				<div className="text">
-					<h4 className="title text-xs font-medium text-gray-300 transition-colors duration-300 group-hover:text-purple-400">
+					<h4 className="title text-sm font-medium text-gray-300 transition-colors duration-300 group-hover:text-purple-400">
 						{item.name}
 					</h4>
 				</div>
@@ -240,13 +240,13 @@ const ExpertAreaCard = () => {
 	return (
 		<Card className="expertise-card">
 			<CardContent className="p-6">
-				<motion.h3
+				<motion.h4
 					className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
 					Tech Stack & Tools
-				</motion.h3>
+				</motion.h4>
 
 				<div className="space-y-2">
 					{/* Top Scrolling Row */}

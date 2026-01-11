@@ -243,14 +243,14 @@ export default function Services() {
   };
 
   return (
-    <div className="space-y-12 md:space-y-16">
+    <div className="space-y-8 md:space-y-10">
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <Card className="p-6 sm:p-8 md:p-10 text-center relative overflow-hidden">
+        <Card className="p-6 sm:p-7 text-center relative overflow-hidden">
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
@@ -258,7 +258,7 @@ export default function Services() {
             <h2 className="text-lg sm:text-lg md:text-lg font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4 md:mb-6">
               Development Services
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Full-stack development services specializing in Web3, Web2 frontend,
               and freelance projects. Transforming your ideas into secure,
               scalable, and user-friendly applications.
@@ -273,10 +273,10 @@ export default function Services() {
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div key={stat.label} variants={itemVariants}>
-              <Card className="text-center p-5 sm:p-6 md:p-7">
+              <Card className="text-center p-4 sm:p-5 md:p-6">
                 <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3 sm:mb-4">
                   {stat.icon}
                 </div>
@@ -302,13 +302,13 @@ export default function Services() {
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
             Core Services
           </h2>
-          <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
             Comprehensive development solutions including Web3, Web2 frontend,
             and freelance services.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {mainServices.map((service, index) => (
             <motion.div
               key={service.title}
@@ -324,7 +324,7 @@ export default function Services() {
                     : "group-hover:shadow-lg group-hover:border-purple-600"
                 }`}
               >
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col h-full p-5 sm:p-6">
                   {/* Service Header */}
                   <div className="flex items-start gap-5 sm:gap-6 mb-5 sm:mb-6">
                     {/* Service Icon */}
@@ -334,10 +334,10 @@ export default function Services() {
 
                     {/* Service Title & Description */}
                     <div className="flex-1">
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3">
+                      <h4 className="text-base sm:text-lg md:text-xl font-bold text-white mb-3">
                         {service.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                      </h4>
+                      <p className="text-sm text-gray-400 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
@@ -348,7 +348,7 @@ export default function Services() {
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span className="text-xs text-gray-300">
+                        <span className="text-sm text-gray-300">
                           {feature}
                         </span>
                       </div>
@@ -383,13 +383,13 @@ export default function Services() {
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
               Freelance Development
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
               Flexible freelance services for projects of all sizes. Get dedicated
               development expertise without the overhead of a full-time hire.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {freelancingBenefits.map((benefit, index) => (
               <motion.div
                 key={benefit.title}
@@ -402,7 +402,7 @@ export default function Services() {
                   <h4 className="text-sm sm:text-base font-bold text-white mb-3">
                     {benefit.title}
                   </h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
+                  <p className="text-sm text-gray-400 leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
@@ -423,13 +423,13 @@ export default function Services() {
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
               Specialized Services
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
               Additional development services to meet your specific project
               requirements and business needs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {additionalServices.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -438,7 +438,7 @@ export default function Services() {
                 transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
                 className="group"
               >
-                <div className="p-6 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
+                <div className="p-5 rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full">
                   <div className="flex items-start gap-4">
                     <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       {service.icon}
@@ -447,14 +447,14 @@ export default function Services() {
                       <h4 className="text-sm sm:text-base font-bold text-white mb-2">
                         {service.title}
                       </h4>
-                      <p className="text-xs text-gray-400 mb-3">
+                      <p className="text-sm text-gray-400 mb-3">
                         {service.description}
                       </p>
                       <div className="space-y-1">
                         {service.features.map((feature, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-2 text-xs text-gray-400"
+                            className="flex items-center gap-2 text-sm text-gray-400"
                           >
                             <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
                             {feature}
@@ -481,13 +481,13 @@ export default function Services() {
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
               Development Process
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-400 max-w-2xl mx-auto">
               A structured approach to ensure your project's success from
               concept to deployment.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.step}
@@ -507,7 +507,7 @@ export default function Services() {
                 <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3">
                   {step.title}
                 </h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-sm text-gray-400 leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>

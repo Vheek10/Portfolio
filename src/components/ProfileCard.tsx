@@ -119,13 +119,13 @@ const ProfileCard = () => {
 
 				{/* Name and Title */}
 				<div className="text mb-4 sm:mb-6 md:mb-8">
-					<motion.h3
+					<motion.h4
 						className="text-lg sm:text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
 						Victor Gp
-					</motion.h3>
+					</motion.h4>
 
 					<motion.div
 						initial={{ opacity: 0, y: 10 }}
@@ -133,7 +133,7 @@ const ProfileCard = () => {
 						transition={{ delay: 0.2 }}
 						className="text-gray-400 leading-relaxed min-h-[3.5rem] sm:min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
 						<div className="space-y-1 sm:space-y-2">
-							<p className="text-xs sm:text-sm md:text-base">
+							<p className="text-sm sm:text-base md:text-lg">
 								A{" "}
 								<span className="font-semibold text-purple-400 min-h-[1.25rem] sm:min-h-[1.5rem] inline-block">
 									{currentRole}
@@ -141,11 +141,7 @@ const ProfileCard = () => {
 								</span>{" "}
 								🖥️
 							</p>
-							<p className="text-xs sm:text-sm text-gray-400 max-w-xs mx-auto px-2 sm:px-0">
-								Crafting digital experiences where innovation meets execution.
-								Transforming complex ideas into seamless, user-centric
-								applications that bridge the gap between design and technology.
-							</p>
+
 						</div>
 					</motion.div>
 				</div>

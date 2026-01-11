@@ -130,13 +130,13 @@ export default function Contact() {
 		budgetOptions[0];
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-8 text-center relative overflow-hidden">
+				<Card className="p-6 sm:p-7 text-center relative overflow-hidden">
 					{/* Background Gradient - Dark theme only */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
@@ -157,7 +157,7 @@ export default function Contact() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6, delay: 0.2 }}>
-				<Card className="p-8">
+				<Card className="p-6 sm:p-7">
 					{isSubmitted ? (
 						<motion.div
 							initial={{ opacity: 0, scale: 0.8 }}
@@ -166,9 +166,9 @@ export default function Contact() {
 							<div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-900 flex items-center justify-center">
 								<CheckCircle className="w-10 h-10 text-green-400" />
 							</div>
-							<h3 className="text-lg font-bold text-white mb-2">
+							<h4 className="text-lg font-bold text-white mb-2">
 								Message Sent!
-							</h3>
+							</h4>
 							<p className="text-gray-400 mb-6">
 								Thank you for reaching out. I'll get back to you within 24
 								hours.
@@ -185,7 +185,7 @@ export default function Contact() {
 								<h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 									Send a Message
 								</h2>
-								<p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto">
+								<p className="text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
 									Fill out the form below with your project details and I'll get
 									back to you as soon as possible to discuss how we can bring
 									your vision to life.
@@ -414,30 +414,30 @@ export default function Contact() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4, duration: 0.6 }}>
-				<Card className="p-8">
+				<Card className="p-6 sm:p-7">
 					<div className="text-center mb-8">
 						<h2 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Frequently Asked Questions
 						</h2>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-sm font-bold font-clash text-white mb-2">
+								<h4 className="text-sm font-bold font-clash text-white mb-2">
 									What's your typical response time?
-								</h3>
-								<p className="text-gray-400 text-xs leading-relaxed">
+								</h4>
+								<p className="text-gray-400 text-sm leading-relaxed">
 									I typically respond to all inquiries within 24 hours. For
 									urgent matters, WhatsApp is the fastest way to reach me.
 								</p>
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-sm font-bold font-clash text-white mb-2">
+								<h4 className="text-sm font-bold font-clash text-white mb-2">
 									Do you work with international clients?
-								</h3>
-								<p className="text-gray-400 text-xs leading-relaxed">
+								</h4>
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Yes! I work with clients from all over the world. My remote
 									setup allows me to collaborate effectively across different
 									time zones.
@@ -447,10 +447,10 @@ export default function Contact() {
 
 						<div className="space-y-4">
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-sm font-bold font-clash text-white mb-2">
+								<h4 className="text-sm font-bold font-clash text-white mb-2">
 									What information should I include in my project inquiry?
-								</h3>
-								<p className="text-gray-400 text-xs leading-relaxed">
+								</h4>
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Please include: project overview, goals, timeline, budget
 									range, and any specific technologies or features you have in
 									mind.
@@ -458,10 +458,10 @@ export default function Contact() {
 							</div>
 
 							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h3 className="text-sm font-bold font-clash text-white mb-2">
+								<h4 className="text-sm font-bold font-clash text-white mb-2">
 									Do you offer ongoing support after project completion?
-								</h3>
-								<p className="text-gray-400 text-xs leading-relaxed">
+								</h4>
+								<p className="text-gray-400 text-sm leading-relaxed">
 									Yes, I offer various support and maintenance packages to
 									ensure your project continues to run smoothly after
 									deployment.

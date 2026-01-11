@@ -144,13 +144,13 @@ export default function Home() {
 	];
 
 	return (
-		<div className="space-y-8">
+		<div className="section-gap space-y-8 md:space-y-10">
 			{/* Welcome Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-6 sm:p-8 text-center relative overflow-hidden">
+				<Card className="p-5 sm:p-7 text-center relative overflow-hidden">
 					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
@@ -158,7 +158,7 @@ export default function Home() {
 						<h2 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Welcome to My Digital Space
 						</h2>
-						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
+						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of what's
 							possible on the web.
@@ -184,7 +184,7 @@ export default function Home() {
 				{stats.map((stat, index) => (
 					<Card
 						key={stat.label}
-						className="text-center p-5 sm:p-6">
+						className="text-center p-4 sm:p-5">
 						<motion.div
 							initial={{ scale: 0 }}
 							animate={{ scale: 1 }}
@@ -195,7 +195,7 @@ export default function Home() {
 						<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 							{stat.number}
 						</div>
-						<div className="text-xs font-accent tracking-wider uppercase text-gray-400">{stat.label}</div>
+						<div className="text-sm font-accent tracking-wider uppercase text-gray-400">{stat.label}</div>
 					</Card>
 				))}
 			</motion.section>
@@ -209,14 +209,14 @@ export default function Home() {
 				{highlights.map((highlight, index) => (
 					<Card
 						key={highlight.title}
-						className="p-5 sm:p-6 text-center group">
+						className="p-4 sm:p-5 text-center group">
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
 						</div>
 						<h4 className="text-base font-bold text-white mb-2">
 							{highlight.title}
 						</h4>
-						<p className="text-gray-400 text-xs sm:text-sm">{highlight.description}</p>
+						<p className="text-gray-400 text-sm">{highlight.description}</p>
 					</Card>
 				))}
 			</motion.section>
@@ -226,12 +226,12 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.6, duration: 0.6 }}>
-				<Card className="p-6 sm:p-8">
-					<div className="text-center mb-8">
-						<motion.h3
+				<Card className="p-5 sm:p-7">
+					<div className="text-center mb-6">
+						<motion.h4
 							className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							Featured Projects
-						</motion.h3>
+						</motion.h4>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
 							Showcasing my diverse range of projects from blockchain
 							applications to trading bots and modern web applications
@@ -239,7 +239,7 @@ export default function Home() {
 					</div>
 
 					{/* Changed to 2 columns only */}
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						{featuredProjects.map((project, index) => (
 							<motion.div
 								key={project.title}
@@ -276,14 +276,14 @@ export default function Home() {
 									{/* Content - Only title and links */}
 									<div className="p-6 flex flex-col flex-grow">
 										{/* Project Title with cool font and animation */}
-										<motion.h3
-											className="text-base md:text-lg font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+										<motion.h4
+											className="text-sm sm:text-base font-bold text-white text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 											whileHover={{
 												scale: 1.05,
 											}}
 											transition={{ duration: 0.3 }}>
 											{project.title}
-										</motion.h3>
+										</motion.h4>
 
 										{/* Project Links - Icon only */}
 										<div className="flex justify-center gap-4 mt-auto">
@@ -337,11 +337,11 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
-				<Card className="p-6">
-					<motion.h3
+				<Card className="p-5">
+					<motion.h4
 						className="text-lg sm:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2">
 						Core Expertise
-					</motion.h3>
+					</motion.h4>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (
 							<motion.div

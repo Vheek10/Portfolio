@@ -303,17 +303,17 @@ export default function Portfolio() {
 				{/* Project Content - Minimal */}
 				<div className="p-6 flex flex-col flex-grow">
 					{/* Project Title */}
-					<motion.h3
-						className="text-base font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+					<motion.h4
+						className="text-sm sm:text-base font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 						whileHover={{
 							scale: 1.05,
 						}}
 						transition={{ duration: 0.3 }}>
 						{project.title}
-					</motion.h3>
+					</motion.h4>
 
 					{/* Short Description */}
-					<p className="text-gray-400 text-xs mb-4 text-center line-clamp-2 flex-grow">
+					<p className="text-gray-400 text-sm mb-4 text-center line-clamp-2 flex-grow">
 						{project.description}
 					</p>
 
@@ -366,13 +366,13 @@ export default function Portfolio() {
 	);
 
 	return (
-		<div className="space-y-12">
+		<div className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-8 text-center relative overflow-hidden">
+				<Card className="p-6 sm:p-7 text-center relative overflow-hidden">
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 					<div className="relative z-10">
 						<h1 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
@@ -396,7 +396,7 @@ export default function Portfolio() {
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}>
-							<Card className="text-center p-6">
+							<Card className="text-center p-5">
 								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 									{stat.icon}
 								</div>
@@ -415,7 +415,7 @@ export default function Portfolio() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2, duration: 0.6 }}>
-				<Card className="p-6">
+				<Card className="p-6 sm:p-7">
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 						<div className="flex items-center gap-2">
 							<Filter className="w-5 h-5 text-gray-400" />
@@ -460,7 +460,7 @@ export default function Portfolio() {
 							variants={containerVariants}
 							initial="hidden"
 							animate="visible"
-							className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 							{web2Projects.map((project) => (
 								<ProjectCard
 									key={project.id}
@@ -488,7 +488,7 @@ export default function Portfolio() {
 							variants={containerVariants}
 							initial="hidden"
 							animate="visible"
-							className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 							{web3Projects.map((project) => (
 								<ProjectCard
 									key={project.id}
@@ -506,7 +506,7 @@ export default function Portfolio() {
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
-					className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					{filteredProjects.map((project) => (
 						<ProjectCard
 							key={project.id}
@@ -522,7 +522,7 @@ export default function Portfolio() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
-					<Card className="p-12 text-center">
+					<Card className="p-8 text-center">
 						<div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-800 flex items-center justify-center">
 							<Filter className="w-10 h-10 text-gray-400" />
 						</div>
