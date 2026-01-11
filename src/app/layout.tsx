@@ -57,24 +57,30 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			// Add dark class here to prevent flash
-			className={`${manrope.variable} ${clashDisplay.variable} dark bg-gray-950 scroll-smooth`}
+			className={`${manrope.variable} ${clashDisplay.variable} dark bg-[#020617] scroll-smooth`}
 			style={{ colorScheme: "dark", backgroundColor: "#020617" }}>
 			<head>
-				{/* Add this script to prevent flash */}
+				<meta name="color-scheme" content="dark" />
+				<meta name="theme-color" content="#020617" />
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `
+              html, body { background-color: #020617 !important; }
+              @media (prefers-color-scheme: light) {
+                html, body { background-color: #020617 !important; }
+              }
+            `,
+					}}
+				/>
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
               (function() {
-                // Always force dark mode to prevent flash
-                document.documentElement.classList.add('dark');
-                document.documentElement.style.colorScheme = 'dark';
-                
-                // Still allow localStorage updates if user explicitly switches (for future-proofing)
-                if (localStorage.theme === 'light') {
-                  // But for now, we override it to dark for this specific request
-                  document.documentElement.classList.add('dark');
-                }
+                try {
+                  var html = document.documentElement;
+                  html.classList.add('dark');
+                  html.style.colorScheme = 'dark';
+                } catch (e) {}
               })();
             `,
 					}}
@@ -101,13 +107,14 @@ export default function RootLayout({
 			<body
 				className={`
         ${manrope.className}
-        bg-gray-950 
+        bg-[#020617] 
         text-gray-100 
         min-h-screen
         antialiased
         overflow-x-hidden
         relative
-      `}>
+      `}
+				style={{ backgroundColor: "#020617" }}>
 				{/* Geometric 3D Background - Ensure it's behind everything */}
 				<GeometricBackground />
 

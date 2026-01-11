@@ -97,15 +97,12 @@ const ProfileCard = () => {
 		<Card
 			className="text-center profile-card w-full mx-auto lg:-ml-8"
 			hoverable={false}>
-			<CardContent className="p-3 sm:p-4 md:p-6 lg:p-8">
+			<CardContent className="p-4 sm:p-5 md:p-6">
 				{/* Profile Image - Improved mobile scaling */}
 				<div className="image text-center -mx-3 sm:-mx-4 md:-mx-6 lg:-mx-8 -mt-3 sm:-mt-4 md:-mt-6 lg:-mt-8 mb-3 sm:mb-4 md:mb-6">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						className="inline-block w-full scale-105 sm:scale-100 md:scale-100"
-						style={{
-							transform: "scale(1.05)",
-						}}>
+						className="inline-block w-full scale-105 sm:scale-100 md:scale-100">
 						<Image
 							src="/profile.jpg"
 							alt="Victor Gp"
@@ -118,9 +115,9 @@ const ProfileCard = () => {
 				</div>
 
 				{/* Name and Title */}
-				<div className="text mb-4 sm:mb-6 md:mb-8">
+				<div className="text mb-4 sm:mb-5">
 					<motion.h4
-						className="text-lg sm:text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2"
+						className="text-lg sm:text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 flex items-center justify-center gap-2"
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}>
@@ -131,7 +128,7 @@ const ProfileCard = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="text-gray-400 leading-relaxed min-h-[3.5rem] sm:min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
+						className="text-gray-400 leading-relaxed min-h-[3rem] sm:min-h-[3.5rem] flex items-center justify-center">
 						<div className="space-y-1 sm:space-y-2">
 							<p className="text-sm sm:text-base md:text-lg">
 								A{" "}
@@ -148,7 +145,7 @@ const ProfileCard = () => {
 
 				{/* Action Buttons */}
 				<motion.div
-					className="common-button-groups flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 sm:mb-6 md:mb-8"
+					className="common-button-groups flex flex-col sm:flex-row gap-2 sm:gap-3 mb-4 sm:mb-5"
 					initial={{ opacity: 0, y: 10 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.3 }}>
