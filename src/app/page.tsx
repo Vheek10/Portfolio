@@ -155,9 +155,9 @@ export default function Home() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Welcome to My Digital Space
-						</h1>
+						</h2>
 						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of what's
@@ -213,9 +213,9 @@ export default function Home() {
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
 						</div>
-						<h3 className="text-base font-bold text-white mb-2">
+						<h4 className="text-base font-bold text-white mb-2">
 							{highlight.title}
-						</h3>
+						</h4>
 						<p className="text-gray-400 text-xs sm:text-sm">{highlight.description}</p>
 					</Card>
 				))}

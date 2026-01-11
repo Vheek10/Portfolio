@@ -58,8 +58,8 @@ export default function RootLayout({
 		<html
 			lang="en"
 			// Add dark class here to prevent flash
-			className={`${manrope.variable} ${clashDisplay.variable} dark scroll-smooth`}
-			style={{ colorScheme: "dark" }}>
+			className={`${manrope.variable} ${clashDisplay.variable} dark bg-gray-950 scroll-smooth`}
+			style={{ colorScheme: "dark", backgroundColor: "#020617" }}>
 			<head>
 				{/* Add this script to prevent flash */}
 				<script
