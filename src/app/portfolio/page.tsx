@@ -438,80 +438,70 @@ export default function Portfolio() {
 					</div>
 				</Card>
 			</motion.section>
+{/* All Projects View */}
+{activeFilter === "all" && (
+  <>
+    {/* Web2 Projects Section */}
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="text-center mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+          Web2 Projects
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Modern web applications built with cutting-edge technologies and
+          user-centric design.
+        </p>
+      </div>
+      <motion.div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
+        {web2Projects.map((project) => (
+          <div key={project.id} className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </motion.div>
+    </motion.section>
 
-			{/* All Projects View */}
-			{activeFilter === "all" && (
-				<>
-					{/* Web2 Projects Section */}
-					<motion.section
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6 }}>
-						<div className="text-center mb-8">
-							<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-								Web2 Projects
-							</h2>
-							<p className="text-gray-400 max-w-2xl mx-auto">
-								Modern web applications built with cutting-edge technologies and
-								user-centric design.
-							</p>
-						</div>
-						<motion.div
-							variants={containerVariants}
-							initial="hidden"
-							animate="visible"
-							className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-							{web2Projects.map((project) => (
-								<ProjectCard
-									key={project.id}
-									project={project}
-								/>
-							))}
-						</motion.div>
-					</motion.section>
-
-					{/* Web3 Projects Section */}
-					<motion.section
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}>
-						<div className="text-center mb-8">
-							<h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-								Web3 Projects
-							</h2>
-							<p className="text-gray-400 max-w-2xl mx-auto">
-								Blockchain and decentralized applications exploring the future
-								of web technology.
-							</p>
-						</div>
-						<motion.div
-							variants={containerVariants}
-							initial="hidden"
-							animate="visible"
-							className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-							{web3Projects.map((project) => (
-								<ProjectCard
-									key={project.id}
-									project={project}
-								/>
-							))}
-						</motion.div>
-					</motion.section>
-				</>
-			)}
+    {/* Web3 Projects Section */}
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      <div className="text-center mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+          Web3 Projects
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Blockchain and decentralized applications exploring the future
+          of web technology.
+        </p>
+      </div>
+      <motion.div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
+        {web3Projects.map((project) => (
+          <div key={project.id} className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </motion.div>
+    </motion.section>
+  </>
+)}
 
 			{/* Filtered Projects View */}
 			{activeFilter !== "all" && (
 				<motion.section
-					variants={containerVariants}
-					initial="hidden"
-					animate="visible"
-					className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+					className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
 					{filteredProjects.map((project) => (
+						<div key={project.id} className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
 						<ProjectCard
 							key={project.id}
 							project={project}
 						/>
+						</div>
 					))}
 				</motion.section>
 			)}

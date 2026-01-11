@@ -107,3 +107,20 @@ p {
 	font-size: 1.1rem; /* Bumping primary paragraph text slightly above body base */
 	line-height: 1.75;
 }
+
+@utility scrollbar-hide {
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+/* global.css - Hide scrollbars everywhere */
+* {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* Edge/IE */
+}
+
+*::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, new Edge */
+}

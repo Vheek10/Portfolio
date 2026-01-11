@@ -189,14 +189,15 @@ export default function About() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
 						{services.map((service, index) => (
 							<motion.div
 								key={service.title}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.6 + index * 0.1, duration: 0.6 }}
-								className="group">
+								initial={{ opacity: 0, x: 50 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: index * 0.1, duration: 0.6 }}
+								className="min-w-[280px] sm:min-w-[340px] snap-center">
 								<div className="flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
 									<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 										{service.icon}
@@ -243,14 +244,15 @@ export default function About() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
 						{values.map((value, index) => (
 							<motion.div
 								key={value.title}
-								initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ delay: 1.0 + index * 0.1, duration: 0.6 }}
-								className="group text-center">
+								initial={{ opacity: 0, x: 50 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: index * 0.1, duration: 0.6 }}
+								className="min-w-[260px] sm:min-w-[300px] snap-center">
 								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
 									<h4 className="text-base font-bold text-white mb-3">
 										{value.title}

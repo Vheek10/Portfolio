@@ -239,14 +239,15 @@ export default function Home() {
 					</div>
 
 					{/* Changed to 2 columns only */}
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
 						{featuredProjects.map((project, index) => (
 							<motion.div
 								key={project.title}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
-								className="group">
+								initial={{ opacity: 0, x: 50 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: index * 0.1, duration: 0.6 }}
+								className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] snap-center">
 								{/* Card with larger image and minimal content */}
 								<div className="rounded-2xl bg-gray-800 border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 h-full flex flex-col overflow-hidden">
 									{/* Project Image - Made even larger for wider cards */}
