@@ -106,7 +106,7 @@ p {
 
 /* ── Infinite Scroll Utility Classes ─────────────────────────────── */
 @utility animate-scroll-slow {
-	animation: scroll-slow 45s linear infinite;
+	animation: scroll-slow 50s linear infinite;
 	will-change: transform;
 }
 
@@ -126,7 +126,7 @@ p {
 }
 
 @utility animate-infinite-scroll {
-	animation: infinite-scroll 20s linear infinite;
+	animation: infinite-scroll 30s linear infinite;
 	will-change: transform;
 }
 
@@ -134,4 +134,17 @@ p {
 	&:hover {
 		animation-play-state: paused;
 	}
+}
+.animate-infinite-scroll.paused {
+	animation-play-state: paused;
+}
+
+/* For better hover experience */
+.scroll-container {
+	-webkit-overflow-scrolling: touch;
+	cursor: grab;
+}
+
+.scroll-container:active {
+	cursor: grabbing;
 }

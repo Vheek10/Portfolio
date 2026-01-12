@@ -22,6 +22,7 @@ import {
 	Smartphone,
 	Layout,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function Services() {
 	const mainServices = [
@@ -242,6 +243,11 @@ export default function Services() {
 		},
 	};
 
+	// Add state for hover control
+	const [additionalServicesHovered, setAdditionalServicesHovered] =
+		useState(false);
+	const [processHovered, setProcessHovered] = useState(false);
+
 	return (
 		<div className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
@@ -407,7 +413,7 @@ export default function Services() {
 				</Card>
 			</motion.section>
 
-			{/* Additional Services */}
+			{/* Additional Services with Auto-scroll - FIXED */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -423,47 +429,72 @@ export default function Services() {
 						</p>
 					</div>
 
-					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-						{additionalServices.map((service, index) => (
-							<motion.div
-								key={service.title}
-								initial={{ opacity: 0, x: 50 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1, duration: 0.6 }}
-								className="min-w-[280px] sm:min-w-[320px] lg:min-w-[380px] snap-center first:pl-0 last:pr-0">
-								<Card className="p-5 h-full group hover:border-purple-600">
-									<div className="flex items-start gap-4">
-										<div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-											{service.icon}
-										</div>
-										<div>
-											<h4 className="text-sm sm:text-base font-bold text-white mb-2">
-												{service.title}
-											</h4>
-											<p className="text-sm text-gray-400 mb-3">
-												{service.description}
-											</p>
-											<div className="space-y-1">
-												{service.features.map((feature, idx) => (
-													<div
-														key={idx}
-														className="flex items-center gap-2 text-sm text-gray-400">
-														<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-														{feature}
+					{/* Auto-scroll carousel with hover pause - FIXED */}
+					<div
+						className="relative w-full overflow-hidden py-4"
+						onMouseEnter={() => setAdditionalServicesHovered(true)}
+						onMouseLeave={() => setAdditionalServicesHovered(false)}
+						onTouchStart={() => setAdditionalServicesHovered(true)}
+						onTouchEnd={() => setAdditionalServicesHovered(false)}>
+						{/* Fade edges */}
+						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
+
+						{/* Auto-scroll container - Fixed width for consistent sizing */}
+						<div
+							className={`flex gap-6 w-max animate-services-scroll ${
+								additionalServicesHovered ? "paused" : ""
+							}`}>
+							{/* First set + duplicate for seamless loop */}
+							{[...additionalServices, ...additionalServices].map(
+								(service, index) => (
+									<div
+										key={`${service.title}-${index}`}
+										className="w-[280px] sm:w-[320px] lg:w-[380px] flex-shrink-0">
+										<motion.div
+											initial={{ opacity: 0, x: 50 }}
+											whileInView={{ opacity: 1, x: 0 }}
+											viewport={{ once: true }}
+											transition={{
+												delay: (index % additionalServices.length) * 0.1,
+												duration: 0.6,
+											}}
+											className="h-full">
+											<Card className="p-5 h-full group hover:border-purple-600">
+												<div className="flex items-start gap-4 h-full">
+													<div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+														{service.icon}
 													</div>
-												))}
-											</div>
-										</div>
+													<div className="flex-1 min-w-0">
+														<h4 className="text-sm sm:text-base font-bold text-white mb-2">
+															{service.title}
+														</h4>
+														<p className="text-sm text-gray-400 mb-3 line-clamp-2">
+															{service.description}
+														</p>
+														<div className="space-y-1">
+															{service.features.map((feature, idx) => (
+																<div
+																	key={idx}
+																	className="flex items-center gap-2 text-sm text-gray-400 truncate">
+																	<div className="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0"></div>
+																	<span className="truncate">{feature}</span>
+																</div>
+															))}
+														</div>
+													</div>
+												</div>
+											</Card>
+										</motion.div>
 									</div>
-								</Card>
-							</motion.div>
-						))}
+								),
+							)}
+						</div>
 					</div>
 				</Card>
 			</motion.section>
 
-			{/* Process Section */}
+			{/* Process Section with Auto-scroll - FIXED */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -479,33 +510,56 @@ export default function Services() {
 						</p>
 					</div>
 
-					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-						{processSteps.map((step, index) => (
-							<motion.div
-								key={step.step}
-								initial={{ opacity: 0, x: 50 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1, duration: 0.6 }}
-								className="min-w-[260px] sm:min-w-[300px] snap-center">
-								<Card className="p-5 sm:p-6 text-center group h-full hover:border-purple-600">
-									<div className="relative mb-5 sm:mb-6">
-										<div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-											{step.icon}
-										</div>
-										<div className="absolute -top-2 -right-2 w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-bold">
-											{step.step}
-										</div>
-									</div>
-									<h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3">
-										{step.title}
-									</h4>
-									<p className="text-sm text-gray-400 leading-relaxed">
-										{step.description}
-									</p>
-								</Card>
-							</motion.div>
-						))}
+					{/* Auto-scroll carousel with hover pause - FIXED */}
+					<div
+						className="relative w-full overflow-hidden py-4"
+						onMouseEnter={() => setProcessHovered(true)}
+						onMouseLeave={() => setProcessHovered(false)}
+						onTouchStart={() => setProcessHovered(true)}
+						onTouchEnd={() => setProcessHovered(false)}>
+						{/* Fade edges */}
+						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
+
+						{/* Auto-scroll container - Fixed width for consistent sizing */}
+						<div
+							className={`flex gap-6 w-max animate-process-scroll ${
+								processHovered ? "paused" : ""
+							}`}>
+							{/* First set + duplicate for seamless loop */}
+							{[...processSteps, ...processSteps].map((step, index) => (
+								<div
+									key={`${step.step}-${index}`}
+									className="w-[260px] sm:w-[300px] flex-shrink-0">
+									<motion.div
+										initial={{ opacity: 0, x: 50 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										viewport={{ once: true }}
+										transition={{
+											delay: (index % processSteps.length) * 0.1,
+											duration: 0.6,
+										}}
+										className="h-full">
+										<Card className="p-5 sm:p-6 text-center group h-full hover:border-purple-600">
+											<div className="relative mb-5 sm:mb-6">
+												<div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+													{step.icon}
+												</div>
+												<div className="absolute -top-2 -right-2 w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-bold">
+													{step.step}
+												</div>
+											</div>
+											<h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3">
+												{step.title}
+											</h4>
+											<p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+												{step.description}
+											</p>
+										</Card>
+									</motion.div>
+								</div>
+							))}
+						</div>
 					</div>
 				</Card>
 			</motion.section>
@@ -562,6 +616,42 @@ export default function Services() {
 					</div>
 				</Card>
 			</motion.section>
+
+			{/* Add CSS animations */}
+			<style jsx>{`
+				@keyframes services-scroll {
+					0% {
+						transform: translateX(0);
+					}
+					100% {
+						transform: translateX(calc(-50% - 0.75rem));
+					}
+				}
+
+				@keyframes process-scroll {
+					0% {
+						transform: translateX(0);
+					}
+					100% {
+						transform: translateX(calc(-50% - 0.75rem));
+					}
+				}
+
+				.animate-services-scroll {
+					animation: services-scroll 40s linear infinite;
+					animation-play-state: running;
+				}
+
+				.animate-process-scroll {
+					animation: process-scroll 35s linear infinite;
+					animation-play-state: running;
+				}
+
+				.animate-services-scroll.paused,
+				.animate-process-scroll.paused {
+					animation-play-state: paused;
+				}
+			`}</style>
 		</div>
 	);
 }

@@ -17,6 +17,29 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+// Add these Framer Motion variants at the top of the component
+const containerVariants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.2,
+			delayChildren: 0.3,
+		},
+	},
+};
+
+const itemVariants = {
+	hidden: { opacity: 0, y: 20 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.6,
+		},
+	},
+};
+
 export default function About() {
 	const stats = [
 		{
@@ -107,27 +130,6 @@ export default function About() {
 	const [servicesHovered, setServicesHovered] = useState(false);
 	const [valuesHovered, setValuesHovered] = useState(false);
 
-	const containerVariants = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.1,
-			},
-		},
-	};
-
-	const itemVariants = {
-		hidden: { opacity: 0, y: 20 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.6,
-			},
-		},
-	};
-
 	return (
 		<div className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
@@ -152,7 +154,8 @@ export default function About() {
 				</Card>
 			</motion.section>
 
-			{/* Stats Section */}
+			{/* Stats Section - FIXED */}
+
 			<motion.section
 				variants={containerVariants}
 				initial="hidden"
@@ -161,15 +164,27 @@ export default function About() {
 					{stats.map((stat, index) => (
 						<motion.div
 							key={stat.label}
-							variants={itemVariants}>
-							<Card className="text-center p-4 sm:p-5">
-								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
+							variants={itemVariants}
+							custom={index}>
+							<Card className="text-center p-5 sm:p-6 h-full flex flex-col items-center justify-center">
+								{/* Icon container - centered */}
+								<motion.div
+									initial={{ scale: 0 }}
+									animate={{ scale: 1 }}
+									transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
+									className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4">
 									{stat.icon}
-								</div>
-								<div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+								</motion.div>
+
+								{/* Number - centered */}
+								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 									{stat.number}
 								</div>
-								<div className="text-sm text-gray-400">{stat.label}</div>
+
+								{/* Label - centered */}
+								<div className="text-sm text-gray-400 font-medium tracking-wide">
+									{stat.label}
+								</div>
 							</Card>
 						</motion.div>
 					))}
@@ -198,7 +213,7 @@ export default function About() {
 						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
 						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
 
-						{/* Auto-scroll container - NO STRETCHING */}
+						{/* Auto-scroll container - SAME HEIGHT CARDS */}
 						<div
 							className="flex gap-6"
 							style={{
@@ -215,6 +230,7 @@ export default function About() {
 									style={{
 										flexShrink: 0,
 										width: "280px", // Fixed width for mobile
+										height: "380px", // Fixed height for all cards
 									}}
 									className="sm:w-[340px]">
 									{" "}
@@ -226,7 +242,8 @@ export default function About() {
 										transition={{
 											delay: (index % services.length) * 0.1,
 											duration: 0.6,
-										}}>
+										}}
+										className="h-full">
 										<div className="flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
 											<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 												{service.icon}
@@ -236,17 +253,17 @@ export default function About() {
 												{service.title}
 											</h4>
 
-											<p className="text-gray-400 mb-4 flex-grow text-sm">
+											<p className="text-gray-400 mb-4 text-sm line-clamp-3">
 												{service.description}
 											</p>
 
-											<div className="space-y-2">
+											<div className="space-y-2 mt-auto">
 												{service.features.map((feature, idx) => (
 													<div
 														key={idx}
 														className="flex items-center gap-2 text-sm text-gray-400">
-														<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-														{feature}
+														<div className="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0"></div>
+														<span className="truncate">{feature}</span>
 													</div>
 												))}
 											</div>
@@ -275,13 +292,13 @@ export default function About() {
 						</p>
 					</div>
 
-					{/* Values auto-scroll carousel with fade sides */}
+					{/* Values auto-scroll carousel with fade sides - SAME HEIGHT CARDS */}
 					<div className="relative w-full overflow-hidden py-4">
 						{/* Fade edges */}
 						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
 						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
 
-						{/* Auto-scroll container - NO STRETCHING */}
+						{/* Auto-scroll container - SAME HEIGHT CARDS */}
 						<div
 							className="flex gap-6"
 							style={{
@@ -298,6 +315,7 @@ export default function About() {
 									style={{
 										flexShrink: 0,
 										width: "260px", // Fixed width for mobile
+										height: "320px", // Fixed height for all cards
 									}}
 									className="sm:w-[300px]">
 									{" "}
@@ -309,12 +327,13 @@ export default function About() {
 										transition={{
 											delay: (index % values.length) * 0.1,
 											duration: 0.6,
-										}}>
-										<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
+										}}
+										className="h-full">
+										<div className="h-full p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600 flex flex-col">
 											<h4 className="text-base font-bold text-white mb-3">
 												{value.title}
 											</h4>
-											<p className="text-gray-400 leading-relaxed text-sm">
+											<p className="text-gray-400 leading-relaxed text-sm flex-grow line-clamp-4">
 												{value.description}
 											</p>
 										</div>

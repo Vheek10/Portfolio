@@ -17,6 +17,7 @@ import {
 	Github,
 } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
 	const featuredProjects = [
@@ -144,6 +145,9 @@ export default function Home() {
 		},
 	];
 
+	// Add hover state
+	const [isHovered, setIsHovered] = useState(false);
+
 	return (
 		<div className="section-gap space-y-8 md:space-y-10">
 			{/* Welcome Section */}
@@ -240,11 +244,19 @@ export default function Home() {
 						</p>
 					</div>
 
-					{/* Infinite auto-scrolling carousel - pure CSS */}
-					<div className="relative w-full overflow-hidden py-4">
+					{/* Infinite auto-scrolling carousel with hover pause */}
+					<div
+						className="relative w-full overflow-hidden py-4"
+						onMouseEnter={() => setIsHovered(true)}
+						onMouseLeave={() => setIsHovered(false)}
+						onTouchStart={() => setIsHovered(true)}
+						onTouchEnd={() => setIsHovered(false)}>
 						{/* Container with mask for fading edges */}
 						<div className="relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-20 before:bg-gradient-to-r before:from-gray-900 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-20 after:bg-gradient-to-l after:from-gray-900 after:to-transparent after:z-10">
-							<div className="flex gap-6 w-max animate-infinite-scroll hover:pause-scroll">
+							<div
+								className={`flex gap-6 w-max animate-infinite-scroll ${
+									isHovered ? "paused" : ""
+								}`}>
 								{/* First set + duplicate for seamless loop */}
 								{[...featuredProjects, ...featuredProjects].map(
 									(project, index) => (
