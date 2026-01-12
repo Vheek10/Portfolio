@@ -410,64 +410,63 @@ export default function Contact() {
 			</motion.div>
 
 			{/* FAQ Section */}
+
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-6 sm:p-7">
 					<div className="text-center mb-8">
-						<h3 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-							Frequently Asked Questions
+						<h3 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+							FREQUENTLY ASKED QUESTIONS
 						</h3>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div className="space-y-4">
-							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h4 className="text-sm font-bold font-clash text-white mb-2">
-									What's your typical response time?
-								</h4>
-								<p className="text-gray-400 text-sm leading-relaxed">
-									I typically respond to all inquiries within 24 hours. For
-									urgent matters, WhatsApp is the fastest way to reach me.
-								</p>
-							</div>
+					<div className="space-y-4 max-w-3xl mx-auto">
+						{[
+							{
+								q: "WHAT'S YOUR TYPICAL RESPONSE TIME?",
+								a: "I usually respond within 24 hours. For urgent matters, WhatsApp is the fastest way to reach me.",
+							},
+							{
+								q: "DO YOU WORK WITH INTERNATIONAL CLIENTS?",
+								a: "Yes. I work with clients globally and my workflow is fully optimized for remote collaboration across time zones.",
+							},
+							{
+								q: "WHAT INFORMATION SHOULD I INCLUDE IN MY PROJECT INQUIRY?",
+								a: "A brief project overview, goals, timeline, budget range, and any specific features or technologies you’re considering.",
+							},
+							{
+								q: "DO YOU OFFER ONGOING SUPPORT AFTER PROJECT COMPLETION?",
+								a: "Yes. I offer flexible support and maintenance packages to keep your product stable, secure, and evolving.",
+							},
+						].map((item, idx) => (
+							<details
+								key={idx}
+								className="group rounded-xl border border-gray-700 bg-gray-800">
+								<summary className="flex cursor-pointer list-none items-center justify-between p-4 font-clash text-sm font-bold text-white">
+									{item.q}
+									<ChevronDown
+										size={18}
+										className="ml-4 text-gray-400 transition-transform group-open:rotate-180"
+									/>
+								</summary>
 
-							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h4 className="text-sm font-bold font-clash text-white mb-2">
-									Do you work with international clients?
-								</h4>
-								<p className="text-gray-400 text-sm leading-relaxed">
-									Yes! I work with clients from all over the world. My remote
-									setup allows me to collaborate effectively across different
-									time zones.
-								</p>
-							</div>
-						</div>
-
-						<div className="space-y-4">
-							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h4 className="text-sm font-bold font-clash text-white mb-2">
-									What information should I include in my project inquiry?
-								</h4>
-								<p className="text-gray-400 text-sm leading-relaxed">
-									Please include: project overview, goals, timeline, budget
-									range, and any specific technologies or features you have in
-									mind.
-								</p>
-							</div>
-
-							<div className="p-4 rounded-xl bg-gray-800 border border-gray-700">
-								<h4 className="text-sm font-bold font-clash text-white mb-2">
-									Do you offer ongoing support after project completion?
-								</h4>
-								<p className="text-gray-400 text-sm leading-relaxed">
-									Yes, I offer various support and maintenance packages to
-									ensure your project continues to run smoothly after
-									deployment.
-								</p>
-							</div>
-						</div>
+								<AnimatePresence initial={false}>
+									{/* Animate height and opacity */}
+									<motion.div
+										initial={{ height: 0, opacity: 0 }}
+										animate={{ height: "auto", opacity: 1 }}
+										exit={{ height: 0, opacity: 0 }}
+										transition={{ duration: 0.3, ease: "easeInOut" }}
+										className="px-4 overflow-hidden">
+										<p className="pb-4 text-sm leading-relaxed text-gray-400">
+											{item.a}
+										</p>
+									</motion.div>
+								</AnimatePresence>
+							</details>
+						))}
 					</div>
 				</Card>
 			</motion.section>
