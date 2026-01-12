@@ -154,6 +154,7 @@ const projects: Project[] = [
 		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
 		github: "#",
 		live: "#",
+		featured: false, // ADDED THIS LINE
 		status: "In Development",
 	},
 
@@ -166,6 +167,7 @@ const projects: Project[] = [
 		tech: ["Next.js", "Rust", "Solana", "TypeScript"],
 		github: "https://github.com/Vheek10/Polysight",
 		live: "https://polysight.vercel.app",
+		featured: false, // This was also missing, but it looks like it might not be in your original
 		status: "Live",
 	},
 ];
