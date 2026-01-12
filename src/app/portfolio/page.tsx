@@ -14,10 +14,24 @@ import {
 	Zap,
 	TrendingUp,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
-const projects = [
+// Define Project interface
+interface Project {
+	id: number;
+	title: string;
+	category: string;
+	description: string;
+	image: string;
+	tech: string[];
+	github: string;
+	live: string;
+	featured: boolean;
+	status: string;
+}
+
+const projects: Project[] = [
 	// ==== Web2 Projects ====
 	{
 		id: 1,
@@ -242,7 +256,7 @@ export default function Portfolio() {
 		visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 	};
 
-	const ProjectCard = ({ project }: { project: any }) => {
+	const ProjectCard = ({ project }: { project: Project }) => {
 		const [imageError, setImageError] = useState(false);
 
 		return (
@@ -292,7 +306,7 @@ export default function Portfolio() {
 									},
 								]
 									.filter((link) => isValidUrl(link.url))
-									.map((link, idx) => (
+									.map((link, idx: number) => (
 										<motion.a
 											key={idx}
 											href={link.url}
@@ -320,7 +334,7 @@ export default function Portfolio() {
 							{project.description}
 						</p>
 						<div className="flex flex-wrap gap-1 mb-4 justify-center">
-							{project.tech.slice(0, 3).map((tech, idx) => (
+							{project.tech.slice(0, 3).map((tech: string, idx: number) => (
 								<span
 									key={idx}
 									className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
@@ -351,7 +365,7 @@ export default function Portfolio() {
 								},
 							]
 								.filter((link) => isValidUrl(link.url))
-								.map((link, idx) => (
+								.map((link, idx: number) => (
 									<motion.a
 										key={idx}
 										href={link.url}
@@ -545,13 +559,15 @@ export default function Portfolio() {
 
 												{/* Tech stack */}
 												<div className="flex flex-wrap gap-2 justify-center mb-4">
-													{project.tech.slice(0, 3).map((tech, idx) => (
-														<span
-															key={idx}
-															className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
-															{tech}
-														</span>
-													))}
+													{project.tech
+														.slice(0, 3)
+														.map((tech: string, idx: number) => (
+															<span
+																key={idx}
+																className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
+																{tech}
+															</span>
+														))}
 													{project.tech.length > 3 && (
 														<span className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
 															+{project.tech.length - 3}
