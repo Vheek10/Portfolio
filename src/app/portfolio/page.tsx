@@ -16,7 +16,7 @@ import {
 	ChevronLeft,
 	ChevronRight,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const projects = [
@@ -166,52 +166,9 @@ const isValidUrl = (url: string) => {
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 	const scrollRef = useRef<HTMLDivElement>(null);
-	const animationIdRef = useRef<number | null>(null);
-
-	useEffect(() => {
-		const element = scrollRef.current;
-		if (!element) return;
-
-		let direction = 1;
-		let paused = false;
-		let lastScrollPosition = 0;
-
-		const handleMouseEnter = () => (paused = true);
-		const handleMouseLeave = () => (paused = false);
-
-		element.addEventListener("mouseenter", handleMouseEnter);
-		element.addEventListener("mouseleave", handleMouseLeave);
-
-		const animate = () => {
-			if (!paused) {
-				element.scrollLeft += 0.5 * direction;
-
-				// Update current slide based on scroll position
-				const cardWidth = 400; // Approximate width of each card
-				const newSlide = Math.round(element.scrollLeft / cardWidth);
-				setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
-
-				if (element.scrollLeft + element.clientWidth >= element.scrollWidth) {
-					direction = -1;
-				}
-				if (element.scrollLeft <= 0) {
-					direction = 1;
-				}
-			}
-			animationIdRef.current = requestAnimationFrame(animate);
-		};
-
-		animationIdRef.current = requestAnimationFrame(animate);
-
-		return () => {
-			if (animationIdRef.current) {
-				cancelAnimationFrame(animationIdRef.current);
-			}
-			element.removeEventListener("mouseenter", handleMouseEnter);
-			element.removeEventListener("mouseleave", handleMouseLeave);
-		};
-	}, [activeFilter]);
+	const autoScrollRef = useRef<number | null>(null);
 
 	const filters = [
 		{ id: "all", label: "All Projects" },
@@ -253,10 +210,148 @@ export default function Portfolio() {
 		return p.category === activeFilter;
 	});
 
+	// Auto-scroll effect - SIMPLIFIED AND WORKING
+	useEffect(() => {
+		const element = scrollRef.current;
+		if (!element || filteredProjects.length <= 1) return;
+
+		let direction = 1;
+		let lastTime = 0;
+		const speed = 0.8; // Adjusted for better visibility
+
+		const startAutoScroll = () => {
+			if (autoScrollRef.current) {
+				cancelAnimationFrame(autoScrollRef.current);
+			}
+
+			const animate = (timestamp: number) => {
+				if (!lastTime) lastTime = timestamp;
+				const deltaTime = timestamp - lastTime;
+				lastTime = timestamp;
+
+				if (isAutoScrolling && element) {
+					const scrollLeft = element.scrollLeft;
+					const maxScroll = element.scrollWidth - element.clientWidth;
+
+					// Check boundaries and reverse direction if needed
+					if (scrollLeft >= maxScroll - 5) {
+						direction = -1;
+					} else if (scrollLeft <= 5) {
+						direction = 1;
+					}
+
+					// Scroll based on time for consistent speed
+					const scrollAmount = speed * (deltaTime / 16); // Normalized to 60fps
+					element.scrollLeft += scrollAmount * direction;
+
+					// Update current slide
+					const cardWidth = 400; // Original card width
+					const newSlide = Math.round(element.scrollLeft / cardWidth);
+					setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
+				}
+
+				autoScrollRef.current = requestAnimationFrame(animate);
+			};
+
+			autoScrollRef.current = requestAnimationFrame(animate);
+		};
+
+		// Start auto-scroll
+		startAutoScroll();
+
+		// Handle hover events
+		const handleMouseEnter = () => setIsAutoScrolling(false);
+		const handleMouseLeave = () => setIsAutoScrolling(true);
+
+		element.addEventListener("mouseenter", handleMouseEnter);
+		element.addEventListener("mouseleave", handleMouseLeave);
+
+		// Cleanup
+		return () => {
+			if (autoScrollRef.current) {
+				cancelAnimationFrame(autoScrollRef.current);
+			}
+			element.removeEventListener("mouseenter", handleMouseEnter);
+			element.removeEventListener("mouseleave", handleMouseLeave);
+		};
+	}, [
+		activeFilter,
+		filteredProjects.length,
+		isAutoScrolling,
+		filteredProjects,
+	]);
+
+	const scrollToSlide = useCallback((index: number) => {
+		const element = scrollRef.current;
+		if (!element) return;
+
+		setIsAutoScrolling(false); // Pause auto-scroll
+
+		const cardWidth = 400; // Original card width
+		const scrollPosition = index * cardWidth;
+
+		element.scrollTo({
+			left: scrollPosition,
+			behavior: "smooth",
+		});
+		setCurrentSlide(index);
+
+		// Resume auto-scroll after 3 seconds
+		setTimeout(() => {
+			setIsAutoScrolling(true);
+		}, 3000);
+	}, []);
+
+	const scrollProjects = useCallback(
+		(direction: "left" | "right") => {
+			const element = scrollRef.current;
+			if (!element) return;
+
+			setIsAutoScrolling(false); // Pause auto-scroll
+
+			const cardWidth = 400; // Original card width
+			const gap = 24; // 24px gap between cards
+			const scrollAmount = cardWidth + gap;
+
+			const newScrollLeft =
+				direction === "left"
+					? Math.max(0, element.scrollLeft - scrollAmount)
+					: element.scrollLeft + scrollAmount;
+
+			element.scrollTo({
+				left: newScrollLeft,
+				behavior: "smooth",
+			});
+
+			// Update current slide
+			setTimeout(() => {
+				const newSlide = Math.round(element.scrollLeft / cardWidth);
+				setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
+			}, 300);
+
+			// Resume auto-scroll after 3 seconds
+			setTimeout(() => {
+				setIsAutoScrolling(true);
+			}, 3000);
+		},
+		[filteredProjects.length],
+	);
+
+	// Filter change handler
+	const handleFilterChange = (filterId: string) => {
+		setActiveFilter(filterId);
+		setCurrentSlide(0);
+		setIsAutoScrolling(true);
+		if (scrollRef.current) {
+			scrollRef.current.scrollLeft = 0;
+		}
+	};
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 	};
+
 	const itemVariants = {
 		hidden: { opacity: 0, y: 20 },
 		visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -392,39 +487,6 @@ export default function Portfolio() {
 		);
 	};
 
-	const scrollToSlide = (index: number) => {
-		const element = scrollRef.current;
-		if (!element) return;
-
-		const cardWidth = 400; // Approximate width of each card
-		const newPosition = index * cardWidth;
-		element.scrollTo({
-			left: newPosition,
-			behavior: "smooth",
-		});
-		setCurrentSlide(index);
-	};
-
-	const scrollProjects = (direction: "left" | "right") => {
-		const element = scrollRef.current;
-		if (!element) return;
-
-		const scrollAmount = 400; // Width of one card
-		const newPosition =
-			direction === "left"
-				? element.scrollLeft - scrollAmount
-				: element.scrollLeft + scrollAmount;
-
-		element.scrollTo({
-			left: newPosition,
-			behavior: "smooth",
-		});
-	};
-
-	const scrollableProjects = filteredProjects.length
-		? filteredProjects
-		: projects;
-
 	return (
 		<div className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
@@ -487,7 +549,7 @@ export default function Portfolio() {
 							{filters.map((f) => (
 								<button
 									key={f.id}
-									onClick={() => setActiveFilter(f.id)}
+									onClick={() => handleFilterChange(f.id)}
 									aria-label={`Filter projects by ${f.label}`}
 									aria-pressed={activeFilter === f.id}
 									className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
@@ -525,8 +587,15 @@ export default function Portfolio() {
 				<motion.div
 					ref={scrollRef}
 					className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory"
-					style={{ WebkitOverflowScrolling: "touch" }}>
-					{scrollableProjects.map((project) => (
+					style={{ WebkitOverflowScrolling: "touch" }}
+					onScroll={(e) => {
+						const element = e.currentTarget;
+						const cardWidth = 400; // Original card width
+						const scrollPos = element.scrollLeft;
+						const newSlide = Math.round(scrollPos / cardWidth);
+						setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
+					}}>
+					{filteredProjects.map((project) => (
 						<div
 							key={project.id}
 							className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">

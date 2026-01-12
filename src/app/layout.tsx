@@ -8,17 +8,19 @@ const ProfileCard = dynamic(() => import("@/components/ProfileCard"), {
 });
 import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
-import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 
-// Optimize manrope for body text
-const manrope = Manrope({
-	subsets: ["latin"],
+// Manrope local font (for body text)
+const manrope = localFont({
+	src: [
+		{ path: "../../public/fonts/Manrope-Regular.woff2", weight: "400" },
+		{ path: "../../public/fonts/Manrope-Bold.woff2", weight: "700" },
+	],
 	variable: "--font-manrope",
 	display: "swap",
 });
 
-// Clash Display for headings and accents
+// Clash Display local font (for headings and accents)
 const clashDisplay = localFont({
 	src: [
 		{
@@ -60,39 +62,13 @@ export default function RootLayout({
 			className={`${manrope.variable} ${clashDisplay.variable} dark bg-[#020617] scroll-smooth`}
 			style={{ colorScheme: "dark", backgroundColor: "#020617" }}>
 			<head>
-				<meta name="color-scheme" content="dark" />
-				<meta name="theme-color" content="#020617" />
-				<style
-					dangerouslySetInnerHTML={{
-						__html: `
-              html, body { background-color: #020617 !important; }
-              @media (prefers-color-scheme: light) {
-                html, body { background-color: #020617 !important; }
-              }
-            `,
-					}}
+				<meta
+					name="color-scheme"
+					content="dark"
 				/>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-              (function() {
-                try {
-                  var html = document.documentElement;
-                  html.classList.add('dark');
-                  html.style.colorScheme = 'dark';
-                } catch (e) {}
-              })();
-            `,
-					}}
-				/>
-				<link
-					rel="preconnect"
-					href="https://fonts.googleapis.com"
-				/>
-				<link
-					rel="preconnect"
-					href="https://fonts.gstatic.com"
-					crossOrigin="anonymous"
+				<meta
+					name="theme-color"
+					content="#020617"
 				/>
 				<link
 					rel="icon"
@@ -104,44 +80,37 @@ export default function RootLayout({
 					href="/profile.jpg?v=3"
 				/>
 			</head>
+
 			<body
-				className={`
-        ${manrope.className}
-        bg-[#020617] 
-        text-gray-100 
-        min-h-screen
-        antialiased
-        overflow-x-hidden
-        relative
-      `}
+				className={`min-h-screen antialiased overflow-x-hidden relative text-gray-100 ${manrope.className}`}
 				style={{ backgroundColor: "#020617" }}>
-				{/* Geometric 3D Background - Ensure it's behind everything */}
+				{/* Geometric 3D Background */}
 				<GeometricBackground />
 
-				{/* Skip to main content for accessibility */}
+				{/* Skip to main content */}
 				<a
 					href="#main-content"
 					className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-purple-700 transform hover:scale-105">
 					Skip to main content
 				</a>
 
-				{/* Header component - NOT sticky */}
+				{/* Header */}
 				<Header />
 
-				{/* Main content with responsive layout */}
+				{/* Main content */}
 				<main
 					id="main-content"
 					className="relative z-10 pt-16 md:pt-20 min-h-screen">
 					<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 md:py-6">
 						<div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8">
-							{/* Sidebar - Profile Card Only - STICKY on desktop only */}
+							{/* Sidebar */}
 							<div className="lg:w-80 lg:flex-shrink-0">
 								<div className="lg:sticky lg:top-6">
 									<ProfileCard />
 								</div>
 							</div>
 
-							{/* Main Content Area - Add negative margin to align with header right edge */}
+							{/* Main content area */}
 							<div className="flex-1 min-w-0 w-full lg:-mr-8">{children}</div>
 						</div>
 					</div>

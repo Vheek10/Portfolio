@@ -81,6 +81,7 @@ export default function Home() {
 			image: "/joeyung.png",
 		},
 	];
+
 	const highlights = [
 		{
 			icon: <Rocket className="w-6 h-6" />,
@@ -223,7 +224,7 @@ export default function Home() {
 				))}
 			</motion.section>
 
-			{/* Featured Projects */}
+			{/* Featured Projects with CSS Auto-scroll */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -241,77 +242,92 @@ export default function Home() {
 
 					{/* Infinite auto-scrolling carousel - pure CSS */}
 					<div className="relative w-full overflow-hidden py-4">
-						<div className="flex gap-6 w-max animate-infinite-scroll hover:pause-scroll">
-							{/* First set + duplicate for seamless loop */}
-							{[...featuredProjects, ...featuredProjects].map(
-								(project, index) => (
-									<motion.div
-										key={`${project.title}-${index}`}
-										className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] flex-shrink-0"
-										whileHover={{ scale: 1.04 }}
-										transition={{ duration: 0.3 }}>
-										<div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
-											{/* Image */}
-											<div className="relative w-full h-80 bg-gray-700 overflow-hidden">
-												<Image
-													src={project.image}
-													alt={project.title}
-													fill
-													className="object-cover transition-transform duration-700 group-hover:scale-110"
-													onError={(e) => {
-														const target = e.target as HTMLImageElement;
-														target.style.display = "none";
-														target.parentElement!.style.background =
-															"linear-gradient(135deg, #8B5CF6, #3B82F6)";
-														const fallback = document.createElement("div");
-														fallback.className =
-															"w-full h-full flex items-center justify-center text-white font-bold text-xl";
-														fallback.textContent = project.title.split(" ")[0];
-														target.parentElement!.appendChild(fallback);
-													}}
-												/>
-											</div>
+						{/* Container with mask for fading edges */}
+						<div className="relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-20 before:bg-gradient-to-r before:from-gray-900 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-20 after:bg-gradient-to-l after:from-gray-900 after:to-transparent after:z-10">
+							<div className="flex gap-6 w-max animate-infinite-scroll hover:pause-scroll">
+								{/* First set + duplicate for seamless loop */}
+								{[...featuredProjects, ...featuredProjects].map(
+									(project, index) => (
+										<motion.div
+											key={`${project.title}-${index}`}
+											className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] flex-shrink-0"
+											whileHover={{ scale: 1.04 }}
+											transition={{ duration: 0.3 }}>
+											<div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
+												{/* Image */}
+												<div className="relative w-full h-80 bg-gray-700 overflow-hidden">
+													<Image
+														src={project.image}
+														alt={project.title}
+														fill
+														className="object-cover transition-transform duration-700 group-hover:scale-110"
+														sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
+													/>
+													{/* Status badge */}
+													<div className="absolute top-4 left-4">
+														<span className="px-3 py-1 rounded-full text-xs font-medium bg-green-900/30 text-green-300 border border-green-800/50">
+															{project.status}
+														</span>
+													</div>
+												</div>
 
-											{/* Content */}
-											<div className="p-6 flex flex-col items-center flex-grow">
-												<motion.h4
-													className="text-sm sm:text-base font-bold text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
-													whileHover={{ scale: 1.03 }}>
-													{project.title}
-												</motion.h4>
+												{/* Content */}
+												<div className="p-6 flex flex-col items-center flex-grow">
+													<motion.h4
+														className="text-sm sm:text-base font-bold text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+														whileHover={{ scale: 1.03 }}>
+														{project.title}
+													</motion.h4>
 
-												<div className="flex gap-5 mt-auto">
-													{project.liveUrl && project.liveUrl !== "#" && (
-														<motion.a
-															href={project.liveUrl}
-															target="_blank"
-															rel="noopener noreferrer"
-															whileHover={{ scale: 1.25, rotate: 8 }}
-															whileTap={{ scale: 0.9 }}
-															className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
-															title="Live Demo">
-															<ExternalLink className="w-5 h-5" />
-														</motion.a>
-													)}
+													{/* Tech stack */}
+													<div className="flex flex-wrap gap-2 justify-center mb-4">
+														{project.tech.slice(0, 3).map((tech, idx) => (
+															<span
+																key={idx}
+																className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
+																{tech}
+															</span>
+														))}
+														{project.tech.length > 3 && (
+															<span className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
+																+{project.tech.length - 3}
+															</span>
+														)}
+													</div>
 
-													{project.githubUrl && project.githubUrl !== "#" && (
-														<motion.a
-															href={project.githubUrl}
-															target="_blank"
-															rel="noopener noreferrer"
-															whileHover={{ scale: 1.25, rotate: -8 }}
-															whileTap={{ scale: 0.9 }}
-															className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
-															title="View Code">
-															<Github className="w-5 h-5" />
-														</motion.a>
-													)}
+													<div className="flex gap-5 mt-auto">
+														{project.liveUrl && project.liveUrl !== "#" && (
+															<motion.a
+																href={project.liveUrl}
+																target="_blank"
+																rel="noopener noreferrer"
+																whileHover={{ scale: 1.25, rotate: 8 }}
+																whileTap={{ scale: 0.9 }}
+																className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
+																title="Live Demo">
+																<ExternalLink className="w-5 h-5" />
+															</motion.a>
+														)}
+
+														{project.githubUrl && project.githubUrl !== "#" && (
+															<motion.a
+																href={project.githubUrl}
+																target="_blank"
+																rel="noopener noreferrer"
+																whileHover={{ scale: 1.25, rotate: -8 }}
+																whileTap={{ scale: 0.9 }}
+																className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
+																title="View Code">
+																<Github className="w-5 h-5" />
+															</motion.a>
+														)}
+													</div>
 												</div>
 											</div>
-										</div>
-									</motion.div>
-								),
-							)}
+										</motion.div>
+									),
+								)}
+							</div>
 						</div>
 					</div>
 

@@ -44,16 +44,6 @@
 	}
 }
 
-/* ── Infinite Horizontal Scroll (used in carousels) ──────────────── */
-@keyframes scroll-slow {
-	from {
-		transform: translateX(0);
-	}
-	to {
-		transform: translateX(-50%);
-	}
-}
-
 /* ── Base Styles & Typography ────────────────────────────────────── */
 html,
 body {
@@ -114,19 +104,29 @@ p {
 	scrollbar-width: none;
 }
 
-/* Global scrollbar hiding (very popular in modern portfolios) */
-* {
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-}
-
-*::-webkit-scrollbar {
-	display: none;
-}
-
 /* ── Infinite Scroll Utility Classes ─────────────────────────────── */
 @utility animate-scroll-slow {
 	animation: scroll-slow 60s linear infinite;
+	will-change: transform;
+}
+
+@utility pause-scroll {
+	&:hover {
+		animation-play-state: paused;
+	}
+}
+/* Infinite scroll animation for homepage */
+@keyframes infinite-scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@utility animate-infinite-scroll {
+	animation: infinite-scroll 30s linear infinite;
 	will-change: transform;
 }
 
