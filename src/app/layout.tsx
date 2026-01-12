@@ -10,17 +10,7 @@ import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
 import localFont from "next/font/local";
 
-// Manrope local font (for body text)
-const manrope = localFont({
-	src: [
-		{ path: "../../public/fonts/Manrope-Regular.woff2", weight: "400" },
-		{ path: "../../public/fonts/Manrope-Bold.woff2", weight: "700" },
-	],
-	variable: "--font-manrope",
-	display: "swap",
-});
-
-// Clash Display local font (for headings and accents)
+// Clash Display local font for entire project
 const clashDisplay = localFont({
 	src: [
 		{
@@ -59,7 +49,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${manrope.variable} ${clashDisplay.variable} dark bg-[#020617] scroll-smooth`}
+			className={`${clashDisplay.variable} dark bg-[#020617] scroll-smooth`}
 			style={{ colorScheme: "dark", backgroundColor: "#020617" }}>
 			<head>
 				<meta
@@ -82,7 +72,7 @@ export default function RootLayout({
 			</head>
 
 			<body
-				className={`min-h-screen antialiased overflow-x-hidden relative text-gray-100 ${manrope.className}`}
+				className={`min-h-screen antialiased overflow-x-hidden relative text-gray-100 ${clashDisplay.className}`}
 				style={{ backgroundColor: "#020617" }}>
 				{/* Geometric 3D Background */}
 				<GeometricBackground />

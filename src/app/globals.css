@@ -106,7 +106,7 @@ p {
 
 /* ── Infinite Scroll Utility Classes ─────────────────────────────── */
 @utility animate-scroll-slow {
-	animation: scroll-slow 60s linear infinite;
+	animation: scroll-slow 45s linear infinite;
 	will-change: transform;
 }
 
@@ -126,7 +126,7 @@ p {
 }
 
 @utility animate-infinite-scroll {
-	animation: infinite-scroll 30s linear infinite;
+	animation: infinite-scroll 20s linear infinite;
 	will-change: transform;
 }
 

@@ -15,6 +15,7 @@ import {
 	Database,
 	Cloud,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function About() {
 	const stats = [
@@ -102,6 +103,10 @@ export default function About() {
 		},
 	];
 
+	// State for hover control
+	const [servicesHovered, setServicesHovered] = useState(false);
+	const [valuesHovered, setValuesHovered] = useState(false);
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -164,16 +169,14 @@ export default function About() {
 								<div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 									{stat.number}
 								</div>
-								<div className="text-sm text-gray-400">
-									{stat.label}
-								</div>
+								<div className="text-sm text-gray-400">{stat.label}</div>
 							</Card>
 						</motion.div>
 					))}
 				</div>
 			</motion.section>
 
-			{/* Services Section */}
+			{/* Services Section with Auto-scroll */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -189,46 +192,74 @@ export default function About() {
 						</p>
 					</div>
 
-					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-						{services.map((service, index) => (
-							<motion.div
-								key={service.title}
-								initial={{ opacity: 0, x: 50 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1, duration: 0.6 }}
-								className="min-w-[280px] sm:min-w-[340px] snap-center">
-								<div className="flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
-									<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
-										{service.icon}
-									</div>
+					{/* Services auto-scroll carousel with fade sides */}
+					<div className="relative w-full overflow-hidden py-4">
+						{/* Fade edges */}
+						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
 
-									<h4 className="text-base font-bold text-white mb-3">
-										{service.title}
-									</h4>
-
-									<p className="text-gray-400 mb-4 flex-grow text-sm">
-										{service.description}
-									</p>
-
-									<div className="space-y-2">
-										{service.features.map((feature, idx) => (
-											<div
-												key={idx}
-												className="flex items-center gap-2 text-sm text-gray-400">
-												<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-												{feature}
+						{/* Auto-scroll container - NO STRETCHING */}
+						<div
+							className="flex gap-6"
+							style={{
+								animation: "scroll 40s linear infinite",
+								animationPlayState: servicesHovered ? "paused" : "running",
+								width: "max-content",
+							}}
+							onMouseEnter={() => setServicesHovered(true)}
+							onMouseLeave={() => setServicesHovered(false)}>
+							{/* Original services + duplicates for seamless loop */}
+							{[...services, ...services].map((service, index) => (
+								<div
+									key={`${service.title}-${index}`}
+									style={{
+										flexShrink: 0,
+										width: "280px", // Fixed width for mobile
+									}}
+									className="sm:w-[340px]">
+									{" "}
+									{/* Fixed width for larger screens */}
+									<motion.div
+										initial={{ opacity: 0, x: 50 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										viewport={{ once: true }}
+										transition={{
+											delay: (index % services.length) * 0.1,
+											duration: 0.6,
+										}}>
+										<div className="flex flex-col h-full p-4 sm:p-5 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
+											<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
+												{service.icon}
 											</div>
-										))}
-									</div>
+
+											<h4 className="text-base font-bold text-white mb-3">
+												{service.title}
+											</h4>
+
+											<p className="text-gray-400 mb-4 flex-grow text-sm">
+												{service.description}
+											</p>
+
+											<div className="space-y-2">
+												{service.features.map((feature, idx) => (
+													<div
+														key={idx}
+														className="flex items-center gap-2 text-sm text-gray-400">
+														<div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
+														{feature}
+													</div>
+												))}
+											</div>
+										</div>
+									</motion.div>
 								</div>
-							</motion.div>
-						))}
+							))}
+						</div>
 					</div>
 				</Card>
 			</motion.section>
 
-			{/* Values Section */}
+			{/* Values Section with Auto-scroll */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -244,25 +275,53 @@ export default function About() {
 						</p>
 					</div>
 
-					<div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-						{values.map((value, index) => (
-							<motion.div
-								key={value.title}
-								initial={{ opacity: 0, x: 50 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1, duration: 0.6 }}
-								className="min-w-[260px] sm:min-w-[300px] snap-center">
-								<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
-									<h4 className="text-base font-bold text-white mb-3">
-										{value.title}
-									</h4>
-									<p className="text-gray-400 leading-relaxed text-sm">
-										{value.description}
-									</p>
+					{/* Values auto-scroll carousel with fade sides */}
+					<div className="relative w-full overflow-hidden py-4">
+						{/* Fade edges */}
+						<div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none" />
+						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none" />
+
+						{/* Auto-scroll container - NO STRETCHING */}
+						<div
+							className="flex gap-6"
+							style={{
+								animation: "scroll 50s linear infinite reverse",
+								animationPlayState: valuesHovered ? "paused" : "running",
+								width: "max-content",
+							}}
+							onMouseEnter={() => setValuesHovered(true)}
+							onMouseLeave={() => setValuesHovered(false)}>
+							{/* Original values + duplicates for seamless loop */}
+							{[...values, ...values].map((value, index) => (
+								<div
+									key={`${value.title}-${index}`}
+									style={{
+										flexShrink: 0,
+										width: "260px", // Fixed width for mobile
+									}}
+									className="sm:w-[300px]">
+									{" "}
+									{/* Fixed width for larger screens */}
+									<motion.div
+										initial={{ opacity: 0, x: 50 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										viewport={{ once: true }}
+										transition={{
+											delay: (index % values.length) * 0.1,
+											duration: 0.6,
+										}}>
+										<div className="p-5 sm:p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:border-purple-600">
+											<h4 className="text-base font-bold text-white mb-3">
+												{value.title}
+											</h4>
+											<p className="text-gray-400 leading-relaxed text-sm">
+												{value.description}
+											</p>
+										</div>
+									</motion.div>
 								</div>
-							</motion.div>
-						))}
+							))}
+						</div>
 					</div>
 				</Card>
 			</motion.section>
@@ -274,6 +333,18 @@ export default function About() {
 				transition={{ delay: 1.2, duration: 0.6 }}>
 				<ExpertAreaCard />
 			</motion.section>
+
+			{/* Add CSS for scroll animation */}
+			<style jsx>{`
+				@keyframes scroll {
+					0% {
+						transform: translateX(0);
+					}
+					100% {
+						transform: translateX(-50%);
+					}
+				}
+			`}</style>
 		</div>
 	);
 }

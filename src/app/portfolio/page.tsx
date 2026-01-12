@@ -13,10 +13,8 @@ import {
 	Code,
 	Zap,
 	TrendingUp,
-	ChevronLeft,
-	ChevronRight,
 } from "lucide-react";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 const projects = [
@@ -165,10 +163,8 @@ const isValidUrl = (url: string) => {
 
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+	const [isHovered, setIsHovered] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
-	const autoScrollRef = useRef<number | null>(null);
 
 	const filters = [
 		{ id: "all", label: "All Projects" },
@@ -210,140 +206,29 @@ export default function Portfolio() {
 		return p.category === activeFilter;
 	});
 
-	// Auto-scroll effect - SIMPLIFIED AND WORKING
-	useEffect(() => {
-		const element = scrollRef.current;
-		if (!element || filteredProjects.length <= 1) return;
-
-		let direction = 1;
-		let lastTime = 0;
-		const speed = 0.8; // Adjusted for better visibility
-
-		const startAutoScroll = () => {
-			if (autoScrollRef.current) {
-				cancelAnimationFrame(autoScrollRef.current);
-			}
-
-			const animate = (timestamp: number) => {
-				if (!lastTime) lastTime = timestamp;
-				const deltaTime = timestamp - lastTime;
-				lastTime = timestamp;
-
-				if (isAutoScrolling && element) {
-					const scrollLeft = element.scrollLeft;
-					const maxScroll = element.scrollWidth - element.clientWidth;
-
-					// Check boundaries and reverse direction if needed
-					if (scrollLeft >= maxScroll - 5) {
-						direction = -1;
-					} else if (scrollLeft <= 5) {
-						direction = 1;
-					}
-
-					// Scroll based on time for consistent speed
-					const scrollAmount = speed * (deltaTime / 16); // Normalized to 60fps
-					element.scrollLeft += scrollAmount * direction;
-
-					// Update current slide
-					const cardWidth = 400; // Original card width
-					const newSlide = Math.round(element.scrollLeft / cardWidth);
-					setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
-				}
-
-				autoScrollRef.current = requestAnimationFrame(animate);
-			};
-
-			autoScrollRef.current = requestAnimationFrame(animate);
-		};
-
-		// Start auto-scroll
-		startAutoScroll();
-
-		// Handle hover events
-		const handleMouseEnter = () => setIsAutoScrolling(false);
-		const handleMouseLeave = () => setIsAutoScrolling(true);
-
-		element.addEventListener("mouseenter", handleMouseEnter);
-		element.addEventListener("mouseleave", handleMouseLeave);
-
-		// Cleanup
-		return () => {
-			if (autoScrollRef.current) {
-				cancelAnimationFrame(autoScrollRef.current);
-			}
-			element.removeEventListener("mouseenter", handleMouseEnter);
-			element.removeEventListener("mouseleave", handleMouseLeave);
-		};
-	}, [
-		activeFilter,
-		filteredProjects.length,
-		isAutoScrolling,
-		filteredProjects,
-	]);
-
-	const scrollToSlide = useCallback((index: number) => {
-		const element = scrollRef.current;
-		if (!element) return;
-
-		setIsAutoScrolling(false); // Pause auto-scroll
-
-		const cardWidth = 400; // Original card width
-		const scrollPosition = index * cardWidth;
-
-		element.scrollTo({
-			left: scrollPosition,
-			behavior: "smooth",
-		});
-		setCurrentSlide(index);
-
-		// Resume auto-scroll after 3 seconds
-		setTimeout(() => {
-			setIsAutoScrolling(true);
-		}, 3000);
-	}, []);
-
-	const scrollProjects = useCallback(
-		(direction: "left" | "right") => {
-			const element = scrollRef.current;
-			if (!element) return;
-
-			setIsAutoScrolling(false); // Pause auto-scroll
-
-			const cardWidth = 400; // Original card width
-			const gap = 24; // 24px gap between cards
-			const scrollAmount = cardWidth + gap;
-
-			const newScrollLeft =
-				direction === "left"
-					? Math.max(0, element.scrollLeft - scrollAmount)
-					: element.scrollLeft + scrollAmount;
-
-			element.scrollTo({
-				left: newScrollLeft,
-				behavior: "smooth",
-			});
-
-			// Update current slide
-			setTimeout(() => {
-				const newSlide = Math.round(element.scrollLeft / cardWidth);
-				setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
-			}, 300);
-
-			// Resume auto-scroll after 3 seconds
-			setTimeout(() => {
-				setIsAutoScrolling(true);
-			}, 3000);
-		},
-		[filteredProjects.length],
-	);
+	// Duplicate projects for seamless animation
+	const duplicatedProjects = [...filteredProjects, ...filteredProjects];
 
 	// Filter change handler
 	const handleFilterChange = (filterId: string) => {
 		setActiveFilter(filterId);
-		setCurrentSlide(0);
-		setIsAutoScrolling(true);
 		if (scrollRef.current) {
-			scrollRef.current.scrollLeft = 0;
+			scrollRef.current.style.animationPlayState = "running";
+		}
+	};
+
+	// Handle mouse events for pause animation
+	const handleMouseEnter = () => {
+		setIsHovered(true);
+		if (scrollRef.current) {
+			scrollRef.current.style.animationPlayState = "paused";
+		}
+	};
+
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+		if (scrollRef.current) {
+			scrollRef.current.style.animationPlayState = "running";
 		}
 	};
 
@@ -565,63 +450,151 @@ export default function Portfolio() {
 				</Card>
 			</motion.section>
 
-			{/* Projects Section with Navigation */}
-			<div className="relative">
-				{filteredProjects.length > 1 && (
-					<>
-						<button
-							onClick={() => scrollProjects("left")}
-							aria-label="Scroll projects left"
-							className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-700">
-							<ChevronLeft className="w-5 h-5" />
-						</button>
-						<button
-							onClick={() => scrollProjects("right")}
-							aria-label="Scroll projects right"
-							className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-700">
-							<ChevronRight className="w-5 h-5" />
-						</button>
-					</>
-				)}
-
-				<motion.div
-					ref={scrollRef}
-					className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory"
-					style={{ WebkitOverflowScrolling: "touch" }}
-					onScroll={(e) => {
-						const element = e.currentTarget;
-						const cardWidth = 400; // Original card width
-						const scrollPos = element.scrollLeft;
-						const newSlide = Math.round(scrollPos / cardWidth);
-						setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
-					}}>
-					{filteredProjects.map((project) => (
-						<div
-							key={project.id}
-							className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
-							<ProjectCard project={project} />
-						</div>
-					))}
-				</motion.div>
-
-				{/* Slide Indicators */}
-				{filteredProjects.length > 1 && (
-					<div className="flex justify-center gap-2 mt-6">
-						{filteredProjects.map((_, idx) => (
-							<button
-								key={idx}
-								onClick={() => scrollToSlide(idx)}
-								aria-label={`Go to project ${idx + 1}`}
-								className={`w-2 h-2 rounded-full transition-all duration-300 ${
-									currentSlide === idx
-										? "bg-gradient-to-r from-purple-600 to-blue-600 w-6"
-										: "bg-gray-600 hover:bg-gray-400"
-								}`}
-							/>
-						))}
+			{/* Projects Section with CSS Animation */}
+			<motion.section
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.6, duration: 0.6 }}>
+				<Card className="p-5 sm:p-7 overflow-hidden">
+					<div className="text-center mb-6">
+						<motion.h3 className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
+							{activeFilter === "all"
+								? "All Projects"
+								: `${
+										activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)
+								  } Projects`}
+						</motion.h3>
+						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+							{activeFilter === "all"
+								? "Browse through my complete collection of Web2 and Web3 projects"
+								: activeFilter === "web2"
+								? "Traditional web applications built with modern technologies"
+								: activeFilter === "web3"
+								? "Decentralized applications leveraging blockchain technology"
+								: activeFilter === "featured"
+								? "Highlighted projects showcasing my best work"
+								: activeFilter === "live"
+								? "Projects currently deployed and accessible online"
+								: "Projects currently under development"}
+						</p>
 					</div>
-				)}
-			</div>
+
+					{/* Infinite auto-scrolling carousel - pure CSS */}
+					<div className="relative w-full overflow-hidden py-4">
+						{/* Container with mask for fading edges */}
+						<div className="relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-20 before:bg-gradient-to-r before:from-gray-900 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-20 after:bg-gradient-to-l after:from-gray-900 after:to-transparent after:z-10">
+							{/* Scroll container with animation */}
+							<div
+								ref={scrollRef}
+								onMouseEnter={handleMouseEnter}
+								onMouseLeave={handleMouseLeave}
+								className="flex gap-6 w-max animate-infinite-scroll"
+								style={{
+									animationDuration:
+										filteredProjects.length > 3 ? "40s" : "60s",
+									animationPlayState: isHovered ? "paused" : "running",
+								}}>
+								{/* Render duplicated projects for seamless animation */}
+								{duplicatedProjects.map((project, index) => (
+									<motion.div
+										key={`${project.id}-${index}`}
+										className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] flex-shrink-0"
+										whileHover={{ scale: 1.04 }}
+										transition={{ duration: 0.3 }}>
+										<div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
+											{/* Image */}
+											<div className="relative w-full h-64 bg-gray-700 overflow-hidden">
+												<Image
+													src={project.image}
+													alt={project.title}
+													fill
+													className="object-cover transition-transform duration-700 group-hover:scale-110"
+													sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 450px"
+												/>
+												{/* Status badge */}
+												<div className="absolute top-4 left-4">
+													<span
+														className={`px-3 py-1 rounded-full text-xs font-medium ${
+															project.status === "Live"
+																? "bg-green-900/30 text-green-300 border border-green-800/50"
+																: "bg-blue-900/30 text-blue-300 border border-blue-800/50"
+														}`}>
+														{project.status}
+													</span>
+												</div>
+												{project.featured && (
+													<div className="absolute top-4 right-4">
+														<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900/30 text-yellow-300 border border-yellow-800/50">
+															Featured
+														</span>
+													</div>
+												)}
+											</div>
+
+											{/* Content */}
+											<div className="p-6 flex flex-col items-center flex-grow">
+												<motion.h4
+													className="text-sm sm:text-base font-bold text-center mb-4 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+													whileHover={{ scale: 1.03 }}>
+													{project.title}
+												</motion.h4>
+
+												<p className="text-gray-400 text-sm text-center line-clamp-2 mb-4">
+													{project.description}
+												</p>
+
+												{/* Tech stack */}
+												<div className="flex flex-wrap gap-2 justify-center mb-4">
+													{project.tech.slice(0, 3).map((tech, idx) => (
+														<span
+															key={idx}
+															className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
+															{tech}
+														</span>
+													))}
+													{project.tech.length > 3 && (
+														<span className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
+															+{project.tech.length - 3}
+														</span>
+													)}
+												</div>
+
+												<div className="flex gap-5 mt-auto">
+													{project.live && isValidUrl(project.live) && (
+														<motion.a
+															href={project.live}
+															target="_blank"
+															rel="noopener noreferrer"
+															whileHover={{ scale: 1.25, rotate: 8 }}
+															whileTap={{ scale: 0.9 }}
+															className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
+															title="Live Demo">
+															<ExternalLink className="w-5 h-5" />
+														</motion.a>
+													)}
+
+													{project.github && isValidUrl(project.github) && (
+														<motion.a
+															href={project.github}
+															target="_blank"
+															rel="noopener noreferrer"
+															whileHover={{ scale: 1.25, rotate: -8 }}
+															whileTap={{ scale: 0.9 }}
+															className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
+															title="View Code">
+															<Github className="w-5 h-5" />
+														</motion.a>
+													)}
+												</div>
+											</div>
+										</div>
+									</motion.div>
+								))}
+							</div>
+						</div>
+					</div>
+				</Card>
+			</motion.section>
 
 			{/* CTA Section */}
 			<motion.section
