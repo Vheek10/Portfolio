@@ -123,7 +123,7 @@ export default function Home() {
 	const featuredSkills = [
 		{
 			title: "Frontend Development",
-			description: "React, Next.js, TypeScript",
+			description: "React, Next.js, TypeScript, Tailwindcss",
 			progress: 90,
 		},
 		{
@@ -195,7 +195,9 @@ export default function Home() {
 						<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
 							{stat.number}
 						</div>
-						<div className="text-sm font-accent tracking-wider uppercase text-gray-400">{stat.label}</div>
+						<div className="text-sm font-accent tracking-wider uppercase text-gray-400">
+							{stat.label}
+						</div>
 					</Card>
 				))}
 			</motion.section>
@@ -221,116 +223,111 @@ export default function Home() {
 				))}
 			</motion.section>
 
-		{/* Featured Projects */}
-<motion.section
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.6, duration: 0.6 }}
->
-  <Card className="p-5 sm:p-7 overflow-hidden">
-    <div className="text-center mb-6">
-      <motion.h4
-        className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center"
-      >
-        Featured Projects
-      </motion.h4>
-      <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-        Showcasing my diverse range of projects from blockchain applications to trading bots and modern web applications
-      </p>
-    </div>
+			{/* Featured Projects */}
+			<motion.section
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.6, duration: 0.6 }}>
+				<Card className="p-5 sm:p-7 overflow-hidden">
+					<div className="text-center mb-6">
+						<motion.h3 className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
+							Featured Projects
+						</motion.h3>
+						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
+							Showcasing my diverse range of projects from blockchain
+							applications to trading bots and modern web applications
+						</p>
+					</div>
 
-    {/* Infinite auto-scrolling carousel - pure CSS */}
-    <div className="relative w-full overflow-hidden py-4">
-      <div className="flex gap-6 w-max animate-infinite-scroll hover:pause-scroll">
-        {/* First set + duplicate for seamless loop */}
-        {[...featuredProjects, ...featuredProjects].map((project, index) => (
-          <motion.div
-            key={`${project.title}-${index}`}
-            className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] flex-shrink-0"
-            whileHover={{ scale: 1.04 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
-              {/* Image */}
-              <div className="relative w-full h-80 bg-gray-700 overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                    target.parentElement!.style.background =
-                      "linear-gradient(135deg, #8B5CF6, #3B82F6)";
-                    const fallback = document.createElement("div");
-                    fallback.className =
-                      "w-full h-full flex items-center justify-center text-white font-bold text-xl";
-                    fallback.textContent = project.title.split(" ")[0];
-                    target.parentElement!.appendChild(fallback);
-                  }}
-                />
-              </div>
+					{/* Infinite auto-scrolling carousel - pure CSS */}
+					<div className="relative w-full overflow-hidden py-4">
+						<div className="flex gap-6 w-max animate-infinite-scroll hover:pause-scroll">
+							{/* First set + duplicate for seamless loop */}
+							{[...featuredProjects, ...featuredProjects].map(
+								(project, index) => (
+									<motion.div
+										key={`${project.title}-${index}`}
+										className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] flex-shrink-0"
+										whileHover={{ scale: 1.04 }}
+										transition={{ duration: 0.3 }}>
+										<div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
+											{/* Image */}
+											<div className="relative w-full h-80 bg-gray-700 overflow-hidden">
+												<Image
+													src={project.image}
+													alt={project.title}
+													fill
+													className="object-cover transition-transform duration-700 group-hover:scale-110"
+													onError={(e) => {
+														const target = e.target as HTMLImageElement;
+														target.style.display = "none";
+														target.parentElement!.style.background =
+															"linear-gradient(135deg, #8B5CF6, #3B82F6)";
+														const fallback = document.createElement("div");
+														fallback.className =
+															"w-full h-full flex items-center justify-center text-white font-bold text-xl";
+														fallback.textContent = project.title.split(" ")[0];
+														target.parentElement!.appendChild(fallback);
+													}}
+												/>
+											</div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col items-center flex-grow">
-                <motion.h4
-                  className="text-sm sm:text-base font-bold text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
-                  whileHover={{ scale: 1.03 }}
-                >
-                  {project.title}
-                </motion.h4>
+											{/* Content */}
+											<div className="p-6 flex flex-col items-center flex-grow">
+												<motion.h4
+													className="text-sm sm:text-base font-bold text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+													whileHover={{ scale: 1.03 }}>
+													{project.title}
+												</motion.h4>
 
-                <div className="flex gap-5 mt-auto">
-                  {project.liveUrl && project.liveUrl !== "#" && (
-                    <motion.a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.25, rotate: 8 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
-                      title="Live Demo"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </motion.a>
-                  )}
+												<div className="flex gap-5 mt-auto">
+													{project.liveUrl && project.liveUrl !== "#" && (
+														<motion.a
+															href={project.liveUrl}
+															target="_blank"
+															rel="noopener noreferrer"
+															whileHover={{ scale: 1.25, rotate: 8 }}
+															whileTap={{ scale: 0.9 }}
+															className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
+															title="Live Demo">
+															<ExternalLink className="w-5 h-5" />
+														</motion.a>
+													)}
 
-                  {project.githubUrl && project.githubUrl !== "#" && (
-                    <motion.a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.25, rotate: -8 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
-                      title="View Code"
-                    >
-                      <Github className="w-5 h-5" />
-                    </motion.a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
+													{project.githubUrl && project.githubUrl !== "#" && (
+														<motion.a
+															href={project.githubUrl}
+															target="_blank"
+															rel="noopener noreferrer"
+															whileHover={{ scale: 1.25, rotate: -8 }}
+															whileTap={{ scale: 0.9 }}
+															className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
+															title="View Code">
+															<Github className="w-5 h-5" />
+														</motion.a>
+													)}
+												</div>
+											</div>
+										</div>
+									</motion.div>
+								),
+							)}
+						</div>
+					</div>
 
-    {/* CTA */}
-    <div className="text-center mt-10">
-      <motion.a
-        href="/portfolio"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white hover:border-purple-500"
-      >
-        View All Projects
-        <ArrowRight className="w-4 h-4" />
-      </motion.a>
-    </div>
-  </Card>
-</motion.section>
+					{/* CTA */}
+					<div className="text-center mt-10">
+						<motion.a
+							href="/portfolio"
+							whileHover={{ scale: 1.05 }}
+							whileTap={{ scale: 0.95 }}
+							className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white hover:border-purple-500">
+							View All Projects
+							<ArrowRight className="w-4 h-4" />
+						</motion.a>
+					</div>
+				</Card>
+			</motion.section>
 
 			{/* Skills Progress */}
 			<motion.section
@@ -338,10 +335,9 @@ export default function Home() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
 				<Card className="p-5">
-					<motion.h4
-						className="text-lg sm:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2">
+					<motion.h3 className="text-lg sm:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2">
 						Core Expertise
-					</motion.h4>
+					</motion.h3>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (
 							<motion.div

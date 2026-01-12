@@ -240,13 +240,13 @@ const ExpertAreaCard = () => {
 	return (
 		<Card className="expertise-card">
 			<CardContent className="p-6">
-				<motion.h4
+				<motion.h3
 					className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.6 }}>
 					Tech Stack & Tools
-				</motion.h4>
+				</motion.h3>
 
 				<div className="space-y-2">
 					{/* Top Scrolling Row */}
