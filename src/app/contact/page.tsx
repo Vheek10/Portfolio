@@ -141,9 +141,9 @@ export default function Contact() {
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Let's Work Together
-						</h1>
+						</h2>
 						<p className="text-sm md:text-base text-gray-400 max-w-3xl mx-auto leading-relaxed">
 							Have a project in mind? Let's discuss how we can bring your ideas
 							to life with cutting-edge Web3 and Web2 solutions.
@@ -182,9 +182,9 @@ export default function Contact() {
 					) : (
 						<div className="h-full flex flex-col">
 							<div className="text-center mb-8">
-								<h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
+								<h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
 									Send a Message
-								</h2>
+								</h3>
 								<p className="text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
 									Fill out the form below with your project details and I'll get
 									back to you as soon as possible to discuss how we can bring
@@ -416,9 +416,9 @@ export default function Contact() {
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card className="p-6 sm:p-7">
 					<div className="text-center mb-8">
-						<h2 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h3 className="text-lg md:text-xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							Frequently Asked Questions
-						</h2>
+						</h3>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
