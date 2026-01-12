@@ -12,10 +12,11 @@ import {
 	Eye,
 	Code,
 	Zap,
-	Users,
 	TrendingUp,
+	ChevronLeft,
+	ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 const projects = [
@@ -110,7 +111,7 @@ const projects = [
 		category: "web2",
 		description:
 			"AI-powered resume builder with templates, content suggestions, and ATS optimization.",
-		image: "/resumeai.png", // Make sure to add this image to your public folder
+		image: "/resumeai.png",
 		tech: ["Next.js", "OpenAI API", "TailwindCSS", "TypeScript", "Firebase"],
 		github: "https://github.com/Vheek10/ai-resume-craft",
 		live: "https://ai-resume-nine-ecru.vercel.app/",
@@ -151,14 +152,66 @@ const projects = [
 		description: "Decentralized prediction platform on Solana blockchain.",
 		image: "/polysight.png",
 		tech: ["Next.js", "Rust", "Solana", "TypeScript"],
-		github: "www.github.com/Vheek10/Polysight",
-		live: "polysight.vercel.app",
+		github: "https://github.com/Vheek10/Polysight",
+		live: "https://polysight.vercel.app",
 		status: "Live",
 	},
 ];
 
+// URL validation helper
+const isValidUrl = (url: string) => {
+	return url && url !== "#" && (url.startsWith("http") || url.startsWith("/"));
+};
+
 export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const scrollRef = useRef<HTMLDivElement>(null);
+	const animationIdRef = useRef<number | null>(null);
+
+	useEffect(() => {
+		const element = scrollRef.current;
+		if (!element) return;
+
+		let direction = 1;
+		let paused = false;
+		let lastScrollPosition = 0;
+
+		const handleMouseEnter = () => (paused = true);
+		const handleMouseLeave = () => (paused = false);
+
+		element.addEventListener("mouseenter", handleMouseEnter);
+		element.addEventListener("mouseleave", handleMouseLeave);
+
+		const animate = () => {
+			if (!paused) {
+				element.scrollLeft += 0.5 * direction;
+
+				// Update current slide based on scroll position
+				const cardWidth = 400; // Approximate width of each card
+				const newSlide = Math.round(element.scrollLeft / cardWidth);
+				setCurrentSlide(Math.min(newSlide, filteredProjects.length - 1));
+
+				if (element.scrollLeft + element.clientWidth >= element.scrollWidth) {
+					direction = -1;
+				}
+				if (element.scrollLeft <= 0) {
+					direction = 1;
+				}
+			}
+			animationIdRef.current = requestAnimationFrame(animate);
+		};
+
+		animationIdRef.current = requestAnimationFrame(animate);
+
+		return () => {
+			if (animationIdRef.current) {
+				cancelAnimationFrame(animationIdRef.current);
+			}
+			element.removeEventListener("mouseenter", handleMouseEnter);
+			element.removeEventListener("mouseleave", handleMouseLeave);
+		};
+	}, [activeFilter]);
 
 	const filters = [
 		{ id: "all", label: "All Projects" },
@@ -177,7 +230,7 @@ export default function Portfolio() {
 		},
 		{
 			icon: <Code className="w-6 h-6" />,
-			number: "16+",
+			number: "20+",
 			label: "Projects Completed",
 		},
 		{
@@ -187,183 +240,190 @@ export default function Portfolio() {
 		},
 		{
 			icon: <TrendingUp className="w-6 h-6" />,
-			number: "2+",
+			number: "3+",
 			label: "Years Experience",
 		},
 	];
 
-	const filteredProjects = projects.filter((project) => {
+	const filteredProjects = projects.filter((p) => {
 		if (activeFilter === "all") return true;
-		if (activeFilter === "featured") return project.featured;
-		if (activeFilter === "live") return project.status === "Live";
-		if (activeFilter === "development")
-			return project.status === "In Development";
-		return project.category === activeFilter;
+		if (activeFilter === "featured") return p.featured;
+		if (activeFilter === "live") return p.status === "Live";
+		if (activeFilter === "development") return p.status === "In Development";
+		return p.category === activeFilter;
 	});
-
-	const web2Projects = projects.filter(
-		(project) => project.category === "web2",
-	);
-	const web3Projects = projects.filter(
-		(project) => project.category === "web3",
-	);
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.1,
-			},
-		},
+		visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 	};
-
 	const itemVariants = {
 		hidden: { opacity: 0, y: 20 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.6,
-			},
-		},
+		visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 	};
 
-	const ProjectCard = ({ project }: { project: any }) => (
-		<motion.div
-			variants={itemVariants}
-			layout
-			className="group flex">
-			<Card className="overflow-hidden flex flex-col transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-600 w-full">
-				{/* Project Image - Larger */}
-				<div className="relative overflow-hidden h-64 bg-gray-800 flex-shrink-0">
-					<Image
-						src={project.image}
-						alt={project.title}
-						fill
-						className="object-cover transition-transform duration-300 group-hover:scale-105"
-						onError={(e) => {
-							const target = e.target as HTMLImageElement;
-							target.style.display = "none";
-							target.parentElement!.style.background =
-								"linear-gradient(135deg, #8B5CF6, #3B82F6)";
-						}}
-					/>
+	const ProjectCard = ({ project }: { project: any }) => {
+		const [imageError, setImageError] = useState(false);
 
-					{/* Status Badge */}
-					<div className="absolute top-4 left-4">
-						<span
-							className={`px-3 py-1 rounded-full text-xs font-medium ${
-								project.status === "Live"
-									? "bg-green-900 text-green-200"
-									: "bg-blue-900 text-blue-200"
-							}`}>
-							{project.status}
-						</span>
-					</div>
-
-					{/* Featured Badge */}
-					{project.featured && (
-						<div className="absolute top-4 right-4">
-							<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 text-yellow-200">
-								Featured
-							</span>
-						</div>
-					)}
-
-					{/* Overlay with Links */}
-					<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-						<div className="flex gap-4">
-							{project.live !== "#" && (
-								<motion.a
-									href={project.live}
-									target="_blank"
-									rel="noopener noreferrer"
-									whileHover={{ scale: 1.1 }}
-									whileTap={{ scale: 0.9 }}
-									className="w-12 h-12 rounded-full bg-white text-purple-600 flex items-center justify-center transition-all duration-300 hover:bg-purple-600 hover:text-white">
-									<ExternalLink className="w-5 h-5" />
-								</motion.a>
-							)}
-							{project.github !== "#" && (
-								<motion.a
-									href={project.github}
-									target="_blank"
-									rel="noopener noreferrer"
-									whileHover={{ scale: 1.1 }}
-									whileTap={{ scale: 0.9 }}
-									className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white">
-									<Github className="w-5 h-5" />
-								</motion.a>
-							)}
-						</div>
-					</div>
-				</div>
-
-				{/* Project Content - Minimal */}
-				<div className="p-6 flex flex-col flex-grow">
-					{/* Project Title */}
-					<motion.h4
-						className="text-sm sm:text-base font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
-						whileHover={{
-							scale: 1.05,
-						}}
-						transition={{ duration: 0.3 }}>
-						{project.title}
-					</motion.h4>
-
-					{/* Short Description */}
-					<p className="text-gray-400 text-sm mb-4 text-center line-clamp-2 flex-grow">
-						{project.description}
-					</p>
-
-					{/* Technologies - Minimal */}
-					<div className="flex flex-wrap gap-1 mb-4 justify-center">
-						{project.tech.slice(0, 3).map((tech: string, idx: number) => (
+		return (
+			<motion.div
+				variants={itemVariants}
+				layout
+				className="group flex">
+				<Card className="overflow-hidden flex flex-col transition-all duration-300 group-hover:shadow-xl group-hover:border-purple-600 w-full">
+					<div className="relative overflow-hidden h-64 bg-gray-800 flex-shrink-0">
+						<Image
+							src={imageError ? "/project-placeholder.jpg" : project.image}
+							alt={project.title}
+							fill
+							loading="lazy"
+							className="object-cover transition-transform duration-300 group-hover:scale-105"
+							onError={() => setImageError(true)}
+						/>
+						<div className="absolute top-4 left-4">
 							<span
-								key={idx}
-								className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
-								{tech}
+								className={`px-3 py-1 rounded-full text-xs font-medium ${
+									project.status === "Live"
+										? "bg-green-900 text-green-200"
+										: "bg-blue-900 text-blue-200"
+								}`}>
+								{project.status}
 							</span>
-						))}
-						{project.tech.length > 3 && (
-							<span className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
-								+{project.tech.length - 3}
-							</span>
+						</div>
+						{project.featured && (
+							<div className="absolute top-4 right-4">
+								<span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 text-yellow-200">
+									Featured
+								</span>
+							</div>
 						)}
+						<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+							<div className="flex gap-4">
+								{[
+									{
+										url: project.live,
+										icon: <ExternalLink className="w-5 h-5" />,
+										title: "Live Demo",
+									},
+									{
+										url: project.github,
+										icon: <Github className="w-5 h-5" />,
+										title: "View Code",
+									},
+								]
+									.filter((link) => isValidUrl(link.url))
+									.map((link, idx) => (
+										<motion.a
+											key={idx}
+											href={link.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											whileHover={{ scale: 1.1 }}
+											whileTap={{ scale: 0.9 }}
+											className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white"
+											title={link.title}
+											aria-label={link.title}>
+											{link.icon}
+										</motion.a>
+									))}
+							</div>
+						</div>
 					</div>
+					<div className="p-6 flex flex-col flex-grow">
+						<motion.h4
+							className="text-sm sm:text-base font-bold font-clash tracking-tight text-white text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+							whileHover={{ scale: 1.05 }}
+							transition={{ duration: 0.3 }}>
+							{project.title}
+						</motion.h4>
+						<p className="text-gray-400 text-sm mb-4 text-center line-clamp-2 flex-grow">
+							{project.description}
+						</p>
+						<div className="flex flex-wrap gap-1 mb-4 justify-center">
+							{project.tech.slice(0, 3).map((tech, idx) => (
+								<span
+									key={idx}
+									className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+									{tech}
+								</span>
+							))}
+							{project.tech.length > 3 && (
+								<span className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+									+{project.tech.length - 3}
+								</span>
+							)}
+						</div>
+						<div className="flex justify-center gap-3 mt-auto pt-4">
+							{[
+								{
+									url: project.live,
+									icon: <ExternalLink className="w-5 h-5" />,
+									title: "Live Demo",
+									bg: "bg-purple-600",
+									hoverBg: "hover:bg-purple-700",
+								},
+								{
+									url: project.github,
+									icon: <Github className="w-5 h-5" />,
+									title: "View Code",
+									bg: "bg-gray-600",
+									hoverBg: "hover:bg-gray-700",
+								},
+							]
+								.filter((link) => isValidUrl(link.url))
+								.map((link, idx) => (
+									<motion.a
+										key={idx}
+										href={link.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.2, rotate: idx === 0 ? 5 : -5 }}
+										whileTap={{ scale: 0.9 }}
+										className={`flex items-center justify-center w-12 h-12 rounded-full ${link.bg} text-white ${link.hoverBg} transition-all duration-300 shadow-lg`}
+										title={link.title}
+										aria-label={link.title}>
+										{link.icon}
+									</motion.a>
+								))}
+						</div>
+					</div>
+				</Card>
+			</motion.div>
+		);
+	};
 
-					{/* Action Buttons - Icon Only */}
-					<div className="flex justify-center gap-3 mt-auto pt-4">
-						{project.live !== "#" && (
-							<motion.a
-								href={project.live}
-								target="_blank"
-								rel="noopener noreferrer"
-								whileHover={{ scale: 1.2, rotate: 5 }}
-								whileTap={{ scale: 0.9 }}
-								className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
-								title="Live Demo">
-								<ExternalLink className="w-5 h-5" />
-							</motion.a>
-						)}
-						{project.github !== "#" && (
-							<motion.a
-								href={project.github}
-								target="_blank"
-								rel="noopener noreferrer"
-								whileHover={{ scale: 1.2, rotate: -5 }}
-								whileTap={{ scale: 0.9 }}
-								className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-600 text-white hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-gray-500/25"
-								title="View Code">
-								<Github className="w-5 h-5" />
-							</motion.a>
-						)}
-					</div>
-				</div>
-			</Card>
-		</motion.div>
-	);
+	const scrollToSlide = (index: number) => {
+		const element = scrollRef.current;
+		if (!element) return;
+
+		const cardWidth = 400; // Approximate width of each card
+		const newPosition = index * cardWidth;
+		element.scrollTo({
+			left: newPosition,
+			behavior: "smooth",
+		});
+		setCurrentSlide(index);
+	};
+
+	const scrollProjects = (direction: "left" | "right") => {
+		const element = scrollRef.current;
+		if (!element) return;
+
+		const scrollAmount = 400; // Width of one card
+		const newPosition =
+			direction === "left"
+				? element.scrollLeft - scrollAmount
+				: element.scrollLeft + scrollAmount;
+
+		element.scrollTo({
+			left: newPosition,
+			behavior: "smooth",
+		});
+	};
+
+	const scrollableProjects = filteredProjects.length
+		? filteredProjects
+		: projects;
 
 	return (
 		<div className="space-y-8 md:space-y-10">
@@ -392,7 +452,7 @@ export default function Portfolio() {
 				initial="hidden"
 				animate="visible">
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-					{stats.map((stat, index) => (
+					{stats.map((stat) => (
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}>
@@ -419,121 +479,80 @@ export default function Portfolio() {
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 						<div className="flex items-center gap-2">
 							<Filter className="w-5 h-5 text-gray-400" />
-							<span className="font-semibold text-white">Filter by:</span>
+							<span className="font-semibold text-white">
+								Projects ({filteredProjects.length}/{projects.length})
+							</span>
 						</div>
 						<div className="flex flex-wrap gap-2">
-							{filters.map((filter) => (
+							{filters.map((f) => (
 								<button
-									key={filter.id}
-									onClick={() => setActiveFilter(filter.id)}
+									key={f.id}
+									onClick={() => setActiveFilter(f.id)}
+									aria-label={`Filter projects by ${f.label}`}
+									aria-pressed={activeFilter === f.id}
 									className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-										activeFilter === filter.id
+										activeFilter === f.id
 											? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
 											: "bg-gray-800 text-gray-300 hover:bg-gray-700"
 									}`}>
-									{filter.label}
+									{f.label}
 								</button>
 							))}
 						</div>
 					</div>
 				</Card>
 			</motion.section>
-			{/* All Projects View */}
-			{activeFilter === "all" && (
-				<>
-					{/* Web2 Projects Section */}
-					<motion.section
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6 }}>
-						<div className="text-center mb-8">
-							<h3 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-								Web2 Projects
-							</h3>
-							<p className="text-gray-400 max-w-2xl mx-auto">
-								Modern web applications built with cutting-edge technologies and
-								user-centric design.
-							</p>
-						</div>
-						<motion.div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-							{web2Projects.map((project) => (
-								<div
-									key={project.id}
-									className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
-									<ProjectCard project={project} />
-								</div>
-							))}
-						</motion.div>
-					</motion.section>
 
-					{/* Web3 Projects Section */}
-					<motion.section
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}>
-						<div className="text-center mb-8">
-							<h3 className="text-3xl md:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-								Web3 Projects
-							</h3>
-							<p className="text-gray-400 max-w-2xl mx-auto">
-								Blockchain and decentralized applications exploring the future
-								of web technology.
-							</p>
-						</div>
-						<motion.div className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-							{web3Projects.map((project) => (
-								<div
-									key={project.id}
-									className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
-									<ProjectCard project={project} />
-								</div>
-							))}
-						</motion.div>
-					</motion.section>
-				</>
-			)}
+			{/* Projects Section with Navigation */}
+			<div className="relative">
+				{filteredProjects.length > 1 && (
+					<>
+						<button
+							onClick={() => scrollProjects("left")}
+							aria-label="Scroll projects left"
+							className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-700">
+							<ChevronLeft className="w-5 h-5" />
+						</button>
+						<button
+							onClick={() => scrollProjects("right")}
+							aria-label="Scroll projects right"
+							className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-700 transition-all duration-300 shadow-lg border border-gray-700">
+							<ChevronRight className="w-5 h-5" />
+						</button>
+					</>
+				)}
 
-			{/* Filtered Projects View */}
-			{activeFilter !== "all" && (
-				<motion.section className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory">
-					{filteredProjects.map((project) => (
+				<motion.div
+					ref={scrollRef}
+					className="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x snap-mandatory"
+					style={{ WebkitOverflowScrolling: "touch" }}>
+					{scrollableProjects.map((project) => (
 						<div
 							key={project.id}
 							className="min-w-[300px] sm:min-w-[400px] lg:min-w-[450px] snap-center">
-							<ProjectCard
-								key={project.id}
-								project={project}
-							/>
+							<ProjectCard project={project} />
 						</div>
 					))}
-				</motion.section>
-			)}
+				</motion.div>
 
-			{/* Empty State */}
-			{filteredProjects.length === 0 && activeFilter !== "all" && (
-				<motion.section
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}>
-					<Card className="p-8 text-center">
-						<div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-800 flex items-center justify-center">
-							<Filter className="w-10 h-10 text-gray-400" />
-						</div>
-						<h3 className="text-lg font-bold text-white mb-2">
-							No projects found
-						</h3>
-						<p className="text-gray-400 mb-6">
-							No projects match the selected filter. Try choosing a different
-							category.
-						</p>
-						<button
-							onClick={() => setActiveFilter("all")}
-							className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-lg">
-							Show All Projects
-						</button>
-					</Card>
-				</motion.section>
-			)}
+				{/* Slide Indicators */}
+				{filteredProjects.length > 1 && (
+					<div className="flex justify-center gap-2 mt-6">
+						{filteredProjects.map((_, idx) => (
+							<button
+								key={idx}
+								onClick={() => scrollToSlide(idx)}
+								aria-label={`Go to project ${idx + 1}`}
+								className={`w-2 h-2 rounded-full transition-all duration-300 ${
+									currentSlide === idx
+										? "bg-gradient-to-r from-purple-600 to-blue-600 w-6"
+										: "bg-gray-600 hover:bg-gray-400"
+								}`}
+							/>
+						))}
+					</div>
+				)}
+			</div>
 
 			{/* CTA Section */}
 			<motion.section
@@ -556,7 +575,8 @@ export default function Portfolio() {
 								href="/contact"
 								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.95 }}
-								className="px-8 py-4 rounded-2xl bg-white text-purple-600 font-semibold transition-all duration-300 hover:shadow-2xl flex items-center gap-2">
+								className="px-8 py-4 rounded-2xl bg-white text-purple-600 font-semibold transition-all duration-300 hover:shadow-2xl flex items-center gap-2"
+								aria-label="Start a new project">
 								Start a Project
 								<ArrowRight className="w-5 h-5" />
 							</motion.a>
