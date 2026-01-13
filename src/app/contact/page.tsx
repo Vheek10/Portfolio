@@ -8,8 +8,9 @@ import { Send, CheckCircle, ChevronDown, DollarSign } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import emailjs from "emailjs-com";
 
-// Initialize EmailJS with your credentials
-emailjs.init("auR9dWwQWFJdldZ9H");
+// Initialize EmailJS with environment variable
+// Make sure you have NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in your .env.local file
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "");
 
 interface BudgetOption {
 	value: string;
@@ -64,11 +65,24 @@ export default function Contact() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		// Check if environment variables are set
+		if (
+			!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ||
+			!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ||
+			!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+		) {
+			setError(
+				"Email configuration is not set up. Please contact me directly at jeremiahvictorgp@gmail.com",
+			);
+			return;
+		}
+
 		setIsSubmitting(true);
 		setError("");
 
 		try {
-			// Send email using EmailJS with your credentials
+			// Send email using EmailJS with environment variables
 			const templateParams = {
 				from_name: formData.name,
 				from_email: formData.email,
@@ -80,8 +94,8 @@ export default function Contact() {
 			};
 
 			const result = await emailjs.send(
-				"service_usczodq",
-				"template_akepjxb",
+				process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+				process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
 				templateParams,
 			);
 
@@ -410,7 +424,6 @@ export default function Contact() {
 			</motion.div>
 
 			{/* FAQ Section */}
-
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -434,7 +447,7 @@ export default function Contact() {
 							},
 							{
 								q: "WHAT INFORMATION SHOULD I INCLUDE IN MY PROJECT INQUIRY?",
-								a: "A brief project overview, goals, timeline, budget range, and any specific features or technologies you’re considering.",
+								a: "A brief project overview, goals, timeline, budget range, and any specific features or technologies you're considering.",
 							},
 							{
 								q: "DO YOU OFFER ONGOING SUPPORT AFTER PROJECT COMPLETION?",
@@ -453,7 +466,6 @@ export default function Contact() {
 								</summary>
 
 								<AnimatePresence initial={false}>
-									{/* Animate height and opacity */}
 									<motion.div
 										initial={{ height: 0, opacity: 0 }}
 										animate={{ height: "auto", opacity: 1 }}
