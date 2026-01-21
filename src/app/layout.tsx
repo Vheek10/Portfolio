@@ -69,6 +69,10 @@ export default function RootLayout({
 					rel="apple-touch-icon"
 					href="/profile.jpg?v=3"
 				/>
+				<meta
+					name="google-site-verification"
+					content="googlec55af1cd3e71996a"
+				/>
 			</head>
 
 			<body
