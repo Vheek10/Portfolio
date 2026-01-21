@@ -29,16 +29,32 @@ export const metadata = {
 	keywords:
 		"full-stack developer, 3D web design, web development, React, Next.js, portfolio",
 	authors: [{ name: "Jeremiah Victor" }],
-	viewport: "width=device-width, initial-scale=1",
-	themeColor: "#111827",
-	robots: "index, follow",
+	metadataBase: new URL("https://www.vheek.xyz"),
+	alternates: {
+		canonical: "/",
+	},
+	robots: {
+		index: true,
+		follow: true,
+	},
+	verification: {
+		google: "googlec55af1cd3e71996a",
+	},
 	openGraph: {
 		title: "Jeremiah Victor - Creative Full-Stack Developer",
 		description:
 			"Portfolio of Jeremiah Victor, a creative full-stack developer and 3D web designer.",
 		type: "website",
 		locale: "en_US",
+		url: "https://www.vheek.xyz",
+		siteName: "Jeremiah Victor Portfolio",
 	},
+};
+
+export const viewport = {
+	themeColor: "#020617",
+	width: "device-width",
+	initialScale: 1,
 };
 
 export default function RootLayout({
@@ -52,14 +68,6 @@ export default function RootLayout({
 			className={`${clashDisplay.variable} dark bg-[#020617] scroll-smooth`}
 			style={{ colorScheme: "dark", backgroundColor: "#020617" }}>
 			<head>
-				<meta
-					name="color-scheme"
-					content="dark"
-				/>
-				<meta
-					name="theme-color"
-					content="#020617"
-				/>
 				<link
 					rel="icon"
 					href="/profile.jpg?v=3"
@@ -68,10 +76,6 @@ export default function RootLayout({
 				<link
 					rel="apple-touch-icon"
 					href="/profile.jpg?v=3"
-				/>
-				<meta
-					name="google-site-verification"
-					content="googlec55af1cd3e71996a"
 				/>
 			</head>
 
