@@ -102,23 +102,55 @@ const ExpertAreaCard = () => {
 		// Additional Technologies
 		{
 			id: 15,
-			icon: "/icons/tailwindcss.png", // Using PNG for Tailwind
+			icon: "/icons/tailwindcss.png",
 			name: "Tailwind",
 		},
 		{
 			id: 16,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+			icon: "/icons/mongodb.svg",
 			name: "MongoDB",
 		},
 		{
 			id: 17,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+			icon: "/icons/postgresql.svg",
 			name: "PostgreSQL",
 		},
 		{
 			id: 18,
-			icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+			icon: "/icons/docker.svg",
 			name: "Docker",
+		},
+
+		// Rust, Move and DevOps Stack
+		{
+			id: 19,
+			icon: "/icons/rust.png",
+			name: "Rust",
+		},
+		{
+			id: 20,
+			icon: "/icons/move.png",
+			name: "Move",
+		},
+		{
+			id: 21,
+			icon: "/icons/kubernetes.svg",
+			name: "Kubernetes",
+		},
+		{
+			id: 22,
+			icon: "/icons/terraform.svg",
+			name: "Terraform",
+		},
+		{
+			id: 23,
+			icon: "/icons/aws.png",
+			name: "AWS",
+		},
+		{
+			id: 24,
+			icon: "/icons/github-actions.svg",
+			name: "GitHub Actions",
 		},
 	];
 
@@ -284,6 +316,10 @@ const ExpertAreaCard = () => {
 					<div className="flex items-center gap-1">
 						<div className="w-2 h-2 bg-orange-500 rounded-full"></div>
 						<span>Backend</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+						<span>DevOps / Infra</span>
 					</div>
 				</motion.div>
 			</CardContent>

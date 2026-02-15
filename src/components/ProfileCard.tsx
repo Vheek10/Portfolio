@@ -26,6 +26,7 @@ const ProfileCard = () => {
 		"Web3 Developer",
 		"Full Stack Developer",
 		"UI/UX Designer",
+		"DevOps Engineer",
 		"Smart Contract Engineer",
 	]);
 
@@ -138,7 +139,6 @@ const ProfileCard = () => {
 								</span>{" "}
 								🖥️
 							</p>
-
 						</div>
 					</motion.div>
 				</div>

@@ -143,6 +143,11 @@ export default function Home() {
 			description: "Figma, Responsive Design, User Experience",
 			progress: 75,
 		},
+		{
+			title: "DevOps Engineering",
+			description: "CI/CD, Kubernetes, Terraform, AWS, GitHub Actions",
+			progress: 80,
+		},
 	];
 
 	// Add hover state
