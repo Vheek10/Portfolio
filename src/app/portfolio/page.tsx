@@ -130,10 +130,23 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
+	{
+		id: 8,
+		title: "EasyB Group",
+		category: "web2",
+		description:
+			"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
+		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+		status: "Live",
+		live: "https://easybgroup.co.za/",
+		github: "#",
+		image: "/easyb.png",
+		featured: true,
+	},
 
 	// ==== Web3 Projects ====
 	{
-		id: 8,
+		id: 9,
 		title: "StrataDeed - OnChain Real Estate",
 		category: "web3",
 		description: "Decentralized real estate agency with property tokenization.",
@@ -146,7 +159,7 @@ const projects: Project[] = [
 	},
 
 	{
-		id: 9,
+		id: 10,
 		title: "DeFi Portfolio Tracker",
 		category: "web3",
 		description: "Multi-chain portfolio tracker with real-time P&L analytics.",
@@ -159,7 +172,7 @@ const projects: Project[] = [
 	},
 
 	{
-		id: 10,
+		id: 11,
 		title: "PolySight - Solana Prediction Market",
 		category: "web3",
 		description: "Decentralized prediction platform on Solana blockchain.",
@@ -199,7 +212,7 @@ export default function Portfolio() {
 		},
 		{
 			icon: <Code className="w-6 h-6" />,
-			number: "20+",
+			number: "30+",
 			label: "Projects Completed",
 		},
 		{
@@ -478,20 +491,20 @@ export default function Portfolio() {
 								? "All Projects"
 								: `${
 										activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)
-								  } Projects`}
+									} Projects`}
 						</motion.h3>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
 							{activeFilter === "all"
 								? "Browse through my complete collection of Web2 and Web3 projects"
 								: activeFilter === "web2"
-								? "Traditional web applications built with modern technologies"
-								: activeFilter === "web3"
-								? "Decentralized applications leveraging blockchain technology"
-								: activeFilter === "featured"
-								? "Highlighted projects showcasing my best work"
-								: activeFilter === "live"
-								? "Projects currently deployed and accessible online"
-								: "Projects currently under development"}
+									? "Traditional web applications built with modern technologies"
+									: activeFilter === "web3"
+										? "Decentralized applications leveraging blockchain technology"
+										: activeFilter === "featured"
+											? "Highlighted projects showcasing my best work"
+											: activeFilter === "live"
+												? "Projects currently deployed and accessible online"
+												: "Projects currently under development"}
 						</p>
 					</div>
 

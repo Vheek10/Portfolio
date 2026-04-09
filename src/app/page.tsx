@@ -81,6 +81,16 @@ export default function Home() {
 			githubUrl: "https://github.com/Vheek10/joeyung",
 			image: "/joeyung.png",
 		},
+		{
+			title: "EasyB Group",
+			description:
+				"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
+			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+			status: "Live",
+			liveUrl: "https://easybgroup.co.za/",
+			githubUrl: "#",
+			image: "/easyb.png",
+		},
 	];
 
 	const highlights = [
