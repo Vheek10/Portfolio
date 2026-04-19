@@ -15,6 +15,8 @@ import {
 	TrendingUp,
 	ExternalLink,
 	Github,
+	ChevronLeft,
+	ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -161,7 +163,43 @@ export default function Home() {
 	];
 
 	// Add hover state
-	const [isHovered, setIsHovered] = useState(false);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [selectedProject, setSelectedProject] = useState<
+		(typeof featuredProjects)[0] | null
+	>(null);
+	const itemsPerPage = 2;
+
+	// Pagination logic
+	const totalPages = Math.ceil(featuredProjects.length / itemsPerPage);
+	const startIndex = currentPage * itemsPerPage;
+	const endIndex = startIndex + itemsPerPage;
+	const paginatedProjects = featuredProjects.slice(startIndex, endIndex);
+
+	// Pagination handlers with swipe support
+	const handlePrevPage = () => {
+		setCurrentPage((prev) => Math.max(0, prev - 1));
+		setSelectedProject(null);
+	};
+
+	const handleNextPage = () => {
+		setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev));
+		setSelectedProject(null);
+	};
+
+	// Swipe detection
+	const handleDragEnd = (
+		event: MouseEvent | TouchEvent | PointerEvent,
+		info: { offset: { x: number } },
+	) => {
+		const swipeThreshold = 50;
+		const swipe = info.offset.x;
+
+		if (swipe > swipeThreshold) {
+			handlePrevPage();
+		} else if (swipe < -swipeThreshold) {
+			handleNextPage();
+		}
+	};
 
 	return (
 		<div className="section-gap space-y-8 md:space-y-10">
@@ -180,8 +218,8 @@ export default function Home() {
 						</h2>
 						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
 							I create innovative Web3 solutions, trading applications, and
-							stunning digital experiences that push the boundaries of what's
-							possible on the web.
+							stunning digital experiences that push the boundaries of
+							what&apos;s possible on the web.
 						</p>
 						<motion.a
 							href="/portfolio"
@@ -228,7 +266,7 @@ export default function Home() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4, duration: 0.6 }}
 				className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{highlights.map((highlight, index) => (
+				{highlights.map((highlight) => (
 					<Card
 						key={highlight.title}
 						className="p-4 sm:p-5 text-center group">
@@ -243,13 +281,13 @@ export default function Home() {
 				))}
 			</motion.section>
 
-			{/* Featured Projects with CSS Auto-scroll */}
+			{/* Featured Projects Section with Pagination */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.6, duration: 0.6 }}>
-				<Card className="p-5 sm:p-7 overflow-hidden">
-					<div className="text-center mb-6">
+				<Card className="p-5 sm:p-7">
+					<div className="text-center mb-8">
 						<motion.h3 className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							Featured Projects
 						</motion.h3>
@@ -259,104 +297,212 @@ export default function Home() {
 						</p>
 					</div>
 
-					{/* Infinite auto-scrolling carousel with hover pause */}
-					<div
-						className="relative w-full overflow-hidden py-4"
-						onMouseEnter={() => setIsHovered(true)}
-						onMouseLeave={() => setIsHovered(false)}
-						onTouchStart={() => setIsHovered(true)}
-						onTouchEnd={() => setIsHovered(false)}>
-						{/* Container with mask for fading edges */}
-						<div className="relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-20 before:bg-gradient-to-r before:from-gray-900 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-20 after:bg-gradient-to-l after:from-gray-900 after:to-transparent after:z-10">
-							<div
-								className={`flex gap-6 w-max animate-infinite-scroll ${
-									isHovered ? "paused" : ""
-								}`}>
-								{/* First set + duplicate for seamless loop */}
-								{[...featuredProjects, ...featuredProjects].map(
-									(project, index) => (
-										<motion.div
-											key={`${project.title}-${index}`}
-											className="min-w-[300px] sm:min-w-[400px] lg:min-w-[500px] flex-shrink-0"
-											whileHover={{ scale: 1.04 }}
-											transition={{ duration: 0.3 }}>
-											<div className="rounded-2xl bg-gray-800 border border-gray-700 h-full flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-purple-600/60">
-												{/* Image */}
-												<div className="relative w-full h-80 bg-gray-700 overflow-hidden">
-													<Image
-														src={project.image}
-														alt={project.title}
-														fill
-														className="object-cover transition-transform duration-700 group-hover:scale-110"
-														sizes="(max-width: 640px) 300px, (max-width: 1024px) 400px, 500px"
-													/>
-													{/* Status badge */}
-													<div className="absolute top-4 left-4">
-														<span className="px-3 py-1 rounded-full text-xs font-medium bg-green-900/30 text-green-300 border border-green-800/50">
-															{project.status}
-														</span>
-													</div>
-												</div>
+					{/* Projects Grid - 2 Cards Layout with Swipe Support */}
+					<div className="relative">
+						{/* Swipe Hint for Mobile */}
+						<div className="md:hidden text-center mb-4">
+							<p className="text-xs text-gray-500 flex items-center justify-center gap-2">
+								<span className="inline-block">
+									Swipe left/right or use arrows
+								</span>
+							</p>
+						</div>
 
-												{/* Content */}
-												<div className="p-6 flex flex-col items-center flex-grow">
-													<motion.h4
-														className="text-sm sm:text-base font-bold text-center mb-6 font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
-														whileHover={{ scale: 1.03 }}>
-														{project.title}
-													</motion.h4>
-
-													{/* Tech stack */}
-													<div className="flex flex-wrap gap-2 justify-center mb-4">
-														{project.tech.slice(0, 3).map((tech, idx) => (
-															<span
+						<motion.div
+							key={currentPage}
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.3 }}
+							drag="x"
+							dragConstraints={{ left: 0, right: 0 }}
+							dragElastic={0.2}
+							onDragEnd={handleDragEnd}
+							dragTransition={{ power: 0.2, restDelta: 5 }}
+							className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 mb-12 max-w-6xl mx-auto cursor-grab active:cursor-grabbing">
+							{paginatedProjects.map((project) => (
+								<motion.div
+									key={project.title}
+									onClick={() => setSelectedProject(project)}
+									className="group flex cursor-pointer h-full">
+									<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
+										<div className="relative overflow-hidden h-80 sm:h-96 bg-gray-800 flex-shrink-0">
+											<Image
+												src={project.image}
+												alt={project.title}
+												fill
+												loading="lazy"
+												className="object-cover transition-transform duration-300 group-hover:scale-105"
+											/>
+											<div className="absolute top-4 left-4">
+												<span className="px-3 py-1 rounded-full text-xs font-medium bg-green-900 text-green-200">
+													{project.status}
+												</span>
+											</div>
+											<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+												<div className="flex gap-4">
+													{[
+														{
+															url: project.liveUrl,
+															icon: <ExternalLink className="w-5 h-5" />,
+															title: "Live Demo",
+														},
+														{
+															url: project.githubUrl,
+															icon: <Github className="w-5 h-5" />,
+															title: "View Code",
+														},
+													]
+														.filter((link) => link.url && link.url !== "#")
+														.map((link, idx: number) => (
+															<motion.a
 																key={idx}
-																className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
-																{tech}
-															</span>
+																href={link.url}
+																target="_blank"
+																rel="noopener noreferrer"
+																onClick={(e) => e.stopPropagation()}
+																whileHover={{ scale: 1.1 }}
+																whileTap={{ scale: 0.9 }}
+																className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white"
+																title={link.title}
+																aria-label={link.title}>
+																{link.icon}
+															</motion.a>
 														))}
-														{project.tech.length > 3 && (
-															<span className="px-2 py-1 bg-gray-800/50 border border-gray-700 rounded-full text-xs text-gray-300">
-																+{project.tech.length - 3}
-															</span>
-														)}
-													</div>
-
-													<div className="flex gap-5 mt-auto">
-														{project.liveUrl && project.liveUrl !== "#" && (
-															<motion.a
-																href={project.liveUrl}
-																target="_blank"
-																rel="noopener noreferrer"
-																whileHover={{ scale: 1.25, rotate: 8 }}
-																whileTap={{ scale: 0.9 }}
-																className="flex items-center justify-center w-11 h-11 rounded-full bg-purple-600/90 text-white hover:bg-purple-700 transition-colors shadow-md"
-																title="Live Demo">
-																<ExternalLink className="w-5 h-5" />
-															</motion.a>
-														)}
-
-														{project.githubUrl && project.githubUrl !== "#" && (
-															<motion.a
-																href={project.githubUrl}
-																target="_blank"
-																rel="noopener noreferrer"
-																whileHover={{ scale: 1.25, rotate: -8 }}
-																whileTap={{ scale: 0.9 }}
-																className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors shadow-md"
-																title="View Code">
-																<Github className="w-5 h-5" />
-															</motion.a>
-														)}
-													</div>
 												</div>
 											</div>
-										</motion.div>
-									),
-								)}
-							</div>
-						</div>
+										</div>
+										<div className="p-6 flex flex-col flex-grow">
+											<motion.h4
+												className="text-sm sm:text-base font-bold font-clash tracking-tight text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
+												whileHover={{ scale: 1.05 }}
+												transition={{ duration: 0.3 }}>
+												{project.title}
+											</motion.h4>
+											<div className="flex flex-wrap gap-1 mb-4 justify-center">
+												{project.tech
+													.slice(0, 3)
+													.map((tech: string, idx: number) => (
+														<span
+															key={idx}
+															className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+															{tech}
+														</span>
+													))}
+												{project.tech.length > 3 && (
+													<span className="px-2 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">
+														+{project.tech.length - 3}
+													</span>
+												)}
+											</div>
+											<div className="flex justify-center gap-3 mt-auto pt-4">
+												{[
+													{
+														url: project.liveUrl,
+														icon: <ExternalLink className="w-5 h-5" />,
+														title: "Live Demo",
+														bg: "bg-purple-600",
+														hoverBg: "hover:bg-purple-700",
+													},
+													{
+														url: project.githubUrl,
+														icon: <Github className="w-5 h-5" />,
+														title: "View Code",
+														bg: "bg-gray-600",
+														hoverBg: "hover:bg-gray-700",
+													},
+												]
+													.filter((link) => link.url && link.url !== "#")
+													.map((link, idx: number) => (
+														<motion.a
+															key={idx}
+															href={link.url}
+															target="_blank"
+															rel="noopener noreferrer"
+															onClick={(e) => e.stopPropagation()}
+															whileHover={{
+																scale: 1.2,
+																rotate: idx === 0 ? 5 : -5,
+															}}
+															whileTap={{ scale: 0.9 }}
+															className={`flex items-center justify-center w-12 h-12 rounded-full ${link.bg} text-white ${link.hoverBg} transition-all duration-300 shadow-lg`}
+															title={link.title}
+															aria-label={link.title}>
+															{link.icon}
+														</motion.a>
+													))}
+											</div>
+										</div>
+									</Card>
+								</motion.div>
+							))}
+						</motion.div>
 					</div>
+
+					{/* Pagination Controls */}
+					{totalPages > 1 && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 0.2, duration: 0.3 }}
+							className="flex flex-col items-center gap-6 mt-4">
+							{/* Navigation Buttons */}
+							<div className="flex items-center justify-center gap-6">
+								<motion.button
+									onClick={handlePrevPage}
+									disabled={currentPage === 0}
+									whileHover={{ scale: currentPage > 0 ? 1.15 : 1 }}
+									whileTap={{ scale: 0.85 }}
+									className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 shadow-lg ${
+										currentPage === 0
+											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
+											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
+									}`}
+									aria-label="Previous page">
+									<ChevronLeft className="w-6 h-6" />
+								</motion.button>
+
+								{/* Page Indicators */}
+								<div className="flex items-center gap-3">
+									{Array.from({ length: totalPages }).map((_, index) => (
+										<motion.button
+											key={index}
+											onClick={() => setCurrentPage(index)}
+											whileHover={{ scale: 1.2 }}
+											whileTap={{ scale: 0.9 }}
+											className={`rounded-full transition-all duration-300 ${
+												index === currentPage
+													? "bg-gradient-to-r from-purple-600 to-blue-600 w-8 h-3"
+													: "bg-gray-600 w-3 h-3 hover:bg-gray-500"
+											}`}
+											aria-label={`Go to page ${index + 1}`}
+											aria-current={index === currentPage ? "page" : undefined}
+										/>
+									))}
+								</div>
+
+								<motion.button
+									onClick={handleNextPage}
+									disabled={currentPage === totalPages - 1}
+									whileHover={{
+										scale: currentPage < totalPages - 1 ? 1.15 : 1,
+									}}
+									whileTap={{ scale: 0.85 }}
+									className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 shadow-lg ${
+										currentPage === totalPages - 1
+											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
+											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
+									}`}
+									aria-label="Next page">
+									<ChevronRight className="w-6 h-6" />
+								</motion.button>
+							</div>
+
+							{/* Page Info */}
+							<p className="text-xs sm:text-sm text-gray-400">
+								Page {currentPage + 1} of {totalPages}
+							</p>
+						</motion.div>
+					)}
 
 					{/* CTA */}
 					<div className="text-center mt-10">
@@ -371,6 +517,121 @@ export default function Home() {
 					</div>
 				</Card>
 			</motion.section>
+
+			{/* Project Description Modal */}
+			{selectedProject && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					onClick={() => setSelectedProject(null)}
+					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						onClick={(e) => e.stopPropagation()}
+						className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+						{/* Modal Header */}
+						<div className="sticky top-0 p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between">
+							<div>
+								<h3 className="text-2xl font-bold font-clash text-white mb-2">
+									{selectedProject.title}
+								</h3>
+								<span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-green-900 text-green-200">
+									{selectedProject.status}
+								</span>
+							</div>
+							<motion.button
+								onClick={() => setSelectedProject(null)}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
+								className="text-gray-400 hover:text-white transition-colors">
+								<svg
+									className="w-6 h-6"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</motion.button>
+						</div>
+
+						{/* Modal Content */}
+						<div className="p-6">
+							{/* Image */}
+							<div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
+								<Image
+									src={selectedProject.image}
+									alt={selectedProject.title}
+									fill
+									className="object-cover"
+								/>
+							</div>
+
+							{/* Description */}
+							<div className="mb-6">
+								<h4 className="text-lg font-semibold text-purple-400 mb-2">
+									About this project
+								</h4>
+								<p className="text-gray-300 leading-relaxed text-base">
+									{selectedProject.description}
+								</p>
+							</div>
+
+							{/* Tech Stack */}
+							<div className="mb-6">
+								<h4 className="text-lg font-semibold text-purple-400 mb-3">
+									Technologies Used
+								</h4>
+								<div className="flex flex-wrap gap-2">
+									{selectedProject.tech.map((tech: string, idx: number) => (
+										<span
+											key={idx}
+											className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-sm text-gray-300">
+											{tech}
+										</span>
+									))}
+								</div>
+							</div>
+
+							{/* Action Buttons */}
+							<div className="flex gap-4">
+								{selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+									<motion.a
+										href={selectedProject.liveUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+										className="flex-1 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+										<ExternalLink className="w-5 h-5" />
+										View Live
+									</motion.a>
+								)}
+								{selectedProject.githubUrl &&
+									selectedProject.githubUrl !== "#" && (
+										<motion.a
+											href={selectedProject.githubUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+											className="flex-1 px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+											<Github className="w-5 h-5" />
+											View Code
+										</motion.a>
+									)}
+							</div>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
 
 			{/* Skills Progress */}
 			<motion.section
