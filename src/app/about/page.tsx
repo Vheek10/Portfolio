@@ -152,7 +152,7 @@ export default function About() {
 					<div className="relative z-10">
 						<h2
 							data-gsap-text-stagger="words"
-							className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+							className="text-2xl sm:text-3xl lg:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							About Me
 						</h2>
 						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -170,14 +170,14 @@ export default function About() {
 				variants={containerVariants}
 				initial="hidden"
 				animate="visible">
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
 					{stats.map((stat, index) => (
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}
 							custom={index}>
 							<Card
-								className="text-center p-5 sm:p-6 h-full flex flex-col items-center justify-center"
+								className="text-center p-4 sm:p-6 h-full flex flex-col items-center justify-center"
 								data-gsap-reveal>
 								{/* Icon container - centered */}
 								<motion.div
@@ -217,7 +217,7 @@ export default function About() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4, duration: 0.6 }}>
 				<Card
-					className="p-8"
+					className="p-5 sm:p-8"
 					data-gsap-reveal>
 					<div className="text-center mb-12">
 						<h3
@@ -253,8 +253,8 @@ export default function About() {
 									key={`${service.title}-${index}`}
 									style={{
 										flexShrink: 0,
-										width: "280px", // Fixed width for mobile
-										height: "380px", // Fixed height for all cards
+										width: "250px", // Fixed width for mobile
+										height: "350px", // Fixed height for all cards
 									}}
 									className="sm:w-[340px]">
 									{" "}
@@ -306,7 +306,7 @@ export default function About() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.8, duration: 0.6 }}>
 				<Card
-					className="p-8"
+					className="p-5 sm:p-8"
 					data-gsap-reveal>
 					<div className="text-center mb-12">
 						<h3
@@ -342,8 +342,8 @@ export default function About() {
 									key={`${value.title}-${index}`}
 									style={{
 										flexShrink: 0,
-										width: "260px", // Fixed width for mobile
-										height: "320px", // Fixed height for all cards
+										width: "240px", // Fixed width for mobile
+										height: "300px", // Fixed height for all cards
 									}}
 									className="sm:w-[300px]">
 									{" "}
