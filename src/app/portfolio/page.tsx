@@ -16,8 +16,9 @@ import {
 	ChevronLeft,
 	ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
+import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 // Define Project interface
 interface Project {
@@ -193,6 +194,9 @@ const isValidUrl = (url: string) => {
 };
 
 export default function Portfolio() {
+	const pageRef = useRef<HTMLDivElement>(null);
+	useGSAPAnimations({ scopeRef: pageRef });
+
 	const [activeFilter, setActiveFilter] = useState("all");
 	const [currentPage, setCurrentPage] = useState(0);
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -293,6 +297,8 @@ export default function Portfolio() {
 			<motion.div
 				variants={itemVariants}
 				layout
+				data-gsap-reveal
+				data-gsap-parallax-card
 				onClick={() => setSelectedProject(project)}
 				className="group flex cursor-pointer h-full">
 				<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 pointer-events-auto">
@@ -302,6 +308,7 @@ export default function Portfolio() {
 							alt={project.title}
 							fill
 							loading="lazy"
+							data-gsap-parallax-image
 							className="object-cover transition-transform duration-300 group-hover:scale-105"
 							onError={() => setImageError(true)}
 						/>
@@ -410,16 +417,22 @@ export default function Portfolio() {
 	};
 
 	return (
-		<div className="space-y-8 md:space-y-10">
+		<div
+			ref={pageRef}
+			className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-6 sm:p-7 text-center relative overflow-hidden">
+				<Card
+					className="p-6 sm:p-7 text-center relative overflow-hidden"
+					data-gsap-reveal>
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 					<div className="relative z-10">
-						<h2 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2
+							data-gsap-text-stagger="words"
+							className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Portfolio
 						</h2>
 						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -440,12 +453,22 @@ export default function Portfolio() {
 						<motion.div
 							key={stat.label}
 							variants={itemVariants}>
-							<Card className="text-center p-5">
+							<Card
+								className="text-center p-5"
+								data-gsap-reveal>
 								<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 									{stat.icon}
 								</div>
-								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-									{stat.number}
+								<div
+									className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600"
+									data-gsap-counter-group>
+									<span
+										data-gsap-count
+										data-count-to={Number.parseFloat(stat.number)}
+										data-count-suffix={stat.number.replace(/[\d.]/g, "")}
+										data-count-prefix="">
+										0
+									</span>
 								</div>
 								<div className="text-sm text-gray-400">{stat.label}</div>
 							</Card>
@@ -459,7 +482,9 @@ export default function Portfolio() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.2, duration: 0.6 }}>
-				<Card className="p-6 sm:p-7">
+				<Card
+					className="p-6 sm:p-7"
+					data-gsap-reveal>
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 						<div className="flex items-center gap-2">
 							<Filter className="w-5 h-5 text-gray-400" />
@@ -492,7 +517,9 @@ export default function Portfolio() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.6, duration: 0.6 }}>
-				<Card className="p-5 sm:p-7">
+				<Card
+					className="p-5 sm:p-7"
+					data-gsap-reveal>
 					<div className="text-center mb-8">
 						<motion.h3 className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							{activeFilter === "all"

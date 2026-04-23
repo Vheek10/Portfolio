@@ -1,7 +1,8 @@
 /** @format */
 "use client";
 
-import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, User, Briefcase, FolderGit2, Mail } from "lucide-react";
@@ -9,12 +10,83 @@ import { Home, User, Briefcase, FolderGit2, Mail } from "lucide-react";
 const Header = () => {
 	const pathname = usePathname();
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [mounted, setMounted] = useState(false);
+	const mounted = true;
+	const menuPanelRef = useRef<HTMLDivElement>(null);
+	const menuTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
 	// Ensure we only render after mounting to avoid hydration mismatch
-	useEffect(() => {
-		setMounted(true);
+	useLayoutEffect(() => {
+		if (!menuPanelRef.current) {
+			return;
+		}
+
+		const ctx = gsap.context(() => {
+			const panel = menuPanelRef.current;
+
+			if (!panel) {
+				return;
+			}
+
+			gsap.set(panel, {
+				autoAlpha: 0,
+				y: -12,
+				scale: 0.98,
+				pointerEvents: "none",
+			});
+			gsap.set(panel.querySelectorAll("[data-menu-item]"), {
+				opacity: 0,
+				y: -8,
+			});
+
+			menuTimelineRef.current = gsap.timeline({
+				paused: true,
+				defaults: { ease: "power3.out" },
+				onReverseComplete: () => {
+					if (menuPanelRef.current) {
+						gsap.set(menuPanelRef.current, { pointerEvents: "none" });
+					}
+				},
+			});
+
+			menuTimelineRef.current
+				.to(panel, {
+					autoAlpha: 1,
+					y: 0,
+					scale: 1,
+					duration: 0.32,
+					pointerEvents: "auto",
+				})
+				.to(
+					panel.querySelectorAll("[data-menu-item]"),
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.22,
+						stagger: 0.04,
+					},
+					"<0.05",
+				);
+		}, menuPanelRef);
+
+		return () => {
+			menuTimelineRef.current?.kill();
+			menuTimelineRef.current = null;
+			ctx.revert();
+		};
 	}, []);
+
+	useEffect(() => {
+		if (!menuTimelineRef.current || !menuPanelRef.current) {
+			return;
+		}
+
+		if (menuOpen) {
+			gsap.set(menuPanelRef.current, { pointerEvents: "auto" });
+			menuTimelineRef.current.play();
+		} else {
+			menuTimelineRef.current.reverse();
+		}
+	}, [menuOpen]);
 
 	const menus = [
 		{
@@ -135,7 +207,7 @@ const Header = () => {
 
 				{/* Right Section */}
 				<div className="flex items-center space-x-2 sm:space-x-4">
-					{/* Let's Chat Button - Single Line */}
+					{/* Let&apos;s Chat Button - Single Line */}
 					<Link
 						href="/contact"
 						className="hidden sm:inline-flex items-center gap-2 relative px-4 lg:px-6 py-2 lg:py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium font-clash active:scale-95 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-purple-500/25 text-sm lg:text-base"
@@ -150,7 +222,7 @@ const Header = () => {
 						<span className="relative z-10 flex items-center gap-2">
 							<Mail className="w-3 h-3 lg:w-4 lg:h-4 transform transition-all duration-300 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 							<span className="leading-none transition-all duration-300 group-hover:translate-x-1">
-								Let's Chat
+								Let&apos;s Chat
 							</span>
 						</span>
 
@@ -205,55 +277,60 @@ const Header = () => {
 			</nav>
 
 			{/* Mobile Menu - Enhanced */}
-			{menuOpen && (
-				<div className="md:hidden absolute top-full left-0 right-0 mt-2 backdrop-blur-xl bg-gray-900/70 shadow-lg border border-gray-700 rounded-2xl transition-all duration-300 animate-in slide-in-from-top mx-2">
-					<ul className="flex flex-col py-4 space-y-1">
-						{menus.map((menu) => (
-							<li key={menu.title}>
-								<Link
-									href={menu.href}
-									onClick={() => setMenuOpen(false)}
-									className={`group relative flex items-center gap-3 text-sm font-semibold font-clash tracking-wide px-4 py-3 transition-all duration-300 mx-2 ${
-										pathname === menu.href
-											? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
-											: "text-gray-100 hover:bg-gray-800/60 hover:text-purple-400"
-									}`}>
-									{/* Hover background */}
-									<div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-									<span className="relative inline-flex items-center justify-center rounded-lg p-1 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500/20 group-hover:to-indigo-500/20 group-hover:scale-110 group-hover:-translate-y-0.5">
-										{menu.icon}
-									</span>
-									<span className="relative transition-all duration-300 group-hover:translate-x-2 group-hover:drop-shadow-sm">
-										{menu.title}
-									</span>
-
-									{/* Active indicator for mobile */}
-									{pathname === menu.href && (
-										<div className="absolute right-4 w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
-									)}
-								</Link>
-							</li>
-						))}
-
-						{/* Mobile Let's Chat - Single Line */}
-						<li className="pt-2 px-2">
+			<div
+				ref={menuPanelRef}
+				className="md:hidden absolute top-full left-0 right-0 mt-2 backdrop-blur-xl bg-gray-900/70 shadow-lg border border-gray-700 rounded-2xl mx-2"
+				aria-hidden={!menuOpen}>
+				<ul className="flex flex-col py-4 space-y-1">
+					{menus.map((menu) => (
+						<li key={menu.title}>
 							<Link
-								href="/contact"
+								href={menu.href}
 								onClick={() => setMenuOpen(false)}
-								className="group relative inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium font-clash active:scale-95 w-full overflow-hidden shadow-lg text-sm">
-								{/* Shine effect */}
-								<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
+								data-menu-item
+								aria-label={menu.title}
+								className={`group relative flex items-center gap-3 text-sm font-semibold font-clash tracking-wide px-4 py-3 transition-all duration-300 mx-2 ${
+									pathname === menu.href
+										? "text-purple-400 bg-purple-900/30 shadow-lg shadow-purple-500/20"
+										: "text-gray-100 hover:bg-gray-800/60 hover:text-purple-400"
+								}`}>
+								{/* Hover background */}
+								<div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
-								<span className="relative z-10 flex items-center gap-2">
-									<Mail className="w-4 h-4 transform transition-all duration-300 group-hover:scale-110 group-hover:translate-x-1" />
-									<span>Let's Chat</span>
+								<span className="relative inline-flex items-center justify-center rounded-lg p-1 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500/20 group-hover:to-indigo-500/20 group-hover:scale-110 group-hover:-translate-y-0.5">
+									{menu.icon}
 								</span>
+								<span className="relative transition-all duration-300 group-hover:translate-x-2 group-hover:drop-shadow-sm">
+									{menu.title}
+								</span>
+
+								{/* Active indicator for mobile */}
+								{pathname === menu.href && (
+									<div className="absolute right-4 w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
+								)}
 							</Link>
 						</li>
-					</ul>
-				</div>
-			)}
+					))}
+
+					{/* Mobile Let's Chat - Single Line */}
+					<li className="pt-2 px-2">
+						<Link
+							href="/contact"
+							onClick={() => setMenuOpen(false)}
+							data-menu-item
+							aria-label="Let's Chat"
+							className="group relative inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white transition-all duration-300 font-medium font-clash active:scale-95 w-full overflow-hidden shadow-lg text-sm">
+							{/* Shine effect */}
+							<div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out" />
+
+							<span className="relative z-10 flex items-center gap-2">
+								<Mail className="w-4 h-4 transform transition-all duration-300 group-hover:scale-110 group-hover:translate-x-1" />
+								<span>Let&apos;s Chat</span>
+							</span>
+						</Link>
+					</li>
+				</ul>
+			</div>
 		</header>
 	);
 };

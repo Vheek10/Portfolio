@@ -15,7 +15,8 @@ import {
 	Database,
 	Cloud,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 // Add these Framer Motion variants at the top of the component
 const containerVariants = {
@@ -41,6 +42,9 @@ const itemVariants = {
 };
 
 export default function About() {
+	const pageRef = useRef<HTMLDivElement>(null);
+	useGSAPAnimations({ scopeRef: pageRef });
+
 	const stats = [
 		{
 			icon: <Target className="w-6 h-6" />,
@@ -131,18 +135,24 @@ export default function About() {
 	const [valuesHovered, setValuesHovered] = useState(false);
 
 	return (
-		<div className="space-y-8 md:space-y-10">
+		<div
+			ref={pageRef}
+			className="space-y-8 md:space-y-10">
 			{/* Hero Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.6 }}>
-				<Card className="p-6 sm:p-7 text-center relative overflow-hidden">
+				<Card
+					className="p-6 sm:p-7 text-center relative overflow-hidden"
+					data-gsap-reveal>
 					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
 
 					<div className="relative z-10">
-						<h2 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h2
+							data-gsap-text-stagger="words"
+							className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							About Me
 						</h2>
 						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -166,7 +176,9 @@ export default function About() {
 							key={stat.label}
 							variants={itemVariants}
 							custom={index}>
-							<Card className="text-center p-5 sm:p-6 h-full flex flex-col items-center justify-center">
+							<Card
+								className="text-center p-5 sm:p-6 h-full flex flex-col items-center justify-center"
+								data-gsap-reveal>
 								{/* Icon container - centered */}
 								<motion.div
 									initial={{ scale: 0 }}
@@ -177,8 +189,16 @@ export default function About() {
 								</motion.div>
 
 								{/* Number - centered */}
-								<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2">
-									{stat.number}
+								<div
+									className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-2"
+									data-gsap-counter-group>
+									<span
+										data-gsap-count
+										data-count-to={Number.parseFloat(stat.number)}
+										data-count-suffix={stat.number.replace(/[\d.]/g, "")}
+										data-count-prefix="">
+										0
+									</span>
 								</div>
 
 								{/* Label - centered */}
@@ -196,9 +216,13 @@ export default function About() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4, duration: 0.6 }}>
-				<Card className="p-8">
+				<Card
+					className="p-8"
+					data-gsap-reveal>
 					<div className="text-center mb-12">
-						<h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h3
+							data-gsap-text-stagger="words"
+							className="text-xl sm:text-2xl md:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							What I Offer
 						</h3>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
@@ -281,9 +305,13 @@ export default function About() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.8, duration: 0.6 }}>
-				<Card className="p-8">
+				<Card
+					className="p-8"
+					data-gsap-reveal>
 					<div className="text-center mb-12">
-						<h3 className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+						<h3
+							data-gsap-text-stagger="words"
+							className="text-xl sm:text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							My Values
 						</h3>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">

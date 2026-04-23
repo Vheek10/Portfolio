@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import { Card, CardContent } from "./Card";
 import { motion } from "framer-motion";
 
@@ -215,18 +216,22 @@ const ExpertAreaCard = () => {
 		return (
 			<motion.div
 				key={item.id}
+				data-gsap-tech-item
 				className="expertise-item flex-shrink-0 w-20 text-center group"
 				whileHover={{ scale: 1.1, y: -2 }}
 				transition={{ duration: 0.2 }}>
 				<div className="image text-center mb-2">
 					<div className="w-14 h-14 mx-auto rounded-xl bg-gray-800 border border-gray-700 flex items-center justify-center transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 group-hover:shadow-lg group-hover:border-transparent">
 						{!imgError ? (
-							<img
+							<Image
 								src={item.icon}
 								alt={item.name}
+								width={28}
+								height={28}
 								className="w-7 h-7 transition-all duration-300 group-hover:brightness-0 group-hover:invert"
 								onError={handleError}
 								loading="lazy"
+								unoptimized={item.icon.endsWith(".svg")}
 								crossOrigin={isExternalIcon ? "anonymous" : undefined}
 							/>
 						) : (
@@ -270,7 +275,9 @@ const ExpertAreaCard = () => {
 	);
 
 	return (
-		<Card className="expertise-card">
+		<Card
+			className="expertise-card"
+			data-gsap-reveal>
 			<CardContent className="p-6">
 				<motion.h3
 					className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center"

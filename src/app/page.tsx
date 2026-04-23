@@ -19,9 +19,13 @@ import {
 	ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 export default function Home() {
+	const pageRef = useRef<HTMLDivElement>(null);
+	useGSAPAnimations({ scopeRef: pageRef });
+
 	const featuredProjects = [
 		{
 			title: "StrataDeed - OnChain Real Estate",
@@ -202,7 +206,9 @@ export default function Home() {
 	};
 
 	return (
-		<div className="section-gap space-y-8 md:space-y-10">
+		<div
+			ref={pageRef}
+			className="section-gap space-y-8 md:space-y-10">
 			{/* Welcome Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
@@ -211,18 +217,38 @@ export default function Home() {
 				<Card className="p-5 sm:p-7 text-center relative overflow-hidden">
 					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
+					<div
+						className="absolute top-8 left-8 w-24 h-24 rounded-full bg-purple-500/10 blur-3xl"
+						data-gsap-float
+					/>
+					<div
+						className="absolute bottom-8 right-12 w-20 h-20 rounded-full bg-blue-500/10 blur-3xl"
+						data-gsap-float
+					/>
 
 					<div className="relative z-10">
-						<h2 className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-							Welcome to My Digital Space
+						<h2
+							data-gsap-hero-title
+							className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+							{"Welcome to My Digital Space".split(" ").map((word, index) => (
+								<span
+									key={`${word}-${index}`}
+									data-gsap-hero-word
+									className="inline-block mr-2 last:mr-0">
+									{word}
+								</span>
+							))}
 						</h2>
-						<p className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
+						<p
+							data-gsap-hero-subtext
+							className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
 							I create innovative Web3 solutions, trading applications, and
 							stunning digital experiences that push the boundaries of
 							what&apos;s possible on the web.
 						</p>
 						<motion.a
 							href="/portfolio"
+							data-gsap-hero-cta
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-2xl">
@@ -242,6 +268,7 @@ export default function Home() {
 				{stats.map((stat, index) => (
 					<Card
 						key={stat.label}
+						data-gsap-reveal
 						className="text-center p-4 sm:p-5">
 						<motion.div
 							initial={{ scale: 0 }}
@@ -250,8 +277,16 @@ export default function Home() {
 							className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-3">
 							{stat.icon}
 						</motion.div>
-						<div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-							{stat.number}
+						<div
+							className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600"
+							data-gsap-counter-group>
+							<span
+								data-gsap-count
+								data-count-to={Number.parseFloat(stat.number)}
+								data-count-suffix={stat.number.replace(/[\d.]/g, "")}
+								data-count-prefix="">
+								0
+							</span>
 						</div>
 						<div className="text-sm font-accent tracking-wider uppercase text-gray-400">
 							{stat.label}
@@ -269,6 +304,7 @@ export default function Home() {
 				{highlights.map((highlight) => (
 					<Card
 						key={highlight.title}
+						data-gsap-reveal
 						className="p-4 sm:p-5 text-center group">
 						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
 							{highlight.icon}
@@ -288,7 +324,9 @@ export default function Home() {
 				transition={{ delay: 0.6, duration: 0.6 }}>
 				<Card className="p-5 sm:p-7">
 					<div className="text-center mb-8">
-						<motion.h3 className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
+						<motion.h3
+							data-gsap-text-stagger="words"
+							className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							Featured Projects
 						</motion.h3>
 						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
@@ -322,6 +360,8 @@ export default function Home() {
 							{paginatedProjects.map((project) => (
 								<motion.div
 									key={project.title}
+									data-gsap-reveal
+									data-gsap-parallax-card
 									onClick={() => setSelectedProject(project)}
 									className="group flex cursor-pointer h-full">
 									<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
@@ -331,6 +371,7 @@ export default function Home() {
 												alt={project.title}
 												fill
 												loading="lazy"
+												data-gsap-parallax-image
 												className="object-cover transition-transform duration-300 group-hover:scale-105"
 											/>
 											<div className="absolute top-4 left-4">
@@ -638,14 +679,19 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 1.0, duration: 0.6 }}>
-				<Card className="p-5">
-					<motion.h3 className="text-lg sm:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2">
+				<Card
+					className="p-5"
+					data-gsap-reveal>
+					<motion.h3
+						data-gsap-text-stagger="words"
+						className="text-lg sm:text-xl font-bold font-clash tracking-tight text-white mb-2 sm:mb-3 md:mb-4 flex items-center justify-center gap-2">
 						Core Expertise
 					</motion.h3>
 					<div className="space-y-4">
 						{featuredSkills.map((skill, index) => (
 							<motion.div
 								key={skill.title}
+								data-gsap-progress-item
 								initial={{ opacity: 0, x: 20 }}
 								animate={{ opacity: 1, x: 0 }}
 								transition={{ delay: 1.2 + index * 0.1 }}
@@ -663,6 +709,8 @@ export default function Home() {
 										initial={{ width: 0 }}
 										animate={{ width: `${skill.progress}%` }}
 										transition={{ delay: 1.4 + index * 0.1, duration: 1 }}
+										data-gsap-progress-bar
+										data-progress={skill.progress}
 										className="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/25"
 									/>
 								</div>

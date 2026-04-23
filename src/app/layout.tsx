@@ -8,6 +8,7 @@ const ProfileCard = dynamic(() => import("@/components/ProfileCard"), {
 });
 import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
+import PageTransition from "@/components/PageTransition";
 import localFont from "next/font/local";
 
 // Clash Display local font for entire project
@@ -109,7 +110,9 @@ export default function RootLayout({
 							</div>
 
 							{/* Main content area */}
-							<div className="flex-1 min-w-0 w-full lg:-mr-8">{children}</div>
+							<div className="flex-1 min-w-0 w-full lg:-mr-8">
+								<PageTransition>{children}</PageTransition>
+							</div>
 						</div>
 					</div>
 					<Footer />
