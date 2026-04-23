@@ -229,7 +229,7 @@ export default function Home() {
 					<div className="relative z-10">
 						<h2
 							data-gsap-hero-title
-							className="text-lg md:text-lg lg:text-3xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+							className="text-2xl sm:text-3xl lg:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
 							{"Welcome to My Digital Space".split(" ").map((word, index) => (
 								<span
 									key={`${word}-${index}`}
@@ -251,7 +251,7 @@ export default function Home() {
 							data-gsap-hero-cta
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-2xl">
+							className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-2xl">
 							Explore My Work
 							<ArrowRight className="w-5 h-5" />
 						</motion.a>
@@ -356,7 +356,7 @@ export default function Home() {
 							dragElastic={0.2}
 							onDragEnd={handleDragEnd}
 							dragTransition={{ power: 0.2, restDelta: 5 }}
-							className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 mb-12 max-w-6xl mx-auto cursor-grab active:cursor-grabbing">
+							className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 md:gap-10 lg:gap-12 mb-10 sm:mb-12 max-w-6xl mx-auto cursor-grab active:cursor-grabbing">
 							{paginatedProjects.map((project) => (
 								<motion.div
 									key={project.title}
@@ -365,7 +365,7 @@ export default function Home() {
 									onClick={() => setSelectedProject(project)}
 									className="group flex cursor-pointer h-full">
 									<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
-										<div className="relative overflow-hidden h-80 sm:h-96 bg-gray-800 flex-shrink-0">
+										<div className="relative overflow-hidden h-56 sm:h-72 md:h-96 bg-gray-800 flex-shrink-0">
 											<Image
 												src={project.image}
 												alt={project.title}
@@ -403,7 +403,7 @@ export default function Home() {
 																onClick={(e) => e.stopPropagation()}
 																whileHover={{ scale: 1.1 }}
 																whileTap={{ scale: 0.9 }}
-																className="w-12 h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white"
+																className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white"
 																title={link.title}
 																aria-label={link.title}>
 																{link.icon}
@@ -412,7 +412,7 @@ export default function Home() {
 												</div>
 											</div>
 										</div>
-										<div className="p-6 flex flex-col flex-grow">
+										<div className="p-4 sm:p-6 flex flex-col flex-grow">
 											<motion.h4
 												className="text-sm sm:text-base font-bold font-clash tracking-tight text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 												whileHover={{ scale: 1.05 }}
@@ -465,7 +465,7 @@ export default function Home() {
 																rotate: idx === 0 ? 5 : -5,
 															}}
 															whileTap={{ scale: 0.9 }}
-															className={`flex items-center justify-center w-12 h-12 rounded-full ${link.bg} text-white ${link.hoverBg} transition-all duration-300 shadow-lg`}
+															className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full ${link.bg} text-white ${link.hoverBg} transition-all duration-300 shadow-lg`}
 															title={link.title}
 															aria-label={link.title}>
 															{link.icon}
@@ -485,15 +485,15 @@ export default function Home() {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 0.2, duration: 0.3 }}
-							className="flex flex-col items-center gap-6 mt-4">
+							className="flex flex-col items-center gap-4 sm:gap-6 mt-4">
 							{/* Navigation Buttons */}
-							<div className="flex items-center justify-center gap-6">
+							<div className="flex items-center justify-center gap-3 sm:gap-6">
 								<motion.button
 									onClick={handlePrevPage}
 									disabled={currentPage === 0}
 									whileHover={{ scale: currentPage > 0 ? 1.15 : 1 }}
 									whileTap={{ scale: 0.85 }}
-									className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 shadow-lg ${
+									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${
 										currentPage === 0
 											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
 											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
@@ -528,7 +528,7 @@ export default function Home() {
 										scale: currentPage < totalPages - 1 ? 1.15 : 1,
 									}}
 									whileTap={{ scale: 0.85 }}
-									className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 shadow-lg ${
+									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${
 										currentPage === totalPages - 1
 											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
 											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
@@ -551,7 +551,7 @@ export default function Home() {
 							href="/portfolio"
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white hover:border-purple-500">
+							className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white hover:border-purple-500">
 							View All Projects
 							<ArrowRight className="w-4 h-4" />
 						</motion.a>
@@ -574,9 +574,9 @@ export default function Home() {
 						onClick={(e) => e.stopPropagation()}
 						className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
 						{/* Modal Header */}
-						<div className="sticky top-0 p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between">
+						<div className="sticky top-0 p-4 sm:p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between gap-3">
 							<div>
-								<h3 className="text-2xl font-bold font-clash text-white mb-2">
+								<h3 className="text-xl sm:text-2xl font-bold font-clash text-white mb-2">
 									{selectedProject.title}
 								</h3>
 								<span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-green-900 text-green-200">
@@ -604,9 +604,9 @@ export default function Home() {
 						</div>
 
 						{/* Modal Content */}
-						<div className="p-6">
+						<div className="p-4 sm:p-6">
 							{/* Image */}
-							<div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
+							<div className="relative w-full h-48 sm:h-64 mb-6 rounded-xl overflow-hidden">
 								<Image
 									src={selectedProject.image}
 									alt={selectedProject.title}
@@ -642,7 +642,7 @@ export default function Home() {
 							</div>
 
 							{/* Action Buttons */}
-							<div className="flex gap-4">
+							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
 								{selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
 									<motion.a
 										href={selectedProject.liveUrl}
