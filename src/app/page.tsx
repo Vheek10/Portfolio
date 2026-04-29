@@ -19,7 +19,7 @@ import {
 	ChevronRight,
 } from "lucide-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 
 export default function Home() {
@@ -166,20 +166,35 @@ export default function Home() {
 		},
 	];
 
-	// Add hover state
 	const [currentPage, setCurrentPage] = useState(0);
 	const [selectedProject, setSelectedProject] = useState<
 		(typeof featuredProjects)[0] | null
 	>(null);
-	const itemsPerPage = 2;
+	const [itemsPerPage, setItemsPerPage] = useState<number>(2);
 
-	// Pagination logic
-	const totalPages = Math.ceil(featuredProjects.length / itemsPerPage);
+	useEffect(() => {
+		const updateItemsPerPage = () => {
+			const w = window.innerWidth;
+			setItemsPerPage(w < 768 ? 1 : 2);
+		};
+		updateItemsPerPage();
+		window.addEventListener("resize", updateItemsPerPage);
+		return () => window.removeEventListener("resize", updateItemsPerPage);
+	}, []);
+
+	const totalPages = Math.max(
+		1,
+		Math.ceil(featuredProjects.length / itemsPerPage),
+	);
+	// Clamp current page if itemsPerPage changed
+	useEffect(() => {
+		setCurrentPage((p) => Math.min(p, totalPages - 1));
+	}, [itemsPerPage, totalPages]);
+
 	const startIndex = currentPage * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 	const paginatedProjects = featuredProjects.slice(startIndex, endIndex);
 
-	// Pagination handlers with swipe support
 	const handlePrevPage = () => {
 		setCurrentPage((prev) => Math.max(0, prev - 1));
 		setSelectedProject(null);
@@ -190,7 +205,6 @@ export default function Home() {
 		setSelectedProject(null);
 	};
 
-	// Swipe detection
 	const handleDragEnd = (
 		event: MouseEvent | TouchEvent | PointerEvent,
 		info: { offset: { x: number } },
@@ -215,17 +229,7 @@ export default function Home() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.85 }}>
 				<Card className="p-5 sm:p-7 text-center relative overflow-hidden">
-					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
-					<div
-						className="absolute top-8 left-8 w-24 h-24 rounded-full bg-purple-500/10 blur-3xl"
-						data-gsap-float
-					/>
-					<div
-						className="absolute bottom-8 right-12 w-20 h-20 rounded-full bg-blue-500/10 blur-3xl"
-						data-gsap-float
-					/>
-
 					<div className="relative z-10">
 						<h2
 							data-gsap-hero-title
@@ -243,8 +247,8 @@ export default function Home() {
 							data-gsap-hero-subtext
 							className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
 							I create innovative Web3 solutions, trading applications, and
-							stunning digital experiences that push the boundaries of
-							what&apos;s possible on the web.
+							stunning digital experiences that push the boundaries of what's
+							possible on the web.
 						</p>
 						<motion.a
 							href="/portfolio"
@@ -299,28 +303,6 @@ export default function Home() {
 				))}
 			</motion.section>
 
-			{/* Highlights Section */}
-			<motion.section
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.5, duration: 0.85 }}
-				className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{highlights.map((highlight) => (
-					<Card
-						key={highlight.title}
-						data-gsap-reveal
-						className="p-4 sm:p-5 text-center group">
-						<div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4 group-hover:scale-110 transition-transform duration-300">
-							{highlight.icon}
-						</div>
-						<h4 className="text-base font-bold text-white mb-2">
-							{highlight.title}
-						</h4>
-						<p className="text-gray-400 text-sm">{highlight.description}</p>
-					</Card>
-				))}
-			</motion.section>
-
 			{/* Featured Projects Section with Pagination */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
@@ -333,23 +315,9 @@ export default function Home() {
 							className="text-lg md:text-xl font-bold font-clash tracking-tight text-white mb-6 text-center">
 							Featured Projects
 						</motion.h3>
-						<p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-							Showcasing my diverse range of projects from blockchain
-							applications to trading bots and modern web applications
-						</p>
 					</div>
 
-					{/* Projects Grid - 2 Cards Layout with Swipe Support */}
 					<div className="relative">
-						{/* Swipe Hint for Mobile */}
-						<div className="md:hidden text-center mb-4">
-							<p className="text-xs text-gray-500 flex items-center justify-center gap-2">
-								<span className="inline-block">
-									Swipe left/right or use arrows
-								</span>
-							</p>
-						</div>
-
 						<motion.div
 							key={currentPage}
 							initial={{ opacity: 0, y: 10 }}
@@ -369,7 +337,7 @@ export default function Home() {
 									onClick={() => setSelectedProject(project)}
 									className="group flex cursor-pointer h-full">
 									<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
-										<div className="relative overflow-hidden h-56 sm:h-72 md:h-96 bg-gray-800 flex-shrink-0">
+										<div className="relative overflow-hidden h-72 sm:h-72 md:h-96 bg-gray-800 flex-shrink-0">
 											<Image
 												src={project.image}
 												alt={project.title}
@@ -383,6 +351,24 @@ export default function Home() {
 													{project.status}
 												</span>
 											</div>
+
+											{/* Mobile overlay: show title + live link only on small screens */}
+											<div className="absolute left-4 right-4 bottom-4 p-2 rounded-md bg-black/60 flex items-center justify-between sm:hidden">
+												<span className="text-sm font-semibold text-white truncate">
+													{project.title}
+												</span>
+												{project.liveUrl && project.liveUrl !== "#" && (
+													<a
+														href={project.liveUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														onClick={(e) => e.stopPropagation()}
+														className="ml-2 inline-flex items-center gap-2 px-3 py-1 rounded bg-purple-600 text-xs text-white font-medium">
+														Live
+													</a>
+												)}
+											</div>
+
 											<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
 												<div className="flex gap-4">
 													{[
@@ -417,7 +403,7 @@ export default function Home() {
 												</div>
 											</div>
 										</div>
-										<div className="p-4 sm:p-6 flex flex-col flex-grow">
+										<div className="hidden sm:flex p-4 sm:p-6 flex flex-col flex-grow">
 											<motion.h4
 												className="text-sm sm:text-base font-bold font-clash tracking-tight text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"
 												whileHover={{ scale: 1.05 }}
@@ -485,30 +471,23 @@ export default function Home() {
 						</motion.div>
 					</div>
 
-					{/* Pagination Controls */}
 					{totalPages > 1 && (
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 0.2, duration: 0.3 }}
 							className="flex flex-col items-center gap-4 sm:gap-6 mt-4">
-							{/* Navigation Buttons */}
 							<div className="flex items-center justify-center gap-3 sm:gap-6">
 								<motion.button
 									onClick={handlePrevPage}
 									disabled={currentPage === 0}
 									whileHover={{ scale: currentPage > 0 ? 1.15 : 1 }}
 									whileTap={{ scale: 0.85 }}
-									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${
-										currentPage === 0
-											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
-											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
-									}`}
+									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${currentPage === 0 ? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50" : "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"}`}
 									aria-label="Previous page">
 									<ChevronLeft className="w-6 h-6" />
 								</motion.button>
 
-								{/* Page Indicators */}
 								<div className="flex items-center gap-3">
 									{Array.from({ length: totalPages }).map((_, index) => (
 										<motion.button
@@ -516,11 +495,7 @@ export default function Home() {
 											onClick={() => setCurrentPage(index)}
 											whileHover={{ scale: 1.2 }}
 											whileTap={{ scale: 0.9 }}
-											className={`rounded-full transition-all duration-300 ${
-												index === currentPage
-													? "bg-gradient-to-r from-purple-600 to-blue-600 w-8 h-3"
-													: "bg-gray-600 w-3 h-3 hover:bg-gray-500"
-											}`}
+											className={`rounded-full transition-all duration-300 ${index === currentPage ? "bg-gradient-to-r from-purple-600 to-blue-600 w-8 h-3" : "bg-gray-600 w-3 h-3 hover:bg-gray-500"}`}
 											aria-label={`Go to page ${index + 1}`}
 											aria-current={index === currentPage ? "page" : undefined}
 										/>
@@ -534,24 +509,18 @@ export default function Home() {
 										scale: currentPage < totalPages - 1 ? 1.15 : 1,
 									}}
 									whileTap={{ scale: 0.85 }}
-									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${
-										currentPage === totalPages - 1
-											? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50"
-											: "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"
-									}`}
+									className={`flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-full transition-all duration-300 shadow-lg ${currentPage === totalPages - 1 ? "bg-gray-800 text-gray-600 cursor-not-allowed opacity-50" : "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:shadow-2xl hover:from-purple-500 hover:to-purple-600"}`}
 									aria-label="Next page">
 									<ChevronRight className="w-6 h-6" />
 								</motion.button>
 							</div>
 
-							{/* Page Info */}
 							<p className="text-xs sm:text-sm text-gray-400">
 								Page {currentPage + 1} of {totalPages}
 							</p>
 						</motion.div>
 					)}
 
-					{/* CTA */}
 					<div className="text-center mt-10">
 						<motion.a
 							href="/portfolio"
@@ -568,125 +537,6 @@ export default function Home() {
 					</div>
 				</Card>
 			</motion.section>
-
-			{/* Project Description Modal */}
-			{selectedProject && (
-				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					onClick={() => setSelectedProject(null)}
-					data-anime-modal
-					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-					<motion.div
-						initial={{ scale: 0.9, opacity: 0 }}
-						animate={{ scale: 1, opacity: 1 }}
-						exit={{ scale: 0.9, opacity: 0 }}
-						onClick={(e) => e.stopPropagation()}
-						data-anime-modal-content
-						className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-						{/* Modal Header */}
-						<div className="sticky top-0 p-4 sm:p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between gap-3">
-							<div>
-								<h3 className="text-xl sm:text-2xl font-bold font-clash text-white mb-2">
-									{selectedProject.title}
-								</h3>
-								<span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-green-900 text-green-200">
-									{selectedProject.status}
-								</span>
-							</div>
-							<motion.button
-								onClick={() => setSelectedProject(null)}
-								whileHover={{ scale: 1.1 }}
-								whileTap={{ scale: 0.9 }}
-								className="text-gray-400 hover:text-white transition-colors">
-								<svg
-									className="w-6 h-6"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24">
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M6 18L18 6M6 6l12 12"
-									/>
-								</svg>
-							</motion.button>
-						</div>
-
-						{/* Modal Content */}
-						<div className="p-4 sm:p-6">
-							{/* Image */}
-							<div className="relative w-full h-48 sm:h-64 mb-6 rounded-xl overflow-hidden">
-								<Image
-									src={selectedProject.image}
-									alt={selectedProject.title}
-									fill
-									className="object-cover"
-								/>
-							</div>
-
-							{/* Description */}
-							<div className="mb-6">
-								<h4 className="text-lg font-semibold text-purple-400 mb-2">
-									About this project
-								</h4>
-								<p className="text-gray-300 leading-relaxed text-base">
-									{selectedProject.description}
-								</p>
-							</div>
-
-							{/* Tech Stack */}
-							<div className="mb-6">
-								<h4 className="text-lg font-semibold text-purple-400 mb-3">
-									Technologies Used
-								</h4>
-								<div className="flex flex-wrap gap-2">
-									{selectedProject.tech.map((tech: string, idx: number) => (
-										<span
-											key={idx}
-											className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-sm text-gray-300">
-											{tech}
-										</span>
-									))}
-								</div>
-							</div>
-
-							{/* Action Buttons */}
-							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-								{selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
-									<motion.a
-										href={selectedProject.liveUrl}
-										data-anime-click
-										target="_blank"
-										rel="noopener noreferrer"
-										whileHover={{ scale: 1.05 }}
-										whileTap={{ scale: 0.95 }}
-										className="flex-1 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
-										<ExternalLink className="w-5 h-5" />
-										View Live
-									</motion.a>
-								)}
-								{selectedProject.githubUrl &&
-									selectedProject.githubUrl !== "#" && (
-										<motion.a
-											href={selectedProject.githubUrl}
-											data-anime-click
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-											className="flex-1 px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
-											<Github className="w-5 h-5" />
-											View Code
-										</motion.a>
-									)}
-							</div>
-						</div>
-					</motion.div>
-				</motion.div>
-			)}
 
 			{/* Skills Progress */}
 			<motion.section
@@ -737,7 +587,6 @@ export default function Home() {
 				</Card>
 			</motion.section>
 
-			{/* Tech Stack Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}

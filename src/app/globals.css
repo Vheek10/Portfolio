@@ -48,8 +48,8 @@
 html,
 body {
 	@apply font-manrope bg-[oklch(0.1_0.01_260)] text-[oklch(0.98_0.01_260)];
-	font-size: 1.05rem;
-	line-height: 1.75;
+	font-size: 1rem;
+	line-height: 1.6;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
@@ -65,13 +65,13 @@ h6 {
 }
 
 h1 {
-	font-size: clamp(2.5rem, 8vw, 4.5rem);
+	font-size: clamp(2.25rem, 7vw, 4rem);
 }
 h2 {
-	font-size: clamp(2rem, 6vw, 3rem);
+	font-size: clamp(1.75rem, 5.5vw, 2.5rem);
 }
 h3 {
-	font-size: clamp(1.25rem, 3vw, 1.75rem);
+	font-size: clamp(1.125rem, 2.5vw, 1.5rem);
 }
 
 /* Accent / Small Text */
@@ -91,7 +91,7 @@ small,
 
 /* Paragraphs - improved readability */
 p {
-	@apply text-[oklch(0.88_0.01_260)] max-w-[75ch] text-[1.1rem] leading-[1.75];
+	@apply text-[oklch(0.88_0.01_260)] max-w-[75ch] text-[1rem] leading-[1.6];
 }
 
 /* ── Utilities ───────────────────────────────────────────────────── */

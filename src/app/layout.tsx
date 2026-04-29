@@ -113,6 +113,13 @@ export default function RootLayout({
 								</div>
 							</div>
 
+							{/* Mobile: show profile card above the main content for small screens */}
+							<div className="block lg:hidden w-full">
+								<div className="mb-6">
+									<ProfileCard />
+								</div>
+							</div>
+
 							{/* Main content area */}
 							<div className="flex-1 min-w-0 w-full lg:-mr-8">
 								<PageTransition>{children}</PageTransition>

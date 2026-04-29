@@ -19,19 +19,19 @@ export const Card = ({
 }: CardProps) => {
 	return (
 		<motion.div
-			whileHover={hoverable ? { scale: 1.02, y: -2 } : {}}
-			whileTap={hoverable ? { scale: 0.98 } : {}}
+			whileHover={hoverable ? { scale: 1.01, y: -1 } : {}}
+			whileTap={hoverable ? { scale: 0.99 } : {}}
 			onClick={onClick}
 			className={`
-        rounded-2xl sm:rounded-3xl 
-        bg-gray-900/40 backdrop-blur-xl 
-        border border-gray-700
-        shadow-sm hover:shadow-xl 
-        transition-all duration-300
-        overflow-hidden
-        w-full
-        ${className}
-      `}>
+				rounded-2xl sm:rounded-3xl
+				bg-gray-900/40 backdrop-blur-md
+				border border-gray-700
+				shadow-sm hover:shadow-md
+				transition-all duration-200
+				overflow-hidden
+				w-full
+				${className}
+			`}>
 			{children}
 		</motion.div>
 	);
@@ -45,7 +45,7 @@ export const CardHeader = ({
 	className?: string;
 }) => {
 	return (
-		<div className={`p-4 sm:p-5 md:p-6 pb-2 sm:pb-3 md:pb-4 ${className}`}>
+		<div className={`p-3 sm:p-4 md:p-5 pb-2 sm:pb-3 md:pb-4 ${className}`}>
 			{children}
 		</div>
 	);
@@ -59,7 +59,7 @@ export const CardContent = ({
 	className?: string;
 }) => {
 	return (
-		<div className={`p-4 sm:p-5 md:p-6 pt-0 ${className}`}>{children}</div>
+		<div className={`p-3 sm:p-4 md:p-5 pt-0 ${className}`}>{children}</div>
 	);
 };
 
@@ -71,6 +71,6 @@ export const CardFooter = ({
 	className?: string;
 }) => {
 	return (
-		<div className={`p-4 sm:p-5 md:p-6 pt-0 ${className}`}>{children}</div>
+		<div className={`p-3 sm:p-4 md:p-5 pt-0 ${className}`}>{children}</div>
 	);
 };
