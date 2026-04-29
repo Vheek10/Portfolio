@@ -5,7 +5,7 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { RefObject, useLayoutEffect } from "react";
-import anime from "animejs/lib/anime.es.js";
+import anime from "animejs";
 import { pulse, press, modalOpen } from "@/lib/animations";
 
 gsap.registerPlugin(ScrollTrigger);
