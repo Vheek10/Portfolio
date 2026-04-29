@@ -5,6 +5,8 @@
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { RefObject, useLayoutEffect } from "react";
+import anime from "animejs/lib/anime.es.js";
+import { pulse, press, modalOpen } from "@/lib/animations";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +25,7 @@ const animateCounter = (element: HTMLElement) => {
 
 	gsap.to(state, {
 		value: targetValue,
-		duration: 1.6,
+		duration: 2,
 		ease: "power2.out",
 		scrollTrigger: {
 			trigger: element.closest("[data-gsap-counter-group]") ?? element,
@@ -130,8 +132,8 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 					gsap.from(heroWords, {
 						opacity: 0,
 						y: 24,
-						duration: 0.8,
-						stagger: 0.08,
+						duration: 1.05,
+						stagger: 0.1,
 						ease: "power3.out",
 						scrollTrigger: {
 							trigger: heroTitle,
@@ -150,8 +152,8 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 				gsap.from(heroSubtext, {
 					opacity: 0,
 					y: 18,
-					duration: 0.7,
-					delay: 0.15,
+					duration: 0.95,
+					delay: 0.25,
 					ease: "power3.out",
 					scrollTrigger: {
 						trigger: heroSubtext,
@@ -167,8 +169,8 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 					opacity: 0,
 					scale: 0.96,
 					y: 10,
-					duration: 0.7,
-					delay: 0.25,
+					duration: 0.95,
+					delay: 0.35,
 					ease: "expo.out",
 					scrollTrigger: {
 						trigger: heroCta,
@@ -186,11 +188,9 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 				const mode =
 					(element.dataset.gsapTextStagger as "words" | "lines") || "words";
 				const duration = Number.parseFloat(
-					element.dataset.gsapDuration || "0.6",
+					element.dataset.gsapDuration || "0.8",
 				);
-				const stagger = Number.parseFloat(
-					element.dataset.gsapStagger || "0.08",
-				);
+				const stagger = Number.parseFloat(element.dataset.gsapStagger || "0.1");
 
 				animateTextStagger(element, mode, {
 					duration,
@@ -206,22 +206,22 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 				mm.add("(min-width: 768px)", () => {
 					gsap.to(floatingAccents, {
 						y: -12,
-						duration: 4.5,
+						duration: 6,
 						ease: "sine.inOut",
 						repeat: -1,
 						yoyo: true,
-						stagger: 0.4,
+						stagger: 0.55,
 					});
 				});
 
 				mm.add("(max-width: 767px)", () => {
 					gsap.to(floatingAccents, {
 						y: -6,
-						duration: 4,
+						duration: 5.2,
 						ease: "sine.inOut",
 						repeat: -1,
 						yoyo: true,
-						stagger: 0.3,
+						stagger: 0.42,
 					});
 				});
 			}
@@ -245,9 +245,9 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 								opacity: 1,
 								y: 0,
 								scale: 1,
-								duration: 0.85,
+								duration: 1.05,
 								ease: "power3.out",
-								stagger: 0.08,
+								stagger: 0.1,
 							},
 						);
 					},
@@ -271,7 +271,7 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 					{ width: "0%" },
 					{
 						width: `${target}%`,
-						duration: 1.15,
+						duration: 1.4,
 						ease: "power3.out",
 						scrollTrigger: {
 							trigger: bar.closest("[data-gsap-progress-item]") ?? bar,
@@ -303,9 +303,9 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 								y: 0,
 								scale: 1,
 								rotation: 0,
-								duration: 0.75,
+								duration: 0.95,
 								ease: "power3.out",
-								stagger: 0.06,
+								stagger: 0.08,
 							},
 						);
 					},
@@ -326,11 +326,11 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 				}
 
 				const xTo = gsap.quickTo(image, "x", {
-					duration: 0.35,
+					duration: 0.5,
 					ease: "power3.out",
 				});
 				const yTo = gsap.quickTo(image, "y", {
-					duration: 0.35,
+					duration: 0.5,
 					ease: "power3.out",
 				});
 
@@ -355,6 +355,84 @@ export function useGSAPAnimations({ scopeRef }: UseGSAPAnimationsOptions) {
 					card.removeEventListener("mouseleave", handleLeave);
 				});
 			});
+
+			// Anime.js micro-interactions: hover pulse and click press for marked elements.
+			const animeHoverEls = Array.from(
+				scope.querySelectorAll<HTMLElement>("[data-anime-hover]"),
+			);
+
+			animeHoverEls.forEach((el) => {
+				let activeAnim: ReturnType<typeof anime> | null = null;
+				const onEnter = () => {
+					activeAnim = pulse(el as HTMLElement);
+				};
+				const onLeave = () => {
+					if (activeAnim) {
+						activeAnim.pause();
+					}
+					anime({
+						targets: el,
+						scale: 1,
+						duration: 300,
+						easing: "easeOutQuad",
+					});
+				};
+
+				el.addEventListener("mouseenter", onEnter);
+				el.addEventListener("mouseleave", onLeave);
+
+				hoverCleanups.push(() => {
+					el.removeEventListener("mouseenter", onEnter);
+					el.removeEventListener("mouseleave", onLeave);
+					if (activeAnim) activeAnim.pause();
+				});
+			});
+
+			// Click / press micro-animation
+			const animeClickEls = Array.from(
+				scope.querySelectorAll<HTMLElement>("[data-anime-click]"),
+			);
+
+			animeClickEls.forEach((el) => {
+				const onDown = () => press(el as HTMLElement);
+				const onUp = () =>
+					anime({
+						targets: el,
+						scale: 1,
+						duration: 220,
+						easing: "easeOutQuad",
+					});
+
+				el.addEventListener("pointerdown", onDown);
+				el.addEventListener("pointerup", onUp);
+				el.addEventListener("pointercancel", onUp);
+
+				hoverCleanups.push(() => {
+					el.removeEventListener("pointerdown", onDown);
+					el.removeEventListener("pointerup", onUp);
+					el.removeEventListener("pointercancel", onUp);
+				});
+			});
+
+			// Modal open observer: animate newly added modal overlays/contents
+			const modalObserver = new MutationObserver((mutations) => {
+				mutations.forEach((m) => {
+					m.addedNodes.forEach((node) => {
+						if (!(node instanceof HTMLElement)) return;
+						if (node.matches && node.matches("[data-anime-modal]")) {
+							const content = node.querySelector<HTMLElement>(
+								"[data-anime-modal-content]",
+							);
+							if (content) {
+								modalOpen(node as HTMLElement, content);
+							}
+						}
+					});
+				});
+			});
+
+			modalObserver.observe(scope, { childList: true, subtree: true });
+			hoverCleanups.push(() => modalObserver.disconnect());
 
 			return () => {
 				hoverCleanups.forEach((cleanup) => cleanup());

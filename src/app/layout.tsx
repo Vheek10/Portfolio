@@ -6,9 +6,11 @@ import dynamic from "next/dynamic";
 const ProfileCard = dynamic(() => import("@/components/ProfileCard"), {
 	ssr: true,
 });
+import VercelAnalytics from "@/components/VercelAnalytics";
 import Footer from "@/components/Footer";
 import GeometricBackground from "@/components/GeometricBackground";
 import PageTransition from "@/components/PageTransition";
+import SiteLoadingOverlay from "@/components/SiteLoadingOverlay";
 import localFont from "next/font/local";
 
 // Clash Display local font for entire project
@@ -83,6 +85,8 @@ export default function RootLayout({
 			<body
 				className={`min-h-screen antialiased overflow-x-hidden relative text-gray-100 ${clashDisplay.className}`}
 				style={{ backgroundColor: "#020617" }}>
+				<SiteLoadingOverlay />
+
 				{/* Geometric 3D Background */}
 				<GeometricBackground />
 
@@ -99,11 +103,11 @@ export default function RootLayout({
 				{/* Main content */}
 				<main
 					id="main-content"
-					className="relative z-10 pt-16 md:pt-20 min-h-screen">
-					<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 md:py-6">
+					className="relative z-10 pt-14 md:pt-20 min-h-screen">
+					<div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
 						<div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8">
 							{/* Sidebar */}
-							<div className="lg:w-80 lg:flex-shrink-0">
+							<div className="hidden lg:block lg:w-80 lg:flex-shrink-0">
 								<div className="lg:sticky lg:top-6">
 									<ProfileCard />
 								</div>
@@ -116,6 +120,8 @@ export default function RootLayout({
 						</div>
 					</div>
 					<Footer />
+					{/* Vercel Analytics (client-only) */}
+					<VercelAnalytics />
 				</main>
 			</body>
 		</html>

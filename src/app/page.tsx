@@ -213,7 +213,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.6 }}>
+				transition={{ duration: 0.85 }}>
 				<Card className="p-5 sm:p-7 text-center relative overflow-hidden">
 					{/* Background Gradient */}
 					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
@@ -249,11 +249,15 @@ export default function Home() {
 						<motion.a
 							href="/portfolio"
 							data-gsap-hero-cta
+							data-anime-hover
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-2xl">
 							Explore My Work
-							<ArrowRight className="w-5 h-5" />
+							<ArrowRight
+								className="w-5 h-5"
+								data-anime-icon
+							/>
 						</motion.a>
 					</div>
 				</Card>
@@ -263,7 +267,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.2, duration: 0.6 }}
+				transition={{ delay: 0.3, duration: 0.85 }}
 				className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{stats.map((stat, index) => (
 					<Card
@@ -299,7 +303,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.4, duration: 0.6 }}
+				transition={{ delay: 0.5, duration: 0.85 }}
 				className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{highlights.map((highlight) => (
 					<Card
@@ -321,7 +325,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 0.6, duration: 0.6 }}>
+				transition={{ delay: 0.75, duration: 0.85 }}>
 				<Card className="p-5 sm:p-7">
 					<div className="text-center mb-8">
 						<motion.h3
@@ -398,6 +402,7 @@ export default function Home() {
 															<motion.a
 																key={idx}
 																href={link.url}
+																data-anime-click
 																target="_blank"
 																rel="noopener noreferrer"
 																onClick={(e) => e.stopPropagation()}
@@ -457,6 +462,7 @@ export default function Home() {
 														<motion.a
 															key={idx}
 															href={link.url}
+															data-anime-click
 															target="_blank"
 															rel="noopener noreferrer"
 															onClick={(e) => e.stopPropagation()}
@@ -549,11 +555,15 @@ export default function Home() {
 					<div className="text-center mt-10">
 						<motion.a
 							href="/portfolio"
+							data-anime-hover
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3 rounded-xl border-2 border-purple-600 text-purple-400 font-semibold transition-all duration-300 hover:bg-purple-600 hover:text-white hover:border-purple-500">
 							View All Projects
-							<ArrowRight className="w-4 h-4" />
+							<ArrowRight
+								className="w-4 h-4"
+								data-anime-icon
+							/>
 						</motion.a>
 					</div>
 				</Card>
@@ -566,12 +576,14 @@ export default function Home() {
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					onClick={() => setSelectedProject(null)}
+					data-anime-modal
 					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
 					<motion.div
 						initial={{ scale: 0.9, opacity: 0 }}
 						animate={{ scale: 1, opacity: 1 }}
 						exit={{ scale: 0.9, opacity: 0 }}
 						onClick={(e) => e.stopPropagation()}
+						data-anime-modal-content
 						className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
 						{/* Modal Header */}
 						<div className="sticky top-0 p-4 sm:p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between gap-3">
@@ -646,6 +658,7 @@ export default function Home() {
 								{selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
 									<motion.a
 										href={selectedProject.liveUrl}
+										data-anime-click
 										target="_blank"
 										rel="noopener noreferrer"
 										whileHover={{ scale: 1.05 }}
@@ -659,6 +672,7 @@ export default function Home() {
 									selectedProject.githubUrl !== "#" && (
 										<motion.a
 											href={selectedProject.githubUrl}
+											data-anime-click
 											target="_blank"
 											rel="noopener noreferrer"
 											whileHover={{ scale: 1.05 }}
@@ -678,7 +692,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 1.0, duration: 0.6 }}>
+				transition={{ delay: 1.15, duration: 0.85 }}>
 				<Card
 					className="p-5"
 					data-gsap-reveal>
@@ -727,7 +741,7 @@ export default function Home() {
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 1.2, duration: 0.6 }}>
+				transition={{ delay: 1.35, duration: 0.85 }}>
 				<ExpertAreaCard />
 			</motion.section>
 		</div>
