@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/Card";
 import {
 	ExternalLink,
-	Github,
 	ArrowRight,
 	Filter,
 	Eye,
@@ -19,8 +18,8 @@ import {
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
+import WorkExperience from "@/components/WorkExperience";
 
-// Define Project interface
 interface Project {
 	id: number;
 	title: string;
@@ -37,20 +36,6 @@ interface Project {
 const projects: Project[] = [
 	// ==== Web2 Projects ====
 	{
-		id: 1,
-		title: "Forex Growth Hub",
-		category: "web2",
-		description:
-			"Comprehensive forex trading platform with real-time market data and trading tools.",
-		image: "/forex.png",
-		tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
-		github: "https://github.com/Vheek10/forex-growth-hub",
-		live: "https://forex-growth-hub.vercel.app",
-		featured: true,
-		status: "Live",
-	},
-
-	{
 		id: 2,
 		title: "Value Content Africa",
 		category: "web2",
@@ -63,7 +48,44 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-
+	{
+		id: 8,
+		title: "EasyB Group",
+		category: "web2",
+		description:
+			"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
+		image: "/easyb.png",
+		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+		github: "#",
+		live: "https://easybgroup.co.za/",
+		featured: true,
+		status: "Live",
+	},
+	{
+		id: 9,
+		title: "StrataDeed - OnChain Real Estate",
+		category: "web3",
+		description: "Decentralized real estate agency with property tokenization.",
+		image: "/stratadeed.png",
+		tech: ["Next.js", "Solidity", "Ethereum", "IPFS"],
+		github: "https://github.com/Vheek10/StrataDeed",
+		live: "https://strata-deed.vercel.app/",
+		featured: false,
+		status: "Live",
+	},
+	{
+		id: 1,
+		title: "Forex Growth Hub",
+		category: "web2",
+		description:
+			"Comprehensive forex trading platform with real-time market data and trading tools.",
+		image: "/forex.png",
+		tech: ["Next.js", "TailwindCSS", "TypeScript", "Chart.js"],
+		github: "https://github.com/Vheek10/forex-growth-hub",
+		live: "https://forex-growth-hub.vercel.app",
+		featured: true,
+		status: "Live",
+	},
 	{
 		id: 3,
 		title: "ELGVotes - Voting App",
@@ -77,7 +99,6 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-
 	{
 		id: 4,
 		title: "Disney+ Clone",
@@ -91,7 +112,6 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-
 	{
 		id: 5,
 		title: "Trading Bot",
@@ -105,7 +125,6 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-
 	{
 		id: 6,
 		title: "Joeyung Portfolio",
@@ -119,7 +138,6 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-
 	{
 		id: 7,
 		title: "ResumeAI - AI Resume Builder",
@@ -133,47 +151,19 @@ const projects: Project[] = [
 		featured: true,
 		status: "Live",
 	},
-	{
-		id: 8,
-		title: "EasyB Group",
-		category: "web2",
-		description:
-			"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
-		tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
-		status: "Live",
-		live: "https://easybgroup.co.za/",
-		github: "#",
-		image: "/easyb.png",
-		featured: true,
-	},
-
 	// ==== Web3 Projects ====
 	{
-		id: 9,
-		title: "StrataDeed - OnChain Real Estate",
+		id: 10,
+		title: "Triba",
 		category: "web3",
-		description: "Decentralized real estate agency with property tokenization.",
-		image: "/stratadeed.png",
-		tech: ["Next.js", "Solidity", "Ethereum", "IPFS"],
-		github: "https://github.com/Vheek10/StrataDeed",
-		live: "https://strata-deed.vercel.app/",
+		description: "Triba waitlist landing page.",
+		image: "/triba.png",
+		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
+		github: "#",
+		live: "https://triba-waitlist.vercel.app/wait-list",
 		featured: false,
 		status: "Live",
 	},
-
-	{
-		id: 10,
-		title: "DeFi Portfolio Tracker",
-		category: "web3",
-		description: "Multi-chain portfolio tracker with real-time P&L analytics.",
-		image: "/project-placeholder.jpg",
-		tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
-		github: "#",
-		live: "#",
-		featured: false, // ADDED THIS LINE
-		status: "In Development",
-	},
-
 	{
 		id: 11,
 		title: "PolySight - Solana Prediction Market",
@@ -183,7 +173,7 @@ const projects: Project[] = [
 		tech: ["Next.js", "Rust", "Solana", "TypeScript"],
 		github: "https://github.com/Vheek10/Polysight",
 		live: "https://polysight.vercel.app",
-		featured: false, // This was also missing, but it looks like it might not be in your original
+		featured: false,
 		status: "Live",
 	},
 ];
@@ -330,11 +320,6 @@ export default function Portfolio() {
 										icon: <ExternalLink className="w-5 h-5" />,
 										title: "Live Demo",
 									},
-									{
-										url: project.github,
-										icon: <Github className="w-5 h-5" />,
-										title: "View Code",
-									},
 								]
 									.filter((link) => isValidUrl(link.url))
 									.map((link, idx: number) => (
@@ -384,13 +369,6 @@ export default function Portfolio() {
 									title: "Live Demo",
 									bg: "bg-purple-600",
 									hoverBg: "hover:bg-purple-700",
-								},
-								{
-									url: project.github,
-									icon: <Github className="w-5 h-5" />,
-									title: "View Code",
-									bg: "bg-gray-600",
-									hoverBg: "hover:bg-gray-700",
 								},
 							]
 								.filter((link) => isValidUrl(link.url))
@@ -651,6 +629,9 @@ export default function Portfolio() {
 				</Card>
 			</motion.section>
 
+			{/* Work Experience Section */}
+			<WorkExperience />
+
 			{/* CTA Section */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
@@ -785,19 +766,6 @@ export default function Portfolio() {
 										View Live
 									</motion.a>
 								)}
-								{selectedProject.github &&
-									isValidUrl(selectedProject.github) && (
-										<motion.a
-											href={selectedProject.github}
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.05 }}
-											whileTap={{ scale: 0.95 }}
-											className="flex-1 px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
-											<Github className="w-5 h-5" />
-											View Code
-										</motion.a>
-									)}
 							</div>
 						</div>
 					</motion.div>

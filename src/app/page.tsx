@@ -14,7 +14,6 @@ import {
 	Users,
 	TrendingUp,
 	ExternalLink,
-	Github,
 	ChevronLeft,
 	ChevronRight,
 } from "lucide-react";
@@ -28,6 +27,26 @@ export default function Home() {
 
 	const featuredProjects = [
 		{
+			title: "Value Content Africa",
+			description:
+				"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
+			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+			status: "Live",
+			liveUrl: "https://value-content-africa.vercel.app",
+			githubUrl: "https://github.com/Vheek10/Value-Content-Africa",
+			image: "/valuecontent.png",
+		},
+		{
+			title: "EasyB Group",
+			description:
+				"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
+			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+			status: "Live",
+			liveUrl: "https://easybgroup.co.za/",
+			githubUrl: "#",
+			image: "/easyb.png",
+		},
+		{
 			title: "StrataDeed - OnChain Real Estate",
 			description:
 				"Decentralized real estate agency with property tokenization.",
@@ -38,14 +57,13 @@ export default function Home() {
 			image: "/stratadeed.png",
 		},
 		{
-			title: "Value Content Africa",
-			description:
-				"A pan-African initiative focused on value-driven content, technological innovation, and sustainable social impact across the continent. Redefining Africa's story through authentic narratives.",
-			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
+			title: "Triba",
+			description: "Triba waitlist landing page.",
+			tech: ["Next.js", "Ethers.js", "TailwindCSS", "Multiple APIs"],
 			status: "Live",
-			liveUrl: "https://value-content-africa.vercel.app",
-			githubUrl: "https://github.com/Vheek10/Value-Content-Africa",
-			image: "/valuecontent.png",
+			liveUrl: "https://triba-waitlist.vercel.app/wait-list",
+			githubUrl: "#",
+			image: "/triba.png",
 		},
 		{
 			title: "ELGVotes - Voting App",
@@ -86,16 +104,6 @@ export default function Home() {
 			liveUrl: "https://joeyung.vercel.app",
 			githubUrl: "https://github.com/Vheek10/joeyung",
 			image: "/joeyung.png",
-		},
-		{
-			title: "EasyB Group",
-			description:
-				"EasyB Group is built for clients who need high-level executive services and serious logistics capability in one accountable team",
-			tech: ["Next.js", "TailwindCSS", "TypeScript", "Framer Motion"],
-			status: "Live",
-			liveUrl: "https://easybgroup.co.za/",
-			githubUrl: "#",
-			image: "/easyb.png",
 		},
 	];
 
@@ -377,11 +385,6 @@ export default function Home() {
 															icon: <ExternalLink className="w-5 h-5" />,
 															title: "Live Demo",
 														},
-														{
-															url: project.githubUrl,
-															icon: <Github className="w-5 h-5" />,
-															title: "View Code",
-														},
 													]
 														.filter((link) => link.url && link.url !== "#")
 														.map((link, idx: number) => (
@@ -434,13 +437,6 @@ export default function Home() {
 														title: "Live Demo",
 														bg: "bg-purple-600",
 														hoverBg: "hover:bg-purple-700",
-													},
-													{
-														url: project.githubUrl,
-														icon: <Github className="w-5 h-5" />,
-														title: "View Code",
-														bg: "bg-gray-600",
-														hoverBg: "hover:bg-gray-700",
 													},
 												]
 													.filter((link) => link.url && link.url !== "#")
@@ -538,6 +534,109 @@ export default function Home() {
 				</Card>
 			</motion.section>
 
+			{/* Project Description Modal */}
+			{selectedProject && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					onClick={() => setSelectedProject(null)}
+					data-anime-modal
+					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						onClick={(e) => e.stopPropagation()}
+						data-anime-modal-content
+						className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+						{/* Modal Header */}
+						<div className="sticky top-0 p-4 sm:p-6 border-b border-gray-700 bg-gray-900 flex items-center justify-between gap-3">
+							<div>
+								<h3 className="text-xl sm:text-2xl font-bold font-clash text-white mb-2">
+									{selectedProject.title}
+								</h3>
+								<span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-green-900 text-green-200">
+									{selectedProject.status}
+								</span>
+							</div>
+							<motion.button
+								onClick={() => setSelectedProject(null)}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.9 }}
+								className="text-gray-400 hover:text-white transition-colors">
+								<svg
+									className="w-6 h-6"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+							</motion.button>
+						</div>
+			)
+							<div className="relative w-full h-48 sm:h-64 mb-6 rounded-xl overflow-hidden">
+								<Image
+									src={selectedProject.image}
+									alt={selectedProject.title}
+									fill
+									className="object-cover"
+								/>
+							</div>
+
+							{/* Description */}
+							<div className="mb-6">
+								<h4 className="text-lg font-semibold text-purple-400 mb-2">
+									About this project
+								</h4>
+								<p className="text-gray-300 leading-relaxed text-base">
+									{selectedProject.description}
+								</p>
+							</div>
+
+							{/* Tech Stack */}
+							<div className="mb-6">
+								<h4 className="text-lg font-semibold text-purple-400 mb-3">
+									Technologies Used
+								</h4>
+								<div className="flex flex-wrap gap-2">
+									{selectedProject.tech.map((tech: string, idx: number) => (
+										<span
+											key={idx}
+											className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-sm text-gray-300">
+											{tech}
+										</span>
+									))}
+								</div>
+							</div>
+
+							{/* Action Buttons */}
+							<div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+								{selectedProject.liveUrl && selectedProject.liveUrl !== "#" && (
+									<motion.a
+										href={selectedProject.liveUrl}
+										data-anime-click
+										target="_blank"
+										rel="noopener noreferrer"
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+										className="flex-1 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+										<ExternalLink className="w-5 h-5" />
+										View Live
+									</motion.a>
+								)}
+							</div>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
+
+>>>>>>> a606c12 (feat: add WorkExperience component to showcase professional background)
 			{/* Skills Progress */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
