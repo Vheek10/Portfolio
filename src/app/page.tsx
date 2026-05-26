@@ -579,7 +579,10 @@ export default function Home() {
 								</svg>
 							</motion.button>
 						</div>
-			)
+
+						{/* Modal Content */}
+						<div className="p-4 sm:p-6">
+							{/* Image */}
 							<div className="relative w-full h-48 sm:h-64 mb-6 rounded-xl overflow-hidden">
 								<Image
 									src={selectedProject.image}
@@ -635,8 +638,6 @@ export default function Home() {
 					</motion.div>
 				</motion.div>
 			)}
-
->>>>>>> a606c12 (feat: add WorkExperience component to showcase professional background)
 			{/* Skills Progress */}
 			<motion.section
 				initial={{ opacity: 0, y: 20 }}
