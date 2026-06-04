@@ -95,6 +95,7 @@ export default function Home() {
 			githubUrl: "https://github.com/Vheek10/disney-clone",
 			image: "/disneyclone.png",
 		},
+
 		{
 			title: "Joeyung Portfolio",
 			description:
@@ -104,6 +105,15 @@ export default function Home() {
 			liveUrl: "https://joeyung.vercel.app",
 			githubUrl: "https://github.com/Vheek10/joeyung",
 			image: "/joeyung.png",
+		},
+		{
+			title: "Zentry",
+			description: "Zentry landing and demo site.",
+			tech: ["Next.js", "TailwindCSS"],
+			status: "Live",
+			liveUrl: "https://zentry-rho-three.vercel.app/",
+			githubUrl: "#",
+			image: "/preview.png",
 		},
 	];
 
@@ -178,12 +188,11 @@ export default function Home() {
 	const [selectedProject, setSelectedProject] = useState<
 		(typeof featuredProjects)[0] | null
 	>(null);
-	const [itemsPerPage, setItemsPerPage] = useState<number>(2);
+	const [itemsPerPage, setItemsPerPage] = useState<number>(1);
 
 	useEffect(() => {
 		const updateItemsPerPage = () => {
-			const w = window.innerWidth;
-			setItemsPerPage(w < 768 ? 1 : 2);
+			setItemsPerPage(1);
 		};
 		updateItemsPerPage();
 		window.addEventListener("resize", updateItemsPerPage);
@@ -204,14 +213,24 @@ export default function Home() {
 	const paginatedProjects = featuredProjects.slice(startIndex, endIndex);
 
 	const handlePrevPage = () => {
-		setCurrentPage((prev) => Math.max(0, prev - 1));
+		setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
 		setSelectedProject(null);
 	};
 
 	const handleNextPage = () => {
-		setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev));
+		setCurrentPage((prev) => (prev + 1) % totalPages);
 		setSelectedProject(null);
 	};
+
+	// Keyboard navigation for pagination
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "ArrowLeft") handlePrevPage();
+			if (e.key === "ArrowRight") handleNextPage();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [totalPages]);
 
 	const handleDragEnd = (
 		event: MouseEvent | TouchEvent | PointerEvent,
@@ -236,41 +255,32 @@ export default function Home() {
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.85 }}>
-				<Card className="p-5 sm:p-7 text-center relative overflow-hidden">
-					<div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
-					<div className="relative z-10">
-						<h2
-							data-gsap-hero-title
-							className="text-2xl sm:text-3xl lg:text-4xl font-bold font-clash tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
-							{"Welcome to My Digital Space".split(" ").map((word, index) => (
-								<span
-									key={`${word}-${index}`}
-									data-gsap-hero-word
-									className="inline-block mr-2 last:mr-0">
-									{word}
-								</span>
-							))}
-						</h2>
-						<p
-							data-gsap-hero-subtext
-							className="text-base md:text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed mb-6">
-							I create innovative Web3 solutions, trading applications, and
-							stunning digital experiences that push the boundaries of what's
-							possible on the web.
+				<Card className="p-6 sm:p-10 text-center relative overflow-hidden">
+					<div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/30" />
+					<div className="relative z-10 flex flex-col items-center text-center gap-6 py-10">
+						<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+							Welcome to My Digital Space
+						</h1>
+						<p className="max-w-2xl text-gray-300 text-lg sm:text-xl">
+							I build Web2 and Web3 products — trading tools, dApps, and
+							polished digital experiences that prioritize performance and
+							clarity.
 						</p>
-						<motion.a
-							href="/portfolio"
-							data-gsap-hero-cta
-							data-anime-hover
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold transition-all duration-300 hover:shadow-2xl">
-							Explore My Work
-							<ArrowRight
-								className="w-5 h-5"
-								data-anime-icon
-							/>
-						</motion.a>
+						<div className="flex items-center gap-3">
+							<motion.a
+								href="/portfolio"
+								whileHover={{ scale: 1.03 }}
+								whileTap={{ scale: 0.97 }}
+								className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg">
+								Explore My Work
+								<ArrowRight className="w-5 h-5" />
+							</motion.a>
+							<a
+								href="/contact"
+								className="px-5 py-3 rounded-2xl border border-gray-700 text-gray-200 hover:bg-gray-800 transition-colors">
+								Start a Project
+							</a>
+						</div>
 					</div>
 				</Card>
 			</motion.section>
@@ -336,7 +346,7 @@ export default function Home() {
 							dragElastic={0.2}
 							onDragEnd={handleDragEnd}
 							dragTransition={{ power: 0.2, restDelta: 5 }}
-							className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 md:gap-10 lg:gap-12 mb-10 sm:mb-12 max-w-6xl mx-auto cursor-grab active:cursor-grabbing">
+							className="grid grid-cols-1 gap-5 sm:gap-8 md:gap-10 lg:gap-12 mb-6 sm:mb-8 w-full cursor-grab active:cursor-grabbing">
 							{paginatedProjects.map((project) => (
 								<motion.div
 									key={project.title}
@@ -345,7 +355,7 @@ export default function Home() {
 									onClick={() => setSelectedProject(project)}
 									className="group flex cursor-pointer h-full">
 									<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50">
-										<div className="relative overflow-hidden h-72 sm:h-72 md:h-96 bg-gray-800 flex-shrink-0">
+										<div className="relative overflow-hidden h-80 sm:h-[28rem] md:h-[32rem] bg-gray-800 flex-shrink-0">
 											<Image
 												src={project.image}
 												alt={project.title}
@@ -485,17 +495,34 @@ export default function Home() {
 								</motion.button>
 
 								<div className="flex items-center gap-3">
-									{Array.from({ length: totalPages }).map((_, index) => (
-										<motion.button
-											key={index}
-											onClick={() => setCurrentPage(index)}
-											whileHover={{ scale: 1.2 }}
-											whileTap={{ scale: 0.9 }}
-											className={`rounded-full transition-all duration-300 ${index === currentPage ? "bg-gradient-to-r from-purple-600 to-blue-600 w-8 h-3" : "bg-gray-600 w-3 h-3 hover:bg-gray-500"}`}
-											aria-label={`Go to page ${index + 1}`}
-											aria-current={index === currentPage ? "page" : undefined}
-										/>
-									))}
+									{Array.from({ length: totalPages }).map((_, index) => {
+										const imgIndex = index * itemsPerPage;
+										const imgSrc = featuredProjects[imgIndex]?.image;
+										return (
+											<motion.button
+												key={index}
+												onClick={() => setCurrentPage(index)}
+												whileHover={{ scale: 1.05 }}
+												whileTap={{ scale: 0.95 }}
+												className={`rounded-full transition-all duration-300 flex items-center justify-center overflow-hidden ${index === currentPage ? "ring-2 ring-purple-500 w-12 h-8" : "w-8 h-8 bg-gray-700"}`}
+												aria-label={`Go to page ${index + 1}`}
+												aria-current={
+													index === currentPage ? "page" : undefined
+												}>
+												{imgSrc ? (
+													// small thumbnail
+													// eslint-disable-next-line @next/next/no-img-element
+													<img
+														src={imgSrc}
+														alt={`Preview ${index + 1}`}
+														className="w-full h-full object-cover"
+													/>
+												) : (
+													<span className="w-full h-full block" />
+												)}
+											</motion.button>
+										);
+									})}
 								</div>
 
 								<motion.button
@@ -517,7 +544,7 @@ export default function Home() {
 						</motion.div>
 					)}
 
-					<div className="text-center mt-10">
+					<div className="text-center mt-6">
 						<motion.a
 							href="/portfolio"
 							data-anime-hover

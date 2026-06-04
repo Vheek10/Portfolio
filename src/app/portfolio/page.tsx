@@ -15,7 +15,7 @@ import {
 	ChevronLeft,
 	ChevronRight,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { useGSAPAnimations } from "@/hooks/useGSAPAnimations";
 import WorkExperience from "@/components/WorkExperience";
@@ -113,7 +113,7 @@ const projects: Project[] = [
 		status: "Live",
 	},
 	{
-		id: 5,
+		id: 13,
 		title: "Trading Bot",
 		category: "web2",
 		description:
@@ -126,7 +126,7 @@ const projects: Project[] = [
 		status: "Live",
 	},
 	{
-		id: 6,
+		id: 14,
 		title: "Joeyung Portfolio",
 		category: "web2",
 		description:
@@ -153,7 +153,7 @@ const projects: Project[] = [
 	},
 	// ==== Web3 Projects ====
 	{
-		id: 10,
+		id: 5,
 		title: "Triba",
 		category: "web3",
 		description: "Triba waitlist landing page.",
@@ -176,6 +176,19 @@ const projects: Project[] = [
 		featured: false,
 		status: "Live",
 	},
+	// Zentry
+	{
+		id: 6,
+		title: "Zentry",
+		category: "web2",
+		description: "Zentry landing and demo site.",
+		image: "/preview.png",
+		tech: ["Next.js", "TailwindCSS"],
+		github: "#",
+		live: "https://zentry-rho-three.vercel.app/",
+		featured: true,
+		status: "Live",
+	},
 ];
 
 // URL validation helper
@@ -190,7 +203,7 @@ export default function Portfolio() {
 	const [activeFilter, setActiveFilter] = useState("all");
 	const [currentPage, setCurrentPage] = useState(0);
 	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-	const itemsPerPage = 2;
+	const itemsPerPage = 1;
 
 	const filters = [
 		{ id: "all", label: "All Projects" },
@@ -246,14 +259,24 @@ export default function Portfolio() {
 
 	// Pagination handlers with swipe support
 	const handlePrevPage = () => {
-		setCurrentPage((prev) => Math.max(0, prev - 1));
+		setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
 		setSelectedProject(null);
 	};
 
 	const handleNextPage = () => {
-		setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev));
+		setCurrentPage((prev) => (prev + 1) % totalPages);
 		setSelectedProject(null);
 	};
+
+	// Keyboard navigation for pagination (left/right arrows)
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "ArrowLeft") handlePrevPage();
+			if (e.key === "ArrowRight") handleNextPage();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [totalPages]);
 
 	// Swipe detection
 	const handleDragEnd = (
@@ -291,52 +314,42 @@ export default function Portfolio() {
 				data-gsap-parallax-card
 				onClick={() => setSelectedProject(project)}
 				className="group flex cursor-pointer h-full">
-				<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 pointer-events-auto">
-					<div className="relative overflow-hidden h-56 sm:h-72 md:h-96 bg-gray-800 flex-shrink-0">
+				<Card className="overflow-hidden flex flex-col transition-all duration-500 group-hover:shadow-2xl group-hover:border-purple-600/80 group-hover:scale-[1.02] w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 pointer-events-auto rounded-xl">
+					<div className="relative overflow-hidden h-[30rem] sm:h-[34rem] md:h-[38rem] bg-gray-800 flex-shrink-0 rounded-xl">
 						<Image
 							src={imageError ? "/project-placeholder.jpg" : project.image}
 							alt={project.title}
 							fill
 							loading="lazy"
 							data-gsap-parallax-image
-							className="object-cover transition-transform duration-300 group-hover:scale-105"
+							className="object-cover"
 							onError={() => setImageError(true)}
 						/>
-						<div className="absolute top-4 left-4">
-							<span
-								className={`px-3 py-1 rounded-full text-xs font-medium ${
-									project.status === "Live"
-										? "bg-green-900 text-green-200"
-										: "bg-blue-900 text-blue-200"
-								}`}>
-								{project.status}
-							</span>
-						</div>
-						<div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-							<div className="flex gap-4">
-								{[
-									{
-										url: project.live,
-										icon: <ExternalLink className="w-5 h-5" />,
-										title: "Live Demo",
-									},
-								]
-									.filter((link) => isValidUrl(link.url))
-									.map((link, idx: number) => (
-										<motion.a
-											key={idx}
-											href={link.url}
-											target="_blank"
-											rel="noopener noreferrer"
-											onClick={(e) => e.stopPropagation()}
-											whileHover={{ scale: 1.1 }}
-											whileTap={{ scale: 0.9 }}
-											className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-gray-700 flex items-center justify-center transition-all duration-300 hover:bg-gray-800 hover:text-white"
-											title={link.title}
-											aria-label={link.title}>
-											{link.icon}
-										</motion.a>
-									))}
+						<div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
+						<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center gap-4">
+							<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white bg-clip-text">
+								{project.title}
+							</h3>
+							<p className="max-w-2xl text-sm sm:text-base text-gray-200">
+								{project.description}
+							</p>
+							<div className="flex items-center gap-3 mt-2">
+								<a
+									href={project.live}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="px-5 py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg">
+									View Live
+								</a>
+								{project.github && project.github !== "#" && (
+									<a
+										href={project.github}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="px-4 py-2 rounded-xl border border-gray-600 text-gray-200">
+										Source
+									</a>
+								)}
 							</div>
 						</div>
 					</div>
@@ -542,7 +555,7 @@ export default function Portfolio() {
 							dragElastic={0.2}
 							onDragEnd={handleDragEnd}
 							dragTransition={{ power: 0.2, restDelta: 5 }}
-							className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 md:gap-10 lg:gap-12 mb-10 sm:mb-12 max-w-6xl mx-auto cursor-grab active:cursor-grabbing">
+							className="grid grid-cols-1 gap-5 sm:gap-8 md:gap-10 lg:gap-12 mb-6 sm:mb-8 w-full cursor-grab active:cursor-grabbing">
 							{paginatedProjects.map((project) => (
 								<ProjectCard
 									key={project.id}
@@ -575,23 +588,35 @@ export default function Portfolio() {
 									<ChevronLeft className="w-6 h-6" />
 								</motion.button>
 
-								{/* Page Indicators */}
+								{/* Page Indicators (thumbnails) */}
 								<div className="flex items-center gap-3">
-									{Array.from({ length: totalPages }).map((_, index) => (
-										<motion.button
-											key={index}
-											onClick={() => setCurrentPage(index)}
-											whileHover={{ scale: 1.2 }}
-											whileTap={{ scale: 0.9 }}
-											className={`rounded-full transition-all duration-300 ${
-												index === currentPage
-													? "bg-gradient-to-r from-purple-600 to-blue-600 w-8 h-3"
-													: "bg-gray-600 w-3 h-3 hover:bg-gray-500"
-											}`}
-											aria-label={`Go to page ${index + 1}`}
-											aria-current={index === currentPage ? "page" : undefined}
-										/>
-									))}
+									{Array.from({ length: totalPages }).map((_, index) => {
+										const imgIndex = index * itemsPerPage;
+										const imgSrc = filteredProjects[imgIndex]?.image;
+										return (
+											<motion.button
+												key={index}
+												onClick={() => setCurrentPage(index)}
+												whileHover={{ scale: 1.05 }}
+												whileTap={{ scale: 0.95 }}
+												className={`rounded-full transition-all duration-300 flex items-center justify-center overflow-hidden ${index === currentPage ? "ring-2 ring-purple-500 w-12 h-8" : "w-8 h-8 bg-gray-700"}`}
+												aria-label={`Go to page ${index + 1}`}
+												aria-current={
+													index === currentPage ? "page" : undefined
+												}>
+												{imgSrc ? (
+													// eslint-disable-next-line @next/next/no-img-element
+													<img
+														src={imgSrc}
+														alt={`Preview ${index + 1}`}
+														className="w-full h-full object-cover"
+													/>
+												) : (
+													<span className="w-full h-full block" />
+												)}
+											</motion.button>
+										);
+									})}
 								</div>
 
 								<motion.button

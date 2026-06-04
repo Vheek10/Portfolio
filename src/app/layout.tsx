@@ -50,7 +50,21 @@ export const metadata = {
 		type: "website",
 		locale: "en_US",
 		url: "https://www.vheek.xyz",
+		images: [
+			{
+				url: "https://www.vheek.xyz/portfolio.png",
+				alt: "Jeremiah Victor Portfolio",
+			},
+		],
 		siteName: "Jeremiah Victor Portfolio",
+	},
+	twitter: {
+		card: "summary_large_image",
+		site: "@vheek",
+		title: "Jeremiah Victor - Creative Full-Stack Developer",
+		description:
+			"Portfolio of Jeremiah Victor, a creative full-stack developer and 3D web designer.",
+		images: ["/portfolio.png"],
 	},
 };
 
