@@ -66,6 +66,15 @@ export default function Home() {
 			image: "/triba.png",
 		},
 		{
+			title: "Zentry",
+			description: "Zentry landing and demo site.",
+			tech: ["Next.js", "TailwindCSS"],
+			status: "Live",
+			liveUrl: "https://zentry-rho-three.vercel.app/",
+			githubUrl: "#",
+			image: "/preview.png",
+		},
+		{
 			title: "ELGVotes - Voting App",
 			description:
 				"An elegant full-stack voting application built with Next.js, TypeScript, TailwindCSS, and MongoDB. Features anonymous voting, admin dashboard, and real-time results.",
@@ -105,15 +114,6 @@ export default function Home() {
 			liveUrl: "https://joeyung.vercel.app",
 			githubUrl: "https://github.com/Vheek10/joeyung",
 			image: "/joeyung.png",
-		},
-		{
-			title: "Zentry",
-			description: "Zentry landing and demo site.",
-			tech: ["Next.js", "TailwindCSS"],
-			status: "Live",
-			liveUrl: "https://zentry-rho-three.vercel.app/",
-			githubUrl: "#",
-			image: "/preview.png",
 		},
 	];
 

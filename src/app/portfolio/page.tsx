@@ -87,6 +87,18 @@ const projects: Project[] = [
 		status: "Live",
 	},
 	{
+		id: 6,
+		title: "Zentry",
+		category: "web2",
+		description: "Zentry landing and demo site.",
+		image: "/preview.png",
+		tech: ["Next.js", "TailwindCSS"],
+		github: "#",
+		live: "https://zentry-rho-three.vercel.app/",
+		featured: true,
+		status: "Live",
+	},
+	{
 		id: 3,
 		title: "ELGVotes - Voting App",
 		category: "web2",
@@ -174,19 +186,6 @@ const projects: Project[] = [
 		github: "https://github.com/Vheek10/Polysight",
 		live: "https://polysight.vercel.app",
 		featured: false,
-		status: "Live",
-	},
-	// Zentry
-	{
-		id: 6,
-		title: "Zentry",
-		category: "web2",
-		description: "Zentry landing and demo site.",
-		image: "/preview.png",
-		tech: ["Next.js", "TailwindCSS"],
-		github: "#",
-		live: "https://zentry-rho-three.vercel.app/",
-		featured: true,
 		status: "Live",
 	},
 ];
