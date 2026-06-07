@@ -62,6 +62,9 @@ importers:
       three:
         specifier: ^0.180.0
         version: 0.180.0
+      ui-ux-pro-max-skill:
+        specifier: github:nextlevelbuilder/ui-ux-pro-max-skill
+        version: https://codeload.github.com/nextlevelbuilder/ui-ux-pro-max-skill/tar.gz/b7e3af80f6e331f6fb456667b82b12cade7c9d35
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4
@@ -3536,6 +3539,10 @@ packages:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  ui-ux-pro-max-skill@https://codeload.github.com/nextlevelbuilder/ui-ux-pro-max-skill/tar.gz/b7e3af80f6e331f6fb456667b82b12cade7c9d35:
+    resolution: {tarball: https://codeload.github.com/nextlevelbuilder/ui-ux-pro-max-skill/tar.gz/b7e3af80f6e331f6fb456667b82b12cade7c9d35}
+    version: 0.0.0
 
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
@@ -8172,6 +8179,8 @@ snapshots:
       - supports-color
 
   typescript@5.9.3: {}
+
+  ui-ux-pro-max-skill@https://codeload.github.com/nextlevelbuilder/ui-ux-pro-max-skill/tar.gz/b7e3af80f6e331f6fb456667b82b12cade7c9d35: {}
 
   unbox-primitive@1.1.0:
     dependencies:
